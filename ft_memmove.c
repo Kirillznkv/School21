@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/28 19:29:03 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/29 18:28:16 by kshanti          ###   ########.fr       */
+/*   Created: 2020/10/29 18:51:03 by kshanti           #+#    #+#             */
+/*   Updated: 2020/10/29 19:35:00 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned long long			ft_atoi(const char* str)//пропустить невидимые, переполнение
+void*		ft_memmove(void* s1, const void* s2, size_t  n)
 {
-	unsigned long long		res;
-	unsigned int			i;
-	char					m;
+	int		i;
+	int		h;
+	char*	str1;
+	char*	str2;
 
-	m = 0;
+	str1 = (char*)s1;
+	str2 = (char*)s2;
 	i = 0;
-	res = 0;
-	while (str[i] < 33)
-		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
+	h = 1;
+	if (n > ft_strlen(s2))
+		n = ft_strlen(s2);
+	if (n > ft_strlen(s1))
+		n = ft_strlen(s1);
+	if (str2 < str1)
 	{
-		m++;
-		i++;
+		i = n - 1;
+		h = -1;
 	}
-	while (i < ft_strlen(str) && str[i] >= '0' && str[i] <= '9')
-		res = res * 10 + str[i++] - '0';
-	return m ? -res:res;
+	while (n--)
+	{
+		str1[i] = str2[i];
+		i += h;
+	}
+	return str1;
 }

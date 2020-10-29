@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/28 19:29:03 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/29 18:28:16 by kshanti          ###   ########.fr       */
+/*   Created: 2020/10/29 16:48:52 by kshanti           #+#    #+#             */
+/*   Updated: 2020/10/29 18:23:08 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned long long			ft_atoi(const char* str)//пропустить невидимые, переполнение
+char*		ft_strrchr(const char* s, int c)
 {
-	unsigned long long		res;
-	unsigned int			i;
-	char					m;
+	int		i;
+	char*	ps;
 
-	m = 0;
-	i = 0;
-	res = 0;
-	while (str[i] < 33)
-		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
-	{
-		m++;
-		i++;
-	}
-	while (i < ft_strlen(str) && str[i] >= '0' && str[i] <= '9')
-		res = res * 10 + str[i++] - '0';
-	return m ? -res:res;
+	ps = (char *)s;
+	i = ft_strlen(ps) - 1;
+	while (i >= 0 && ps[i] != c)
+		i--;
+	return &ps[i];
 }

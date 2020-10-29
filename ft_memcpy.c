@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/28 19:29:03 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/29 18:28:16 by kshanti          ###   ########.fr       */
+/*   Created: 2020/10/29 18:27:40 by kshanti           #+#    #+#             */
+/*   Updated: 2020/10/29 19:33:58 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned long long			ft_atoi(const char* str)//пропустить невидимые, переполнение
+void*		ft_memcpy(void* s1, const void* s2, size_t n)
 {
-	unsigned long long		res;
-	unsigned int			i;
-	char					m;
+	int		i;
+	char*	str1;
+	char*	str2;
 
-	m = 0;
-	i = 0;
-	res = 0;
-	while (str[i] < 33)
-		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
-	{
-		m++;
-		i++;
-	}
-	while (i < ft_strlen(str) && str[i] >= '0' && str[i] <= '9')
-		res = res * 10 + str[i++] - '0';
-	return m ? -res:res;
+	i = -1;
+	str1 = (char*)s1;
+	str2 = (char*)s2;
+	if (n > ft_strlen(s2))
+		n = ft_strlen(s2);
+	if (n > ft_strlen(s1))
+		n = ft_strlen(s1);
+	while (++i < n)
+		str1[i] = str2[i];
+	return str1; 
 }
