@@ -6,17 +6,17 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:31:05 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/28 19:31:10 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 18:17:39 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void				ft_bzero(void* s, size_t n)
+void				ft_bzero(void *s, size_t n)
 {
-	unsigned char*	str;
+	unsigned char	*str;
 
-	str =(unsigned char*)s;
+	str = (unsigned char*)s;
 	while (n-- > 0)
 		str[n] = '\0';
 }

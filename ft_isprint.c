@@ -6,13 +6,13 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:20:09 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 16:20:57 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 18:19:40 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.c"
+#include "libft.h"
 
 int			ft_isprint(int c)
 {
-	return c > 32 && c < 127;
+	return (c >= 32 && c < 127);
 }

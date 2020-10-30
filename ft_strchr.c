@@ -6,18 +6,18 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 16:48:52 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/29 18:22:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 18:26:23 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char*		ft_strchr(const char* s, int c)
+char		*ft_strchr(const char *s, int c)
 {
-	char*	ps;
+	char	*ps;
 
 	ps = (char *)s;
 	while (*ps != c && *ps != '\0')
 		ps++;
-	return ps;
+	return (ps);
 }

@@ -5,18 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 20:03:17 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/29 21:19:13 by kshanti          ###   ########.fr       */
+/*   Created: 2020/10/30 18:19:25 by kshanti           #+#    #+#             */
+/*   Updated: 2020/10/30 18:22:35 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void*		ft_memccpy(void* s1, const void* s2, int c, size_t n)
+void		*ft_memccpy(void *s1, const void *s2, int c, size_t n)
 {
 	int		i;
-	char*	str1;
-	char*	str2;
+	char	*str1;
+	char	*str2;
 
 	i = -1;
 	str1 = (char*)s1;
@@ -25,5 +25,5 @@ void*		ft_memccpy(void* s1, const void* s2, int c, size_t n)
 		str1[i] = str2[i];
 	if (str2[i] == c)
 		str1[i] = str2[i];
-	return str1;
+	return (str1);
 }

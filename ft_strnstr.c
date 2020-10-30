@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 18:51:03 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 18:32:10 by kshanti          ###   ########.fr       */
+/*   Created: 2020/10/30 16:49:10 by kshanti           #+#    #+#             */
+/*   Updated: 2020/10/30 18:52:33 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_memmove(void *s1, const void *s2, size_t n)
+char		*ft_strnstr(const char *big, const char *little, size_t len)
 {
+	char	*s1;
+	char	*s2;
+	int		len_s1;
 	int		i;
-	int		h;
-	char	*str1;
-	char	*str2;
+	int		j;
 
-	str1 = (char*)s1;
-	str2 = (char*)s2;
 	i = 0;
-	h = 1;
-	n = n > ft_strlen(str2) ? ft_strlen(str2) : n;
-	n = n > ft_strlen(str1) ? ft_strlen(str1) : n;
-	if (str2 < str1)
+	s1 = (char*)big;
+	s2 = (char*)little;
+	len_s1 = ft_strlen(s1);
+	if (ft_strlen(s2) > len_s1)
+		return (NULL);
+	len = len_s1 < len ? len_s1 : len;
+	while (i + ft_strlen(s2) <= len)
 	{
-		i = n - 1;
-		h = -1;
+		j = 0;
+		while (j < ft_strlen(s2) && s1[i + j] == s2[j])
+			j++;
+		if (j == ft_strlen(s2))
+			return (&s1[i]);
+		i++;
 	}
-	while (n--)
-	{
-		str1[i] = str2[i];
-		i += h;
-	}
-	return (str1);
+	return (NULL);
 }

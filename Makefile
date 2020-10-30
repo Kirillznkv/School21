@@ -25,11 +25,11 @@ HEDER = libft.h
 
 all: $(NAME)
 
-$(NAME): $(C_FILE)
+$(NAME): $(O_FILE)
 	ar -rcs $(NAME) $(O_FILE)
 
 %.o: %.c $(HEADER)
-	gcc -Wall -Wextra -Werror -c $<
+	gcc -c $<
 
 clean:
 	@rm -f $(O_FILE)
