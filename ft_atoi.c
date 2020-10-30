@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:29:03 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 18:21:15 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 19:06:47 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int					ft_atoi(const char *str)
 	m = 0;
 	i = 0;
 	res = 0;
-	while (str[i] < 33)
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v' ||
+		str[i] == '\r' || str[i] == '\f' || str[i] == '\n')
 		i++;
 	if (str[i] == '+')
 		i++;
