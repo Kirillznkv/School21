@@ -6,18 +6,18 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:46:31 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 18:30:45 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 19:29:38 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_memcmp(const void *s1, const void *s2, size_t n)
+int				ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int		len1;
-	int		len2;
-	char	*str1;
-	char	*str2;
+	size_t		len1;
+	size_t		len2;
+	char		*str1;
+	char		*str2;
 
 	str1 = (char*)s1;
 	str2 = (char*)s2;

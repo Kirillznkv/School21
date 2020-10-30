@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 19:11:15 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 18:30:01 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 19:28:57 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ void		*ft_memchr(const void *s, int c, size_t n)
 	int		i;
 	char	*str;
 
+	if (s == NULL)
+		return (NULL);
 	i = 0;
 	str = (char*)s;
 	n = n > ft_strlen(str) ? ft_strlen(str) : n;
-	while (n-- && str[i] != c)
+	while (n--)
+	{
+		if (str[i] == c)
+			return (&str[i]);
 		i++;
-	return (str);
+	}
+	return (NULL);
 }

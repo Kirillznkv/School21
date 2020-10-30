@@ -6,19 +6,19 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:49:10 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 18:52:33 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 19:31:39 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strnstr(const char *big, const char *little, size_t len)
+char			*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char	*s1;
-	char	*s2;
-	int		len_s1;
-	int		i;
-	int		j;
+	char		*s1;
+	char		*s2;
+	size_t		len_s1;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	s1 = (char*)big;

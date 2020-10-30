@@ -6,17 +6,17 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:27:40 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 18:31:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 19:30:21 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_memcpy(void *s1, const void *s2, size_t n)
+void			*ft_memcpy(void *s1, const void *s2, size_t n)
 {
-	int		i;
-	char	*str1;
-	char	*str2;
+	size_t		i;
+	char		*str1;
+	char		*str2;
 
 	i = -1;
 	str1 = (char*)s1;

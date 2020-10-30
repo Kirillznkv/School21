@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/30 14:54:25 by kshanti           #+#    #+#              #
-#    Updated: 2020/10/30 15:27:21 by kshanti          ###   ########.fr        #
+#    Updated: 2020/10/30 19:27:08 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ $(NAME): $(O_FILE)
 	ar -rcs $(NAME) $(O_FILE)
 
 %.o: %.c $(HEADER)
-	gcc -c $<
+	gcc -c -Wall -Wextra -Werror $<
 
 clean:
 	@rm -f $(O_FILE)
