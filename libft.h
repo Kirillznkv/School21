@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:29:56 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/30 16:21:26 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/10/30 16:26:08 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ void*		ft_memmove(void* s1, const void* s2, size_t  n);
 void*		ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void*		ft_memccpy(void* s1, const void* s2, int c, size_t n);
-
 int			ft_strncmp(const char* s1, const char* s2, size_t n);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
 int			ft_isascii(int c);
 int			ft_isprint(int c);
+int			ft_toupper(int c);
+int			ft_tolower(int c)
 
 #endif
