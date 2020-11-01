@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:51:03 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/31 14:46:03 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/01 15:25:01 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void				*ft_memmove(void *s1, const void *s2, size_t n)
 	unsigned char	*str1;
 	unsigned char	*str2;
 
-	str1 = (unsigned char*)s1;
-	str2 = (unsigned char*)s2;
 	i = 0;
 	h = 1;
+	str1 = (unsigned char*)s1;
+	str2 = (unsigned char*)s2;
 	if (str2 < str1)
 	{
 		i = n - 1;

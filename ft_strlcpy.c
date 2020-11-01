@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:28:13 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/01 13:33:52 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/01 15:53:21 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size)
 	i = 0;
 	str = (char*)src;
 	res = ft_strlen(str);
-	while (i < (size - 1) && str[i] != '\0')
+	while (i < (size - 1) && str[i])
 	{
 		dst[i] = str[i];
 		i++;
