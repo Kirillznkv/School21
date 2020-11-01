@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 16:48:52 by kshanti           #+#    #+#             */
-/*   Updated: 2020/10/31 14:53:52 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/01 20:48:07 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char		*ft_strchr(const char *s, int c)
 
 	i = 0;
 	ps = (char *)s;
-	while (ps[i] != c && ps[i] != '\0')
+	while (ps[i] != c && ps[i])
 		i++;
 	if (ps[i] != c)
 		return (NULL);
