@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:29:56 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/01 18:55:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/01 19:05:43 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ size_t		ft_strlcpy (char *dst, const char *src, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_strjoin(char const *s1, char const *s2);
 
 #endif
