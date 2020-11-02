@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:20:05 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/02 20:14:15 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/02 22:10:05 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void				ft_putnbr_fd(int n, int fd)
 		else
 		{
 			ft_putchar_fd('-', fd);
-			ft_putnbr_fd(-(n / 10), fd);
 			ln = -n;
+			if (ln >= 10)
+				ft_putnbr_fd(ln / 10, fd);
 			ft_putchar_fd(ln % 10 + '0', fd);
 		}
 	}
