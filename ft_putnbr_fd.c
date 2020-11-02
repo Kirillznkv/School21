@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/01 19:15:35 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/02 20:14:45 by kshanti          ###   ########.fr       */
+/*   Created: 2020/11/02 19:20:05 by kshanti           #+#    #+#             */
+/*   Updated: 2020/11/02 20:14:15 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strtrim(char const *s1, char const *set)
+void				ft_putnbr_fd(int n, int fd)
 {
-	size_t	size;
-	char	*str;
+	unsigned ln;
 
-	if (s1 == NULL)
-		return (NULL);
-	if (!(*set) && set == NULL)
-		return ((char*)s1);
-	while (*s1 && ft_strchr(set, (int)*s1))
-		s1++;
-	size = ft_strlen(s1);
-	while (size > 0 && ft_strrchr(set, s1[size - 1]))
-		size--;
-	str = (char*)ft_calloc(size + 1, sizeof(char));
-	if (str)
-		ft_strlcpy(str, s1, size + 1);
-	return (str);
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
+	}
+	else
+	{
+		if (n >= 0 && n <= 9)
+			ft_putchar_fd(n + '0', fd);
+		else
+		{
+			ft_putchar_fd('-', fd);
+			ft_putnbr_fd(-(n / 10), fd);
+			ln = -n;
+			ft_putchar_fd(ln % 10 + '0', fd);
+		}
+	}
 }
