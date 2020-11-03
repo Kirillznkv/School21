@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:29:56 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/02 20:13:30 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/03 13:10:03 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "unistd.h"
 #include "stdlib.h"
 
-char		*ft_strstr(const char *big, const char *little);
 size_t		ft_strlen(const char* str);
 char*		ft_strdup(const char* str);
 void		ft_bzero(void* s, size_t n);
