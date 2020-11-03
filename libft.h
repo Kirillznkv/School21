@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:29:56 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/03 13:10:03 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/03 13:46:16 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 #include "unistd.h"
 #include "stdlib.h"
 
+typedef struct		s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
+t_list		*ft_lstnew(void *content);
 size_t		ft_strlen(const char* str);
 char*		ft_strdup(const char* str);
 void		ft_bzero(void* s, size_t n);

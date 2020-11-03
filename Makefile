@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/30 14:54:25 by kshanti           #+#    #+#              #
-#    Updated: 2020/11/02 20:13:28 by kshanti          ###   ########.fr        #
+#    Updated: 2020/11/03 14:10:49 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,17 @@ ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_tolower.c\
 ft_substr.c ft_strjoin.c ft_strtrim.c ft_putchar_fd.c ft_itoa.c ft_putstr_fd.c\
 ft_putendl_fd.c ft_strmapi.c ft_putnbr_fd.c ft_split.c
 
-O_FILE = $(C_FILE:.c=.o)
+C_BONUS_FILE = ft_lstnew.c
+
+ifdef ADD_BONUS
+	O_FILE = $(C_FILE:.c=.o) $(C_BONUS_FILE:.c=.o)
+else
+	O_FILE = $(C_FILE:.c=.o)
+endif
 
 HEDER = libft.h
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean bonus re
 
 all: $(NAME)
 
@@ -33,8 +39,11 @@ $(NAME): $(O_FILE)
 %.o: %.c $(HEADER)
 	gcc -c -Wall -Wextra -Werror $<
 
+bonus:
+	$(MAKE) ADD_BONUS=1 all
+
 clean:
-	@rm -f $(O_FILE)
+	@rm -f $(O_FILE) $(C_BONUS_FILE:.c=.o)
 
 fclean: clean
 	@rm -f $(NAME)
