@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/30 14:54:25 by kshanti           #+#    #+#              #
-#    Updated: 2020/11/03 15:33:36 by kshanti          ###   ########.fr        #
+#    Updated: 2020/11/05 11:59:49 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ else
 	O_FILE = $(C_FILE:.c=.o)
 endif
 
-HEDER = libft.h
+HEADER = libft.h
 
 .PHONY: all clean fclean bonus re
 

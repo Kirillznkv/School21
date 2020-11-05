@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 14:53:35 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/03 15:10:04 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/03 16:58:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void		ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list	**pl;
-	t_list	*pnext;
+	t_list	*new_lst;
+	t_list	*pl;
 
-	while (lst)
+	new_lst = *lst;
+	while (new_lst)
 	{
-		pl = lst++;
-		ft_lstiter(lst, del);
-		lst = pl;
+		pl = new_lst->next;
+		ft_lstdelone(new_lst, del);
+		new_lst = pl;
 	}
 }
