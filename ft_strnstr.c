@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 16:49:10 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/01 17:00:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/05 13:15:06 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ char			*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t		j;
 
 	i = 0;
-	if (!(*little) || len == 0)
+	if (!len && *little)
+		return (NULL);
+	if (!(*little) || !little)
 		return ((char*)big);
 	while (big[i] && (i < len))
 	{

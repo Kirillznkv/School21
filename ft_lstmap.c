@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 15:13:46 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/03 15:59:05 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/05 12:49:25 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*beg_tmp;
 	t_list	*beg_lst;
 
-	if (lst == NULL)
-		return (NULL);
 	size = ft_lstsize(lst);
-	if ((tmp = ft_lstnew(f(lst->content))) == NULL)
+	if (lst == NULL || (tmp = ft_lstnew(f(lst->content))) == NULL)
 		return (NULL);
 	beg_tmp = tmp;
 	beg_lst = lst;
