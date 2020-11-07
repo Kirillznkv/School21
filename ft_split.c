@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:12:41 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/03 13:06:58 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/07 20:17:30 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,15 @@ size_t		size_split(const char *s, char c)
 {
 	size_t	res;
 
-	res = 1;
+	res = 0;
 	if (s == NULL)
-		return (0);
-	while (*s == c)
-		s++;
-	if (*s == '\0')
-		return (0);
+		return (res);
 	while (*s)
-		if (*(s++) == c)
-		{
-			while (*s == c)
-				s++;
-			if (*s == '\0')
-				res--;
+	{
+		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
 			res++;
-		}
+		s++;
+	}
 	return (res);
 }
 
@@ -79,7 +72,7 @@ char		**ft_split(char const *s, char c)
 		if ((map[i] = (char*)ft_calloc((size_line + 1), sizeof(char))) == NULL)
 			return (del_split(map, i));
 		ft_strlcpy(map[i++], s, size_line + 1);
-		while (*s != c)
+		while (*s && *s != c)
 			s++;
 		while (*s == c)
 			s++;
