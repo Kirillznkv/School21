@@ -6,78 +6,85 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/10 20:56:00 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/10 23:06:23 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*ft_strdup(const char *s)
+size_t		ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	*str;
-	int		i;
+	size_t		len;
+	size_t		i;
+	size_t		j;
 
-	i = -1;
-	str = (char*)ft_calloc((ft_strlen((char*)s) + 1), sizeof(char));
-	while (str && s[++i])
-		str[i] = s[i];
-	return (str);
+	i = ft_strlen(dst);
+	j = 0;
+	len = i + ft_strlen(src);
+	if (size <= i)
+		return (ft_strlen(src) + size);
+	while (i < (size - 1) && src[j])
+		dst[i++] = src[j++];
+	dst[i] = '\0';
+	return (len);
 }
 
-size_t		maybe_nextline(char *st_buff)
+int			maybe_line(char **st_buff, char **line)
 {
-	char	*str;
+	char	*st;
+	char	*newline;
 
-	str = st_buff;
-	while (*str && *str != '\n')
-		str++;
-	if (*str)
+	st = *st_buff;
+	if (st && (newline = ft_strchr(st, '\n')))
+	{
+		*newline = '\0';
+		*line = ft_strdup(st);
+		*newline = '\n';
+		newline = ft_substr(st, ft_strlen(st), -1);
+		if (!newline)
+			return (-1);
+		free(st);
+		st_buff = &newline;
 		return (1);
+	}
 	return (0);
 }
 
 int			get_next_line(int fd, char **line)
 {
-	int			size_read;
 	char		*buff;
 	static char	*st_buff;
+	int			size_read;
+	int			ret;
 
-	*line = NULL;
 	if (fd < 0)
 		return (-1);
-	if (!st_buff)
-		st_buff = (char*)ft_calloc(1, sizeof(char));
-	buff = (char*)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buff || !st_buff)
+	buff = (char*)malloc(BUFFER_SIZE * sizeof(char));
+	buff[BUFFER_SIZE] = '\0';
+	if (!buff)
 		return (-1);
-	size_read = read(fd, buff, BUFFER_SIZE);
-	st_buff = ft_strjoin_for_gnl(st_buff, buff);
-	if (!st_buff)
-		return (-1);
-	while (!maybe_nextline(st_buff) && size_read)
+		size_read = 1;
+	while (!(ret = maybe_line(&st_buff, line)))
 	{
+		if (ret == -1)
+			return (-1);
+		if (size_read != BUFFER_SIZE)
+		{
+			*line = ft_strdup(st_buff);
+			if (*line == NULL)
+				return (-1);
+			free(st_buff);
+			free(buff);
+			return (0);
+		}
 		size_read = read(fd, buff, BUFFER_SIZE);
-		st_buff = ft_strjoin_for_gnl(st_buff, buff);
+		if (!st_buff)
+			st_buff = ft_strdup("");
+		if (!st_buff)
+			return (-1);
+		st_buff = ft_strjoin(&st_buff, &buff);
 		if (!st_buff)
 			return (-1);
 	}
-	if (!maybe_nextline(st_buff))
-	{
-		*line = ft_strdup(st_buff);
-		free(st_buff);
-		return (0);
-	}
-	else
-	{
-		buff = st_buff;
-		while (*buff != '\n')
-			buff++;
-		*(buff++) = '\0';
-		*line = ft_strdup(st_buff);
-		*(buff++) = '\n';
-		buff = ft_strdup(buff);
-		free(st_buff);
-		st_buff = buff;
-		return (1);
-	}
+	return (1);
 }

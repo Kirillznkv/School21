@@ -6,13 +6,40 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:26:17 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/10 19:52:12 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/10 23:10:35 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t			ft_strlen(const char *str)
+char		*ft_strchr(const char *s, int c)
+{
+	int		i;
+	char	*ps;
+
+	i = 0;
+	ps = (char *)s;
+	while (ps[i] != c && ps[i])
+		i++;
+	if (ps[i] != c)
+		return (NULL);
+	return (&ps[i]);
+}
+
+char		*ft_strdup(const char *s)
+{
+	char	*str;
+	int		i;
+
+	i = -1;
+	str = (char*)malloc(ft_strlen((char*)s) + 1);
+	while (str && s[++i])
+		str[i] = s[i];
+	str[ft_strlen((char*)s) + 1] = '\0';
+	return (str);
+}
+
+size_t		ft_strlen(const char *str)
 {
 	size_t		res;
 
@@ -22,57 +49,38 @@ size_t			ft_strlen(const char *str)
 	return (res);
 }
 
-void			ft_bzero(void *s, size_t n)
+char		*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char	*str;
+	size_t	i;
+	char	*str;
 
-	str = (unsigned char*)s;
-	while (n-- > 0)
-		str[n] = '\0';
-}
-
-void			*ft_calloc(size_t n, size_t size)
-{
-	unsigned char	*s;
-
-	if (n * size < 0)
+	i = 0;
+	if (s == NULL)
 		return (NULL);
-	s = (unsigned char*)malloc(n * size);
-	if (s != NULL)
-		ft_bzero(s, n * size);
-	return (void*)s;
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	str = (char*)malloc(len + 1 * sizeof(int));
+	if (str && start <= ft_strlen(s))
+		while (s[start] && i < len)
+			str[i++] = s[start++];
+	str[len + 1] = '\0';
+	return (str);
 }
 
-size_t			ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t		len;
-	size_t		i;
-	size_t		j;
-
-	i = ft_strlen(dst);
-	j = 0;
-	len = i + ft_strlen(src);
-	if (size <= i)
-		return (ft_strlen(src) + size);
-	while (i < (size - 1) && src[j])
-		dst[i++] = src[j++];
-	dst[i] = '\0';
-	return (len);
-}
-
-char			*ft_strjoin_for_gnl(char *s1, char *s2)
+char		*ft_strjoin(char **s1, char **s2)
 {
 	char	*str;
 
-	if (s1 == NULL || s2 == NULL)
+	if (*s1 == NULL || *s2 == NULL)
 		return (NULL);
-	str = (char*)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
+	str = (char*)malloc(ft_strlen(*s1) + ft_strlen(*s2) + 1);
 	if (str)
 	{
-		ft_strlcat(str, s1, ft_strlen(s1) + 1);
-		ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+		ft_strlcat(str, *s1, ft_strlen(*s1) + 1);
+		ft_strlcat(str, *s2, ft_strlen(*s1) + ft_strlen(*s2) + 1);
 	}
-	free(s1);
-	free(s2);
+	str[ft_strlen(*s1) + ft_strlen(*s2) + 1] = '\0';
+	free(*s1);
+	free(*s2);
 	return (str);
 }

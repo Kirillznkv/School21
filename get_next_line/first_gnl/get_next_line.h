@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:06:46 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/10 23:08:45 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/10 19:52:12 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 #	define BUFFER_SIZE 32
 #endif
 
-char		*ft_strchr(const char *s, int c);
-char		*ft_strdup(const char *s);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-size_t		ft_strlen(const char *str);
-char		*ft_strjoin(char **s1, char **s2);
-size_t		ft_strlcat(char *dst, const char *src, size_t size);
-int			maybe_line(char **st_buff, char **line);
-int			get_next_line(int fd, char **line);
+int				get_next_line(int fd, char **line);
+char			*ft_strjoin_for_gnl(char *s1, char *s2);
+size_t			ft_strlcat(char *dst, const char *src, size_t size);
+void			*ft_calloc(size_t n, size_t size);
+void			ft_bzero(void *s, size_t n);
+size_t			ft_strlen(const char *str);
+size_t			maybe_nextline(char *st_buff);
+char			*ft_strdup(const char *s);
 
 #endif
