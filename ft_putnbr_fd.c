@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:20:05 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/02 22:10:05 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/10 17:01:11 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void				ft_putnbr_fd(int n, int fd)
 {
-	unsigned ln;
+	unsigned int	ln;
 
 	if (n >= 10)
 	{

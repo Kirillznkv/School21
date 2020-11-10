@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:12:41 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/07 20:17:30 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/10 17:01:13 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ char		**ft_split(char const *s, char c)
 			return (del_split(map, i));
 		ft_strlcpy(map[i++], s, size_line + 1);
 		while (*s && *s != c)
-			s++;
-		while (*s == c)
 			s++;
 	}
 	return (map);
