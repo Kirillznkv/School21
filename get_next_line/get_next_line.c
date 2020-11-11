@@ -6,90 +6,86 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/11 17:59:52 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/11 19:44:04 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdio.h"
 #include "get_next_line.h"
+#include "stdio.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t size)
+char		*ft_strchr(const char *s, int c)
 {
-	size_t		len;
-	size_t		i;
-	size_t		j;
+	int		i;
+	char	*ps;
 
-	i = ft_strlen(dst);
-	j = 0;
-	len = i + ft_strlen(src);
-	if (size <= i)
-		return (ft_strlen(src) + size);
-	while (i < (size - 1) && src[j])
-		dst[i++] = src[j++];
-	dst[i] = '\0';
-	return (len);
+	i = 0;
+	ps = (char *)s;
+	while (ps[i] != c && ps[i])
+		i++;
+	if (ps[i] != c)
+		return (NULL);
+	return (&ps[i]);
 }
 
-int			maybe_line(char **st_buff, char **line)
+int			maybe_line(char **static_buff, char **line)
 {
-	char	*st;
-	char	*newline;
+	char	*p_endline;
+	char	*str;
 
-	if (!st_buff)
-		return (0);
-	st = *st_buff;
-	if (st && (newline = ft_strchr(st, '\n')))
+	str = *static_buff;
+	if (str)
 	{
-		*newline = '\0';
-		*line = ft_strdup(st);
-		*(newline++) = '\n';
-		newline = ft_substr(newline, 0, -1);
-		if (!newline)
-			return (-1);
-		free(st);
-		st_buff = &newline;
-		return (1);
+		if ((p_endline = ft_strchr(str, '\n')))
+		{
+			*p_endline = '\0';
+			*line = ft_strdup(str);
+			if (!(*line))
+				return (-1);
+			*p_endline = '\n';
+			p_endline++;
+			*static_buff = ft_strdup(p_endline);
+			if (!(*static_buff))
+				return (-1);
+			free(str);
+			return (1);
+		}
 	}
 	return (0);
+	
 }
 
 int			get_next_line(int fd, char **line)
 {
-	char		*buff;
 	static char	*st_buff;
-	int			size_read;
-	int			ret;
+	char		*p_for_st_buff;
+	char		*buff;
+	int			size_buff;
+	int			res;
 
+	*line = NULL;
 	if (fd < 0)
-		return (-2);
-	buff = (char*)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (-3);
-	size_read = BUFFER_SIZE;
-	ret = 1;
-	//if (st_buff && (ret = maybe_line(&st_buff, line)))
-	//	return (ret);
-	while (!(st_buff && (ret = maybe_line(&st_buff, line))))
+		return (-1);
+	if (!st_buff)
+		st_buff = ft_strdup("");
+	size_buff = BUFFER_SIZE;
+	res = 0;
+	buff = (char*)malloc(BUFFER_SIZE + 1);
+	while (size_buff && !(res = maybe_line(&st_buff, line)))
 	{
-		if (ret == -1)
-			return (-4);
-		if (size_read != BUFFER_SIZE)
+		size_buff = read(fd, buff, BUFFER_SIZE);
+		if (buff)
 		{
-			*line = ft_strdup(st_buff);
-			if (*line == NULL)
-				return (-5);
-			free(st_buff);
-			free(buff);
-			return (0);
+			buff[size_buff] = '\0';
+			p_for_st_buff = st_buff;
+			st_buff = ft_strjoin(p_for_st_buff, buff);
+			free(p_for_st_buff);
 		}
-		size_read = read(fd, buff, BUFFER_SIZE);
-		buff[BUFFER_SIZE] = '\0';
-		if (!st_buff)
-			st_buff = ft_strdup("");
-		st_buff = ft_strjoin(&st_buff, &buff);
-		printf("&&&&&%s&&&&&&", st_buff);
-		if (!st_buff)
-			return (-6);
 	}
-	return (1);
+	if (*st_buff && size_buff != BUFFER_SIZE)
+	{
+		p_for_st_buff = ft_strdup(st_buff);
+		*line = p_for_st_buff;
+	}
+	free(buff);
+	return (res);
 }
