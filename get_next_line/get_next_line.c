@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/11 19:44:04 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/11 20:36:17 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int			get_next_line(int fd, char **line)
 	{
 		p_for_st_buff = ft_strdup(st_buff);
 		*line = p_for_st_buff;
+		free(st_buff);
+		return (0);
 	}
 	free(buff);
 	return (res);
