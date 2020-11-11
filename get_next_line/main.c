@@ -3,8 +3,13 @@
 
 int main(int argc, char **argv)
 {
+    int res;
     char *line;
-    while (get_next_line(0, &line))
-        printf("|%s|\n", line);
+    while ((res = get_next_line(0, &line)))
+    {
+        printf("%d : |%s|\n", res, line);
+        if (res < 0)
+            return 0;
+    }
     return 0;
 }

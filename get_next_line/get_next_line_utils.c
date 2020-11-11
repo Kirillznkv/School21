@@ -6,10 +6,11 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:26:17 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/10 23:10:35 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/11 18:00:48 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "stdio.h"
 #include "get_next_line.h"
 
 char		*ft_strchr(const char *s, int c)
@@ -44,7 +45,7 @@ size_t		ft_strlen(const char *str)
 	size_t		res;
 
 	res = 0;
-	while (str[res])
+	while (str && str[res])
 		res++;
 	return (res);
 }
@@ -59,11 +60,13 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	str = (char*)malloc(len + 1 * sizeof(int));
+	str = (char*)malloc(len + 1);
 	if (str && start <= ft_strlen(s))
+	{
 		while (s[start] && i < len)
 			str[i++] = s[start++];
-	str[len + 1] = '\0';
+		str[len] = '\0';
+	}
 	return (str);
 }
 
@@ -71,15 +74,13 @@ char		*ft_strjoin(char **s1, char **s2)
 {
 	char	*str;
 
-	if (*s1 == NULL || *s2 == NULL)
-		return (NULL);
 	str = (char*)malloc(ft_strlen(*s1) + ft_strlen(*s2) + 1);
 	if (str)
 	{
 		ft_strlcat(str, *s1, ft_strlen(*s1) + 1);
 		ft_strlcat(str, *s2, ft_strlen(*s1) + ft_strlen(*s2) + 1);
+		str[ft_strlen(*s1) + ft_strlen(*s2)] = '\0';
 	}
-	str[ft_strlen(*s1) + ft_strlen(*s2) + 1] = '\0';
 	free(*s1);
 	free(*s2);
 	return (str);

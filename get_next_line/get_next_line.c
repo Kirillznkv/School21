@@ -6,10 +6,11 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/10 23:06:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/11 17:59:52 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "stdio.h"
 #include "get_next_line.h"
 
 size_t		ft_strlcat(char *dst, const char *src, size_t size)
@@ -34,13 +35,15 @@ int			maybe_line(char **st_buff, char **line)
 	char	*st;
 	char	*newline;
 
+	if (!st_buff)
+		return (0);
 	st = *st_buff;
 	if (st && (newline = ft_strchr(st, '\n')))
 	{
 		*newline = '\0';
 		*line = ft_strdup(st);
-		*newline = '\n';
-		newline = ft_substr(st, ft_strlen(st), -1);
+		*(newline++) = '\n';
+		newline = ft_substr(newline, 0, -1);
 		if (!newline)
 			return (-1);
 		free(st);
@@ -58,33 +61,35 @@ int			get_next_line(int fd, char **line)
 	int			ret;
 
 	if (fd < 0)
-		return (-1);
-	buff = (char*)malloc(BUFFER_SIZE * sizeof(char));
-	buff[BUFFER_SIZE] = '\0';
+		return (-2);
+	buff = (char*)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
-		return (-1);
-		size_read = 1;
-	while (!(ret = maybe_line(&st_buff, line)))
+		return (-3);
+	size_read = BUFFER_SIZE;
+	ret = 1;
+	//if (st_buff && (ret = maybe_line(&st_buff, line)))
+	//	return (ret);
+	while (!(st_buff && (ret = maybe_line(&st_buff, line))))
 	{
 		if (ret == -1)
-			return (-1);
+			return (-4);
 		if (size_read != BUFFER_SIZE)
 		{
 			*line = ft_strdup(st_buff);
 			if (*line == NULL)
-				return (-1);
+				return (-5);
 			free(st_buff);
 			free(buff);
 			return (0);
 		}
 		size_read = read(fd, buff, BUFFER_SIZE);
+		buff[BUFFER_SIZE] = '\0';
 		if (!st_buff)
 			st_buff = ft_strdup("");
-		if (!st_buff)
-			return (-1);
 		st_buff = ft_strjoin(&st_buff, &buff);
+		printf("&&&&&%s&&&&&&", st_buff);
 		if (!st_buff)
-			return (-1);
+			return (-6);
 	}
 	return (1);
 }
