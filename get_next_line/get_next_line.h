@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:06:46 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/11 19:20:09 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/13 20:20:35 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "fcntl.h"
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 32
+#	define BUFFER_SIZE 100
 #endif
 
 size_t		ft_strlen(const char *str);

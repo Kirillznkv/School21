@@ -6,11 +6,12 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:26:17 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/11 18:48:54 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/13 18:45:37 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "stdio.h"
 
 size_t		ft_strlen(const char *str)
 {
@@ -84,9 +85,10 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	str = (char*)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (str)
 	{
+		str[0] = '\0';
+		str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 		ft_strlcat(str, s1, ft_strlen(s1) + 1);
 		ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
-		str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	}
 	return (str);
 }

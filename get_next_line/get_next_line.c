@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/11 20:36:17 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/13 20:51:04 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			get_next_line(int fd, char **line)
 	int			res;
 
 	*line = NULL;
-	if (fd < 0)
+	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
 		return (-1);
 	if (!st_buff)
 		st_buff = ft_strdup("");
@@ -73,17 +73,22 @@ int			get_next_line(int fd, char **line)
 	while (size_buff && !(res = maybe_line(&st_buff, line)))
 	{
 		size_buff = read(fd, buff, BUFFER_SIZE);
-		if (buff)
+		if (buff && size_buff)
 		{
 			buff[size_buff] = '\0';
 			p_for_st_buff = st_buff;
 			st_buff = ft_strjoin(p_for_st_buff, buff);
 			free(p_for_st_buff);
 		}
+		if(!buff)
+			return (-1);
 	}
-	if (*st_buff && size_buff != BUFFER_SIZE)
+	if (!size_buff)
 	{
-		p_for_st_buff = ft_strdup(st_buff);
+		if (*st_buff)
+			p_for_st_buff = ft_strdup(st_buff);
+		else
+			p_for_st_buff = ft_strdup("");
 		*line = p_for_st_buff;
 		free(st_buff);
 		return (0);
