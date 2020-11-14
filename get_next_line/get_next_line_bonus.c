@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 01:33:48 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 02:20:14 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,29 +84,48 @@ char		*return_last_line_and_free(char **st_buff)
 	return (line);
 }
 
-t_list		*list_finder(int fd, t_list *list_buff)
+t_list		*list_finder(int fd, t_list **lst)
 {
+	t_list	*list_buff;
 	t_list	*tmp;
 
-	if (!list_buff)
+	list_buff = *lst;
+	if (list_buff)
 	{
 		while (list_buff->next && list_buff->fd != fd)
 			list_buff = list_buff->next;
 		if (list_buff->fd == fd)
+		{
+			if (!list_buff->content)
+			{
+				list_buff->content = ft_strdup("");
+				if (!list_buff->content)
+					return (NULL);
+			}
 			return (list_buff);
+		}
 		tmp = (t_list*)malloc(sizeof(t_list));
+		if (!tmp)
+			return (NULL);
 		list_buff->next = tmp;
 		tmp->fd = fd;
 		tmp->next = NULL;
 		tmp->content = ft_strdup("");
-		tmp = list_buff;
+		if (!tmp->content)
+			return (NULL);
+		tmp = list_buff->next;
 	}
 	else
 	{
 		tmp = (t_list*)malloc(sizeof(t_list));
+		if (!tmp)
+			return (NULL);
 		tmp->fd = fd;
 		tmp->next = NULL;
 		tmp->content = ft_strdup("");
+		if (!tmp->content)
+			return (NULL);
+		*lst = tmp;
 	}
 	return (tmp);
 }
@@ -119,7 +138,7 @@ int			get_next_line(int fd, char **line)
 	int				size_buff;
 	int				res;
 
-	if(!(buff = (char*)malloc(BUFFER_SIZE + 1)) || !(st_buff = list_finder(fd, list_buff)))
+	if(!(buff = (char*)malloc(BUFFER_SIZE + 1)) || !(st_buff = list_finder(fd, &list_buff)))
 	 return (-1);
 	if (line == NULL || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
 	{
