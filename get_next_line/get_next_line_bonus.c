@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 00:39:51 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 01:33:48 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include "stdio.h"
 
 char		*ft_strchr(const char *s, int c)
@@ -51,6 +51,7 @@ int			maybe_line(char **static_buff, char **line)
 		}
 	}
 	return (0);
+	
 }
 
 int			add_to_static(int fd, int *size_buff, char *buff, char **st_buff)
@@ -83,29 +84,55 @@ char		*return_last_line_and_free(char **st_buff)
 	return (line);
 }
 
+t_list		*list_finder(int fd, t_list *list_buff)
+{
+	t_list	*tmp;
+
+	if (!list_buff)
+	{
+		while (list_buff->next && list_buff->fd != fd)
+			list_buff = list_buff->next;
+		if (list_buff->fd == fd)
+			return (list_buff);
+		tmp = (t_list*)malloc(sizeof(t_list));
+		list_buff->next = tmp;
+		tmp->fd = fd;
+		tmp->next = NULL;
+		tmp->content = ft_strdup("");
+		tmp = list_buff;
+	}
+	else
+	{
+		tmp = (t_list*)malloc(sizeof(t_list));
+		tmp->fd = fd;
+		tmp->next = NULL;
+		tmp->content = ft_strdup("");
+	}
+	return (tmp);
+}
+
 int			get_next_line(int fd, char **line)
 {
-	static char	*st_buff;
-	char		*buff;
-	int			size_buff;
-	int			res;
+	static t_list	*list_buff;
+	t_list			*st_buff;
+	char			*buff;
+	int				size_buff;
+	int				res;
 
-    if(!(buff = (char*)malloc(BUFFER_SIZE + 1)))
-        return (-1);
+	if(!(buff = (char*)malloc(BUFFER_SIZE + 1)) || !(st_buff = list_finder(fd, list_buff)))
+	 return (-1);
 	if (line == NULL || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
-    {
-	    free(buff);
-        return (-1);
-    }
-	if (!st_buff)
-		st_buff = ft_strdup("");
+	{
+		free(buff);
+		return (-1);
+	}
 	*line = NULL;
 	size_buff = BUFFER_SIZE;
-	while (size_buff && !(res = maybe_line(&st_buff, line)))
-		res = add_to_static(fd, &size_buff, buff, &st_buff);
+	while (size_buff && !(res = maybe_line(&(st_buff->content), line)))
+		res = add_to_static(fd, &size_buff, buff, &(st_buff->content));//res = -1
 	if (!size_buff && res != -1)
 	{
-		*line = return_last_line_and_free(&st_buff);
+		*line = return_last_line_and_free(&(st_buff->content));
 		res = 0;
 	}
 	free(buff);
