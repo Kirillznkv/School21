@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/13 20:51:04 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/14 13:08:53 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,18 @@ int			get_next_line(int fd, char **line)
 	int			size_buff;
 	int			res;
 
-	*line = NULL;
-	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
-		return (-1);
+    if(!(buff = (char*)malloc(BUFFER_SIZE + 1)))
+        return (-1);
+	if (line == NULL || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
+    {
+	    free(buff);
+        return (-1);
+    }
 	if (!st_buff)
 		st_buff = ft_strdup("");
+	*line = NULL;
 	size_buff = BUFFER_SIZE;
 	res = 0;
-	buff = (char*)malloc(BUFFER_SIZE + 1);
 	while (size_buff && !(res = maybe_line(&st_buff, line)))
 	{
 		size_buff = read(fd, buff, BUFFER_SIZE);
@@ -91,6 +95,8 @@ int			get_next_line(int fd, char **line)
 			p_for_st_buff = ft_strdup("");
 		*line = p_for_st_buff;
 		free(st_buff);
+        free(buff);
+        st_buff = NULL;
 		return (0);
 	}
 	free(buff);

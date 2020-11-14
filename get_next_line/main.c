@@ -3,16 +3,26 @@
 
 int main(int argc, char **argv)
 {
-    int res;
-    char *line;
-    while ((res = get_next_line(0, &line)) > 0)
-    {
-        printf("[Return: %d] Line #%s\n", res, line);
-    }
-    printf("[Return: %d] Line #%s\n", res, line);
-    if (res == -1)
-        printf("-----------\nError\n");
-    else if (res == 0)
-        printf("-----------\nEnd of file\n");
+    int 	res;
+    char	*line;
+	int		fd;
+
+	fd = open("test", O_RDONLY);
+    while ((res = get_next_line(180, &line)) > 0)
+	{
+        printf("|%s|\n", line);
+		free(line);
+	}
+    printf("|%s|\n", line);
+	free(line);
+	close(fd);
+   	fd = open("test_file17", O_RDONLY);
+    while ((res = get_next_line(fd, &line)) > 0)
+	{
+        printf("|%s|\n", line);
+		free(line);
+	}
+    printf("|%s|\n", line);
+	free(line);
     return 0;
 }

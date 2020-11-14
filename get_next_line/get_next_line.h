@@ -18,11 +18,10 @@
 # include "fcntl.h"
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 100
+#	define BUFFER_SIZE 3
 #endif
 
 size_t		ft_strlen(const char *str);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strdup(const char *s);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 char		*ft_strjoin(char const *s1, char const *s2);
