@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/14 13:08:53 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 00:10:38 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,39 @@ int			maybe_line(char **static_buff, char **line)
 	
 }
 
+int			add_to_static(int fd, int *size_buff, char *buff, char **st_buff)
+{
+	char	*p_for_st_buff;
+
+	*size_buff = read(fd, buff, BUFFER_SIZE);
+	if (buff && *size_buff)
+	{
+		buff[*size_buff] = '\0';
+		p_for_st_buff = *st_buff;
+		*st_buff = ft_strjoin(p_for_st_buff, buff);
+		free(p_for_st_buff);
+	}
+	if(!buff)
+		return (-1);
+	return (1);
+}
+
+char		*return_last_line_and_free(char **st_buff)
+{
+	char	*line;
+
+	if (**st_buff)
+		line = ft_strdup(*st_buff);
+	else
+		line = ft_strdup("");
+	free(*st_buff);
+	*st_buff = NULL;
+	return (line);
+}
+
 int			get_next_line(int fd, char **line)
 {
 	static char	*st_buff;
-	char		*p_for_st_buff;
 	char		*buff;
 	int			size_buff;
 	int			res;
@@ -73,31 +102,12 @@ int			get_next_line(int fd, char **line)
 		st_buff = ft_strdup("");
 	*line = NULL;
 	size_buff = BUFFER_SIZE;
-	res = 0;
 	while (size_buff && !(res = maybe_line(&st_buff, line)))
+		res = add_to_static(fd, &size_buff, buff, &st_buff);
+	if (!size_buff && res != -1)
 	{
-		size_buff = read(fd, buff, BUFFER_SIZE);
-		if (buff && size_buff)
-		{
-			buff[size_buff] = '\0';
-			p_for_st_buff = st_buff;
-			st_buff = ft_strjoin(p_for_st_buff, buff);
-			free(p_for_st_buff);
-		}
-		if(!buff)
-			return (-1);
-	}
-	if (!size_buff)
-	{
-		if (*st_buff)
-			p_for_st_buff = ft_strdup(st_buff);
-		else
-			p_for_st_buff = ft_strdup("");
-		*line = p_for_st_buff;
-		free(st_buff);
-        free(buff);
-        st_buff = NULL;
-		return (0);
+		*line = return_last_line_and_free(&st_buff);
+		res = 0;
 	}
 	free(buff);
 	return (res);
