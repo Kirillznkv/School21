@@ -6,12 +6,11 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:26:17 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 14:05:12 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 19:50:59 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include "stdio.h"
 
 size_t		ft_strlen(const char *str)
 {

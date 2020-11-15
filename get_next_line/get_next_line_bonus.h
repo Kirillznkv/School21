@@ -6,20 +6,20 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:06:46 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 14:06:35 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 19:59:48 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include "unistd.h"
 # include "stdlib.h"
 # include "fcntl.h"
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 32
-#endif
+#  define BUFFER_SIZE 3
+# endif
 
 typedef struct		s_list
 {
@@ -28,8 +28,9 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 t_list				*list_finder(int fd, t_list **lst);
-char				*return_last_line_and_free(char **st_buff);
-int					add_to_static(int fd, int *size_buff, char *buff, char **st_buff);
+char				*return_last_line_and_free(char **st_buff, int *res);
+int					add_to_static(int fd, int *size_buff, char *buff,
+char **st_buff);
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *s);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 00:39:51 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 19:52:24 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			add_to_static(int fd, int *size_buff, char *buff, char **st_buff)
 		*st_buff = ft_strjoin(p_for_st_buff, buff);
 		free(p_for_st_buff);
 	}
-	if(!buff)
+	if (!buff)
 		return (-1);
 	return (1);
 }
@@ -90,13 +90,13 @@ int			get_next_line(int fd, char **line)
 	int			size_buff;
 	int			res;
 
-    if(!(buff = (char*)malloc(BUFFER_SIZE + 1)))
-        return (-1);
+	if (!(buff = (char*)malloc(BUFFER_SIZE + 1)))
+		return (-1);
 	if (line == NULL || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
-    {
-	    free(buff);
-        return (-1);
-    }
+	{
+		free(buff);
+		return (-1);
+	}
 	if (!st_buff)
 		st_buff = ft_strdup("");
 	*line = NULL;
