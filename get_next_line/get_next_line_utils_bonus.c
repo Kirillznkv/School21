@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:26:17 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 00:42:33 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 14:05:12 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,20 @@ char		*ft_strdup(const char *s)
 		str[ft_strlen((char*)s)] = '\0';
 	}
 	return (str);
+}
+
+char		*ft_strchr(const char *s, int c)
+{
+	int		i;
+	char	*ps;
+
+	i = 0;
+	ps = (char *)s;
+	while (ps[i] != c && ps[i])
+		i++;
+	if (ps[i] != c)
+		return (NULL);
+	return (&ps[i]);
 }
 
 size_t		ft_strlcat(char *dst, const char *src, size_t size)

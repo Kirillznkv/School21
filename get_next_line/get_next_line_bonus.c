@@ -6,26 +6,12 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:14:54 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 02:20:14 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 14:06:48 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 #include "stdio.h"
-
-char		*ft_strchr(const char *s, int c)
-{
-	int		i;
-	char	*ps;
-
-	i = 0;
-	ps = (char *)s;
-	while (ps[i] != c && ps[i])
-		i++;
-	if (ps[i] != c)
-		return (NULL);
-	return (&ps[i]);
-}
 
 int			maybe_line(char **static_buff, char **line)
 {

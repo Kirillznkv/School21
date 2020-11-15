@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 17:06:46 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/15 00:49:01 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/15 14:06:35 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ typedef struct		s_list
 	char			*content;
 	struct s_list	*next;
 }					t_list;
+t_list				*list_finder(int fd, t_list **lst);
+char				*return_last_line_and_free(char **st_buff);
+int					add_to_static(int fd, int *size_buff, char *buff, char **st_buff);
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *s);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
