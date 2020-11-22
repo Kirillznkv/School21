@@ -6,13 +6,13 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:26:01 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/22 19:24:56 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/22 20:43:38 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parser.h"
 
-char		*skip_flag(char *str, t_list *tmp)
+char		*skip_flag(char *str, t_arg *tmp)
 {
 	while (*str == '0' && (*str + 1) != '-')
 	{
@@ -29,14 +29,14 @@ char		*skip_flag(char *str, t_list *tmp)
 	return (str);
 }
 
-char		*skip_width_precis(char *str, t_list *tmp, va_list **va)
+char		*skip_width_precis(char *str, t_arg *tmp, va_list **va)
 {
 	if (*str == '0' || *str == '-' || *str == '+')
 		tmp->flags = -1;
-	else if (ft_isdigit(str))
+	else if (ft_isdigit(*str))
 	{
 		tmp->width = ft_atoi(str);
-		while (ft_isdigit(str))
+		while (ft_isdigit(*str))
 			str++;
 	}
 	else if (*str == '*')
@@ -54,10 +54,10 @@ char		*skip_width_precis(char *str, t_list *tmp, va_list **va)
 	if (*str != '.')
 		return (str);
 	tmp->precision = 0;
-	if (ft_isdigit(++str))
+	if (ft_isdigit(*(++str)))
 	{
 		tmp->precision = ft_atoi(str);
-		while (ft_isdigit(str))
+		while (ft_isdigit(*str))
 			str++;
 	}
 	else if (*str == '*')
@@ -70,7 +70,7 @@ char		*skip_width_precis(char *str, t_list *tmp, va_list **va)
 	return (str);
 }
 
-char		*skip_type(char *str, t_list *tmp)//дописать проверки воизбежание сеги
+char		*skip_type(char *str, t_arg *tmp)//дописать проверки воизбежание сеги
 {
 	char	*set;
 
@@ -84,11 +84,11 @@ char		*skip_type(char *str, t_list *tmp)//дописать проверки во
 }
 
 //флаг = -1, не правильный тип
-t_list		*parser(char *str, va_list *va)
+t_arg		*parser(char *str, va_list *va)
 {
-	t_list	*tmp;
+	t_arg	*tmp;
 
-	if (!(tmp = (t_list*)malloc(sizeof(t_list))))
+	if (!(tmp = (t_arg*)malloc(sizeof(t_arg))))
 		return (NULL);
 	tmp->length = 1;//%
 	tmp->flags = 0;
