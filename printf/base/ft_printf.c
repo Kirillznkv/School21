@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/21 16:08:20 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/21 18:18:08 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ft_printf(const char *str, ...)
 	va_list		ap;
 	char		*p_newArg;
 	size_t		size;
-	t_list		elem;
+	t_list		*elem;
 
 	size = ft_strlen(str);
 	va_start(ap, str);
@@ -25,7 +25,7 @@ int			ft_printf(const char *str, ...)
 	{
 		*p_newArg = '\0';
 		ft_putstr_fd(str, 1);
-		elem = parser(++p_newArg);
+		elem = parser(++p_newArg, &ap);
 	}
 	if (*str)
 		ft_putstr_fd(str, 1);
