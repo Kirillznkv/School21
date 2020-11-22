@@ -79,6 +79,7 @@ char		*skip_type(char *str, t_arg *tmp)//дописать проверки во�
 		tmp->type = *str;
 	else
 		tmp->flags = -1;
+	tmp->length++;
 	str++;
 	return (str);
 }
