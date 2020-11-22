@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 14:37:19 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/21 19:42:21 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/22 19:07:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			main()
 	printf("5: (4 2)\t|%4.2d|\n", a);
 
 	printf("\n");
-	printf("5:\t|80d|\n", c);
+	printf("5:\t|%5.1d|\n", c);
+	printf("5:\t|%10.1s|\n", "sfkjhfjk");
 	return (0);
 }
