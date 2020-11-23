@@ -6,15 +6,13 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/22 20:41:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/23 19:02:41 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "stdarg.h"
-# include "../libft/libft.h"
 # include "./ft_printf.h"
 
 typedef struct	s_lst

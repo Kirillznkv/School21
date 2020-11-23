@@ -6,26 +6,11 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:26:01 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/22 20:43:38 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/23 19:30:08 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parser.h"
-
-int         num_length(int n)
-{
-    int     i;
-
-    i = 0;
-    if (n == 0)
-        return (1);
-    while (n)
-    {
-        n /=10;
-        i++;
-    }
-    return (i);
-}
 
 char		*skip_flag(char *str, t_arg *tmp)
 {
@@ -87,21 +72,23 @@ char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 	return (str);
 }
 
-char		*skip_type(char *str, t_arg *tmp)//дописать проверки воизбежание сеги
+char		*skip_type(char *str, t_arg *tmp)
 {
 	char	*set;
 
 	set = ft_strdup("cspdiuxX");
-	if (ft_strchr(set, *str))
+	if (set && ft_strchr(set, *str))
 		tmp->type = *str;
 	else
 		tmp->flags = -1;
 	tmp->length++;
-	str++;
+	if (*str)
+		str++;
+	if (set)
+		free(set);
 	return (str);
 }
 
-//флаг = -1, не правильный тип
 t_arg		*parser(char *str, va_list *va)
 {
 	t_arg	*tmp;

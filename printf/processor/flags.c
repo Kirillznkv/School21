@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 15:08:11 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/23 19:13:08 by kshanti          ###   ########.fr       */
+/*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
+/*   Updated: 2020/11/23 19:56:29 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../includes/processor.h"
 
-# include "stdarg.h"
-# include "../libft/libft.h"
-# include "parser.h"
-#include "addition.h"
+int			column_width(t_arg *tmp)
+{
+}
 
-int				ft_printf(const char *format, ...);
-
-#endif
+int			column_precision(t_arg *tmp)
+{
+}

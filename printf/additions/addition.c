@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   addition.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 15:08:11 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/23 19:13:08 by kshanti          ###   ########.fr       */
+/*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
+/*   Updated: 2020/11/23 19:15:11 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../includes/addition.h"
 
-# include "stdarg.h"
-# include "../libft/libft.h"
-# include "parser.h"
-#include "addition.h"
+int			num_length(int n)
+{
+	int		i;
 
-int				ft_printf(const char *format, ...);
-
-#endif
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n)
+	{
+		n /=10;
+		i++;
+	}
+	return (i);
+}
