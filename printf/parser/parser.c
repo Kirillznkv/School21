@@ -12,6 +12,21 @@
 
 #include "../includes/parser.h"
 
+int         num_length(int n)
+{
+    int     i;
+
+    i = 0;
+    if (n == 0)
+        return (1);
+    while (n)
+    {
+        n /=10;
+        i++;
+    }
+    return (i);
+}
+
 char		*skip_flag(char *str, t_arg *tmp)
 {
 	while (*str == '0' && (*str + 1) != '-')
@@ -29,42 +44,44 @@ char		*skip_flag(char *str, t_arg *tmp)
 	return (str);
 }
 
-char		*skip_width_precis(char *str, t_arg *tmp, va_list **va)
+char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 {
 	if (*str == '0' || *str == '-' || *str == '+')
 		tmp->flags = -1;
 	else if (ft_isdigit(*str))
 	{
 		tmp->width = ft_atoi(str);
-		while (ft_isdigit(*str))
-			str++;
+		while (ft_isdigit(*str) && str++)
+			tmp->length++;
 	}
 	else if (*str == '*')
 	{
-		tmp->width = va_arg(**va, int);
+		tmp->width = va_arg(*va, int);
 		if (tmp->width < 0)
 		{
 			tmp->width *= -1;
 			tmp->flags = (!tmp->flags) ? 2 : -1;
+			tmp->length++;
 		}
+        tmp->length += num_length(tmp->width);
 		str++;
 	}
-	else
+	else if (*str != '.')
 		return (str);
-	if (*str != '.')
-		return (str);
+	tmp->length++;
 	tmp->precision = 0;
 	if (ft_isdigit(*(++str)))
 	{
 		tmp->precision = ft_atoi(str);
-		while (ft_isdigit(*str))
-			str++;
+		while (ft_isdigit(*str) && str++)
+			tmp->length++;
 	}
 	else if (*str == '*')
 	{
-		tmp->precision = va_arg(**va, int);
+		tmp->precision = va_arg(*va, int);
 		if (tmp->precision < 0)
 			tmp->flags = -1;
+        tmp->length += num_length(tmp->precision);
 		str++;
 	}
 	return (str);
@@ -97,7 +114,7 @@ t_arg		*parser(char *str, va_list *va)
 	tmp->precision = -1;
 	tmp->type = '\0';
 	str = skip_flag(str, tmp);
-	str = skip_width_precis(str, tmp, &va);
+	str = skip_width_precis(str, tmp, va);
 	str = skip_type(str, tmp);
 	if (tmp->flags == -1)
 	{
