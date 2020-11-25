@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/25 17:13:35 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/25 18:09:16 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			column_precision(t_arg *tmp, int num)
 
 	res = tmp->precision;
 	if (num < 0)
-		num -= num;
+		num = -num;
 	res -= num_length(num);
 	if (res < 0)
 		return (0);
