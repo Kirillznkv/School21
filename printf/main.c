@@ -30,12 +30,10 @@ int			main()
 	printf("5:\t|%5.1d|\n", c);
 	printf("5:\t|%6.1d|\n", -12);*/
 
-	a = ft_printf("sjakfhkf45435\naabb     "
-               "|%d|     aabb     "
-               "|%0d|    \nslflfjd    "
-               "|%.7d|    kffkldv\n    "
-               "|%4.d|    ,     "
-               "|%04.5d|   \n   "
-               "|%-20.89d|   \n", b, c, -378, 7, 7, -a);
+	a = ft_printf("sjakfhkf45435\n"
+               "aabb     |%d|     aabb     |%0d|    \n"
+               "slflfjd    |%.7d|    kffkldv\n"
+               "    |%4.d|    ,     |%04.5d|   \n"
+               "   |%-10.8d|   \n", b, c, -378, 7, 7, -a);
 	return (0);
 }

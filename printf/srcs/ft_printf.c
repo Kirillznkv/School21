@@ -33,6 +33,7 @@ int			ft_printf(const char *str, ...)
 		s = p_newArg;
 		elem = parser(++p_newArg, &va);
 		processor(elem, &va);
+		s += elem->length;
 		//
 		/*if (!elem)
 			printf("NULL\n");
@@ -48,7 +49,7 @@ int			ft_printf(const char *str, ...)
 		//
 	}
 	if (*s)
-		//ft_putstr_fd(s, 1);
+		ft_putstr_fd(s, 1);
 	va_end(va);
 	return (1);
 }

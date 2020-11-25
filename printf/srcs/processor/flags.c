@@ -35,6 +35,6 @@ void		output_d(t_arg *tmp, va_list *va)
 
 void		processor(t_arg *tmp, va_list *va)
 {
-	if (tmp->type == 'd')
+	if (tmp->type == 'd' || tmp->type == 'i')
 		output_d(tmp, va);
 }
