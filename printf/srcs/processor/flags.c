@@ -33,8 +33,24 @@ void		output_d(t_arg *tmp, va_list *va)
 		ft_put_n_char(' ', width);
 }
 
+void        output_percent(t_arg *tmp)
+{
+    int		width;
+
+    width = column_width(tmp, 0);
+    if (tmp->flags == 0)
+        ft_put_n_char(' ', width);
+    if (tmp->flags == 1)
+        ft_put_n_char('0', width);
+    ft_putchar_fd('%', 1);
+    if (tmp->flags == 2)
+        ft_put_n_char(' ', width);
+}
+
 void		processor(t_arg *tmp, va_list *va)
 {
 	if (tmp->type == 'd' || tmp->type == 'i')
 		output_d(tmp, va);
+	else if (tmp->type == '%')
+	    output_percent(tmp);
 }

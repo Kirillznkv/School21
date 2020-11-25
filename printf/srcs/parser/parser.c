@@ -75,7 +75,7 @@ char		*skip_type(char *str, t_arg *tmp)
 {
 	char	*set;
 
-	set = ft_strdup("cspdiuxX");
+	set = ft_strdup("cspdiuxX%");
 	if (set && ft_strchr(set, *str))
 		tmp->type = *str;
 	else

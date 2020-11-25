@@ -37,7 +37,7 @@ int			column_width(t_arg *tmp, int num)
 		res--;
 		num = -num;
 	}
-	if (tmp->precision > 0 && tmp->precision > num_length(num))
+	if (tmp->precision > 0 && tmp->precision > num_length(num) && tmp->type != '%')
 		res -= tmp->precision;
 	else
 		res -= num_length(num);

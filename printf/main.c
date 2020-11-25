@@ -18,17 +18,6 @@ int			main()
 	int		a = 5;
 	int		b = 123;
 	int		c = 12345678;
-	/*printf("5: (- -)\t|%010.d|\n", -77);
-	printf("5: (8 -)\t|%8d|\n", a);
-	printf("5: (- 8)\t|%.8d|\n", a);
-	printf("5: (4 8)\t|%4.8d|\n", a);
-
-	printf("\n");
-	printf("5: (4 2)\t|%4.2d|\n", a);
-
-	printf("\n");
-	printf("5:\t|%5.1d|\n", c);
-	printf("5:\t|%6.1d|\n", -12);*/
 
 	ft_printf("12345#\n");
 	printf("12345#\n\n");
@@ -50,5 +39,17 @@ int			main()
 
 	ft_printf("%-*.3d %-10.*d %-*.d %-5.10d#\n", 1, 10, 2, -12, 3, 3255436, 3525);
 	printf("%-*.3d %-10.*d %-*.d %-5.10d#\n\n", 1, 10, 2, -12, 3, 3255436, 3525);
+
+	ft_printf("|%-3%|\n");
+	printf("|%-3%|\n\n");;
+
+    ft_printf("|%03%|\n");
+    printf("|%03%|\n\n");;
+
+    ft_printf("|%3.%|\n");
+    printf("|%3.%|\n\n");;
+
+    ft_printf("|%-3.8%|\n");
+    printf("|%-3.8%|\n\n");
 	return (0);
 }
