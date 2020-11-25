@@ -49,7 +49,12 @@ int			main()
     ft_printf("|%3.%|\n");
     printf("|%3.%|\n\n");;
 
-    ft_printf("|%-3.8%|\n");
-    printf("|%-3.8%|\n\n");
+    ft_printf("|%-3.2d|\n", 0);
+    printf("|%-3.2d|\n\n", 0);
+    ft_printf("|%-3.d|\n", 0);
+    printf("|%-3.d|\n\n", 0);
+
+    ft_printf("|%-3d|\n", 0);
+    printf("|%-3d|\n\n", 0);
 	return (0);
 }

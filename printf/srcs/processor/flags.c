@@ -28,7 +28,10 @@ void		output_d(t_arg *tmp, va_list *va)
 	if (tmp->flags == 1)
 		ft_put_n_char('0', width);
 	ft_put_n_char('0', precision);
-	ft_putnbr_fd((num > 0) ? num : -num, 1);
+	if (!(num == 0 && tmp->precision == 0))
+	    ft_putnbr_fd((num > 0) ? num : -num, 1);
+	else
+	    width++;
 	if (tmp->flags == 2)
 		ft_put_n_char(' ', width);
 }
