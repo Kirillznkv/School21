@@ -6,11 +6,11 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/23 19:15:11 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/25 17:13:35 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/addition.h"
+#include "../../includes/ft_printf.h"
 
 int			num_length(int n)
 {
@@ -25,4 +25,42 @@ int			num_length(int n)
 		i++;
 	}
 	return (i);
+}
+
+int			column_width(t_arg *tmp, int num)
+{
+	int		res;
+
+	res = tmp->width;
+	if (num < 0)
+	{
+		res--;
+		num = -num;
+	}
+	if (tmp->precision > 0 && tmp->precision > num_length(num))
+		res -= tmp->precision;
+	else
+		res -= num_length(num);
+	if (res < 0)
+		return (0);
+	return (res);
+}
+
+int			column_precision(t_arg *tmp, int num)
+{
+	int		res;
+
+	res = tmp->precision;
+	if (num < 0)
+		num -= num;
+	res -= num_length(num);
+	if (res < 0)
+		return (0);
+	return (res);
+}
+
+void		ft_put_n_char(char ch, int n)
+{
+	while (n--)
+		ft_putchar_fd(ch, 1);
 }
