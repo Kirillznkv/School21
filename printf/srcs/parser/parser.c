@@ -46,9 +46,8 @@ char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 		{
 			tmp->width *= -1;
 			tmp->flags = (!tmp->flags) ? 2 : -1;
-			tmp->length++;
 		}
-		tmp->length += num_length(tmp->width);
+		tmp->length++;
 		str++;
 	}
 	if (*str != '.')
@@ -66,7 +65,7 @@ char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 		tmp->precision = va_arg(*va, int);
 		if (tmp->precision < 0)
 			tmp->flags = -1;
-		tmp->length += num_length(tmp->precision);
+		tmp->length++;
 		str++;
 	}
 	return (str);
