@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/26 03:44:43 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/26 04:59:05 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,25 @@ void		output_s(t_arg *tmp, va_list *va)
 		ft_put_n_char(' ', width);
 }
 
+void		output_p(t_arg *tmp, va_list *va)
+{
+	long long	pointer;
+	char		*str;
+	int         width;
+    int		    precision;
+
+	pointer = va_arg(*va, long long);
+	width = width_pointer(tmp, pointer);
+	precision = precision_poiner(tmp, pointer);
+	if (tmp->flags != 2)
+	    ft_put_n_char(' ', width);
+    ft_putstr_fd("0x", 1);
+    ft_put_n_char('0', precision);
+	out_to_16(pointer);
+	if (tmp->flags == 2)
+        ft_put_n_char(' ', width);
+}
+
 void		processor(t_arg *tmp, va_list *va)
 {
 	if (tmp->type == 'd' || tmp->type == 'i')
@@ -88,4 +107,6 @@ void		processor(t_arg *tmp, va_list *va)
 		output_c(tmp, va);
 	else if (tmp->type == 's')
 		output_s(tmp, va);
+	else if (tmp->type == 'p')
+		output_p(tmp, va);
 }
