@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/25 18:09:16 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/26 03:42:46 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@ int			column_width(t_arg *tmp, int num)
 	if (res < 0)
 		return (0);
 	return (res);
+}
+
+int			column_width_str(t_arg *tmp, char *str)
+{
+	int		res;
+
+	res = tmp->width;
+	if (tmp->precision == -1)
+		return (res);
+	if (tmp->precision < ft_strlen(str))
+		res -= tmp->precision;
+	else
+		res -= ft_strlen(str);
+	if (res < 0)
+		return (0);
+	return (res);
+}
+
+void		output_precision_str(t_arg *tmp, char *str)
+{
+	if (tmp->precision > ft_strlen(str))
+		tmp->precision = ft_strlen(str);
+	while (tmp->precision-- && *str)
+		ft_putchar_fd(*(str++), 1);
 }
 
 int			column_precision(t_arg *tmp, int num)

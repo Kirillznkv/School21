@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/25 18:23:10 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/26 03:44:43 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,46 @@ void		output_d(t_arg *tmp, va_list *va)
 		ft_put_n_char(' ', width);
 }
 
-void        output_percent(t_arg *tmp)
+void		output_percent(t_arg *tmp)
 {
-    int		width;
+	int		width;
 
-    width = column_width(tmp, 0);
-    if (tmp->flags == 0)
-        ft_put_n_char(' ', width);
-    if (tmp->flags == 1)
-        ft_put_n_char('0', width);
-    ft_putchar_fd('%', 1);
-    if (tmp->flags == 2)
-        ft_put_n_char(' ', width);
+	width = column_width(tmp, 0);
+	if (tmp->flags == 0)
+		ft_put_n_char(' ', width);
+	if (tmp->flags == 1)
+		ft_put_n_char('0', width);
+	ft_putchar_fd('%', 1);
+	if (tmp->flags == 2)
+		ft_put_n_char(' ', width);
+}
+
+void		output_c(t_arg *tmp, va_list *va)
+{
+	int		width;
+	unsigned char	ch;
+
+	ch = va_arg(*va, int);
+	width = column_width(tmp, 1);
+	if (tmp->flags == 0)
+		ft_put_n_char(' ', width);
+	ft_putchar_fd(ch, 1);
+	if (tmp->flags == 2)
+		ft_put_n_char(' ', width);
+}
+
+void		output_s(t_arg *tmp, va_list *va)
+{
+	int		width;
+	char	*str;
+
+	str = va_arg(*va, char*);
+	width = column_width_str(tmp, str);
+	if (tmp->flags == 0)
+		ft_put_n_char(' ', width);
+	output_precision_str(tmp, str);
+	if (tmp->flags == 2)
+		ft_put_n_char(' ', width);
 }
 
 void		processor(t_arg *tmp, va_list *va)
@@ -55,5 +83,9 @@ void		processor(t_arg *tmp, va_list *va)
 	if (tmp->type == 'd' || tmp->type == 'i')
 		output_d(tmp, va);
 	else if (tmp->type == '%')
-	    output_percent(tmp);
+		output_percent(tmp);
+	else if (tmp->type == 'c')
+		output_c(tmp, va);
+	else if (tmp->type == 's')
+		output_s(tmp, va);
 }
