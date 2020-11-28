@@ -103,10 +103,10 @@ int         width_pointer(t_arg *tmp, long long n)
     return (i);
 }
 
-void		out_to_16(long long n)
+void		out_to_16(long long n, char c)
 {
-    long long		i;
-	char	ch;
+    long long	i;
+	char        ch;
 
 	i = 1;
 	while (n / i >= 16)
@@ -116,7 +116,7 @@ void		out_to_16(long long n)
 		if (n / i < 10)
 			ch = (n / i) + '0';
 		else
-			ch = ((n / i) % 10) + 'a';
+			ch = ((n / i) % 10) + c;
 		ft_putchar_fd(ch, 1);
 		n %= i;
 		i /= 16;

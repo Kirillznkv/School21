@@ -19,13 +19,8 @@ int			main()
 	int		b = 123;
 	int		c = 12345678;
 
-    ft_printf("|%040p|\n", &b);
-    printf("|%040p|\n", &b);
+    ft_printf("|%015.0d|\n", 0);
+    printf("|%015.0x|\n", 0);
 
-    ft_printf("|%-12.5s|\n", "123456789");
-    printf("|%-12.5s|\n\n", "123456789");
-
-    ft_printf("|%-12.0s|\n", "123456789");
-    printf("|%-12.0s|\n\n", "123456789");
 	return (0);
 }
