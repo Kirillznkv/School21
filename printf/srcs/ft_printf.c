@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/25 17:52:50 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/28 13:44:46 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			ft_printf(const char *str, ...)
 	va_start(va, str);
 	s = ft_strdup(str);
 	while ((p_newArg = ft_strchr(s, '%')))//вычесть ненаписанные символы
-	{//%%
+	{
 		*p_newArg = '\0';
 		ft_putstr_fd(s, 1);
 		s = p_newArg;

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:26:01 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/25 18:20:19 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/28 13:39:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 		if (tmp->width < 0)
 		{
 			tmp->width *= -1;
-			tmp->flags = (!tmp->flags) ? 2 : -1;
+			tmp->flags = 2;
 		}
 		tmp->length++;
 		str++;
