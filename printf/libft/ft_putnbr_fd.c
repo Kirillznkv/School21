@@ -6,15 +6,15 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:20:05 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/10 17:01:11 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/28 18:16:29 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void				ft_putnbr_fd(int n, int fd)
+void				ft_putnbr_fd(long long n, int fd)
 {
-	unsigned int	ln;
+	long long	ln;
 
 	if (n >= 10)
 	{

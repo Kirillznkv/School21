@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:08:11 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/26 04:45:11 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/28 18:49:19 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ typedef struct	s_lst
 }				t_arg;
 t_arg			*parser(char *str, va_list *va);
 int				ft_printf(const char *format, ...);
-int				num_length(int n);
-int				column_width(t_arg *tmp, int num);
-int				column_precision(t_arg *tmp, int num);
+int				num_length(long long n);
+int				column_width(t_arg *tmp, long long num);
+int				column_precision(t_arg *tmp, long long num);
 int				column_width_str(t_arg *tmp, char *str);
 void			output_precision_str(t_arg *tmp, char *str);
 int             precision_poiner(t_arg *tmp, long long n);
@@ -36,6 +36,6 @@ void			out_to_16(long long n, char c);
 int             pointer_length(long long n);
 void			ft_put_n_char(char ch, int n);
 int             width_pointer(t_arg *tmp, long long n);
-void			processor(t_arg *tmp, va_list *va);
+int				processor(t_arg *tmp, va_list *va);
 
 #endif
