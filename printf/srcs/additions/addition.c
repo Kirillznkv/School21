@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/30 15:51:26 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 17:14:15 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int			column_width_str(t_arg *tmp, char *str)//ok
 	res = tmp->width;
 	if (tmp->precision == -1)
 	{
-		if (res - ft_strlen(str) < 0)
+		if ((int)res - (int)ft_strlen(str) < 0)
 			return (0);
 		else
-			return (res - ft_strlen(str));
+			return ((int)res - (int)ft_strlen(str));
 	}
-	if (tmp->precision < ft_strlen(str))
+	if ((int)tmp->precision < (int)ft_strlen(str))
 		res -= tmp->precision;
 	else
 		res -= ft_strlen(str);
@@ -92,13 +92,10 @@ int			output_precision_str(t_arg *tmp, char *str)//ok
 	int		length;
 
 	length = 0;
-	if (tmp->precision > ft_strlen(str))
+	if ((int)tmp->precision > (int)ft_strlen(str))
 		tmp->precision = ft_strlen(str);
-	while (tmp->precision-- && *str)
-	{
-		ft_putchar_fd(*(str++), 1);
-		length++;
-	}
+	while (tmp->precision-- && str[length])
+		ft_putchar_fd(str[length++], 1);
 	return (length);
 }
 
