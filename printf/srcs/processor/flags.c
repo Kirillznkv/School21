@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/30 19:28:22 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 20:43:32 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int			out_diu(t_arg *tmp, long long num, int width, int precision)//вывод �
 	res = 0;
 	if (num == 0 && tmp->precision == 0)
 	{
-		ft_put_n_char(' ', width + 1);
-		return (width + 1);
+		if (width)
+			width++;
+		ft_put_n_char(' ', width);
+		return (width);
 	}
 	if (tmp->flags == 0)
 		ft_put_n_char(' ', width);
@@ -151,11 +153,13 @@ int        output_x(t_arg *tmp, va_list *va)
     num = va_arg(*va, unsigned int);
     precision = precision_poiner(tmp, num);
     width = width_pointer(tmp, num) - precision;
-    if (num == 0 && tmp->precision == 0)
-    {
-        ft_put_n_char(' ', width + 1);
-        return (width + 1);
-    }
+	if (num == 0 && tmp->precision == 0)
+	{
+		if (width)
+			width++;
+		ft_put_n_char(' ', width);
+		return (width);
+	}
 	if (tmp->flags == 0)
         ft_put_n_char(' ', width);
 	if (tmp->flags == 1)
