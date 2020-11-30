@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/30 17:37:22 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 18:59:06 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,37 +104,48 @@ int		output_p(t_arg *tmp, va_list *va)
 	width = tmp->width - 14;
 	if (width < 0)
 		width = 0;
+	if (!pointer)
+		width = tmp->width - 3;
 	if (tmp->flags == 0)
 	    ft_put_n_char(' ', width);
     ft_putstr_fd("0x", 1);
 	out_to_16(pointer, 'a');
 	if (tmp->flags == 2)
         ft_put_n_char(' ', width);
+	if (!pointer)
+		width -= 11;
 	return (14 + width);
 }
 
 int		output_s(t_arg *tmp, va_list *va)
 {
+	int		flaaaag;
 	int		res;
 	int		width;
 	char	*str;
 
 	str = va_arg(*va, char*);
+	flaaaag = 0;
+	if (!str && ++flaaaag)
+		if (!(str = ft_strdup("(null)")))
+			return (0);
 	width = column_width_str(tmp, str);
 	if (tmp->flags == 0)
 		ft_put_n_char(' ', width);
 	res = output_precision_str(tmp, str);
 	if (tmp->flags == 2)
 		ft_put_n_char(' ', width);
+	if (flaaaag)
+		free(str);
 	return (res + width);
 }
 
 int        output_x(t_arg *tmp, va_list *va)
 {
-    char    c;
-    int		num;
-    int		width;
-    int		precision;
+    char			c;
+    unsigned int	num;
+    int				width;
+    int				precision;
 
     c = (tmp->type == 'x') ? 'a' : 'A';
     num = va_arg(*va, unsigned int);
