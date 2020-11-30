@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/30 17:14:15 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 17:37:37 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,37 @@ void		ft_put_n_char(char ch, int n)// base
 {
 	while (n--)
 		ft_putchar_fd(ch, 1);
+}
+
+int         pointer_length(unsigned int n)
+{
+    int     i;
+
+    i = 0;
+    while (n)
+    {
+        i++;
+        n /= 16;
+    }
+    return (i);
+}
+
+int         precision_poiner(t_arg *tmp, unsigned  int n)
+{
+    int     i;
+
+    i = tmp->precision - pointer_length(n);
+    if (i < 0)
+        return (0);
+    return (i);
+}
+
+int         width_pointer(t_arg *tmp, unsigned  int n)
+{
+    int     i;
+
+    i = tmp->width - pointer_length(n);
+    if (i < 0)
+        return (0);
+    return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/30 15:52:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 17:37:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,33 @@ int		output_s(t_arg *tmp, va_list *va)
 	return (res + width);
 }
 
+int        output_x(t_arg *tmp, va_list *va)
+{
+    char    c;
+    int		num;
+    int		width;
+    int		precision;
+
+    c = (tmp->type == 'x') ? 'a' : 'A';
+    num = va_arg(*va, unsigned int);
+    precision = precision_poiner(tmp, num);
+    width = width_pointer(tmp, num) - precision;
+    if (num == 0 && tmp->precision == 0)
+    {
+        ft_put_n_char(' ', width + 1);
+        return (width + 1);
+    }
+	if (tmp->flags == 0)
+        ft_put_n_char(' ', width);
+	if (tmp->flags == 1)
+        ft_put_n_char('0', width);
+    ft_put_n_char('0', precision);
+    out_to_16(num, c);
+    if (tmp->flags == 2)
+        ft_put_n_char(' ', width);
+	return (width + precision + pointer_length(num));
+}
+
 int		processor(t_arg *tmp, va_list *va)
 {
 	if (tmp->flags == 1 && tmp->precision != -1)
@@ -143,7 +170,7 @@ int		processor(t_arg *tmp, va_list *va)
 		return (output_s(tmp, va));
 	else if (tmp->type == 'p')
 		return (output_p(tmp, va));
-	//else if (tmp->type == 'x' || tmp->type == 'X')
-	//    return (output_x(tmp, va));
+	else if (tmp->type == 'x' || tmp->type == 'X')
+	    return (output_x(tmp, va));
 	return (0);
 }
