@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/28 18:59:45 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 15:52:36 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,22 @@ int		output_p(t_arg *tmp, va_list *va)
 	return (14 + width);
 }
 
+int		output_s(t_arg *tmp, va_list *va)
+{
+	int		res;
+	int		width;
+	char	*str;
+
+	str = va_arg(*va, char*);
+	width = column_width_str(tmp, str);
+	if (tmp->flags == 0)
+		ft_put_n_char(' ', width);
+	res = output_precision_str(tmp, str);
+	if (tmp->flags == 2)
+		ft_put_n_char(' ', width);
+	return (res + width);
+}
+
 int		processor(t_arg *tmp, va_list *va)
 {
 	if (tmp->flags == 1 && tmp->precision != -1)
@@ -127,7 +143,7 @@ int		processor(t_arg *tmp, va_list *va)
 		return (output_s(tmp, va));
 	else if (tmp->type == 'p')
 		return (output_p(tmp, va));
-	else if (tmp->type == 'x' || tmp->type == 'X')
-	    return (output_x(tmp, va));
+	//else if (tmp->type == 'x' || tmp->type == 'X')
+	//    return (output_x(tmp, va));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/28 19:01:30 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 15:51:26 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,18 @@ int			column_width(t_arg *tmp, long long num)//d,i,u,%	для % кидаьб 1 /
 	return (res);
 }
 
-int			column_width_str(t_arg *tmp, char *str)
+int			column_width_str(t_arg *tmp, char *str)//ok
 {
 	int		res;
 
 	res = tmp->width;
 	if (tmp->precision == -1)
-		return (res);
+	{
+		if (res - ft_strlen(str) < 0)
+			return (0);
+		else
+			return (res - ft_strlen(str));
+	}
 	if (tmp->precision < ft_strlen(str))
 		res -= tmp->precision;
 	else
@@ -82,12 +87,19 @@ void		out_to_16(long long n, char c) // c = 'a'/'A'
 	}
 }
 
-void		output_precision_str(t_arg *tmp, char *str)
+int			output_precision_str(t_arg *tmp, char *str)//ok
 {
+	int		length;
+
+	length = 0;
 	if (tmp->precision > ft_strlen(str))
 		tmp->precision = ft_strlen(str);
 	while (tmp->precision-- && *str)
+	{
 		ft_putchar_fd(*(str++), 1);
+		length++;
+	}
+	return (length);
 }
 
 int			column_precision(t_arg *tmp, long long num)//d, i, u // header

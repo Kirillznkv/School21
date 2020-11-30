@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:08:11 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/28 18:49:19 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 15:52:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				num_length(long long n);
 int				column_width(t_arg *tmp, long long num);
 int				column_precision(t_arg *tmp, long long num);
 int				column_width_str(t_arg *tmp, char *str);
-void			output_precision_str(t_arg *tmp, char *str);
+int				output_precision_str(t_arg *tmp, char *str);
 int             precision_poiner(t_arg *tmp, long long n);
 void			out_to_16(long long n, char c);
 int             pointer_length(long long n);

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 14:37:19 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/28 18:54:01 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 15:59:03 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int			main()
 	int		b = 123;
 	int		c = 12345678;
 
-    //ft_printf("|%010.2d|\n", 0);
-    printf("|%14.12p|\n", &a);
+    a = ft_printf("|%-14.2s|\n", "abcd");
+    b = printf("|%-14.2s|\n", "abcd");
+
+	ft_printf("ft_p = %d\np    = %d\n", a, b);
 
 	return (0);
 }

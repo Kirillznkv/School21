@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/28 18:47:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 15:59:15 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int			ft_printf(const char *str, ...)
 	if (*s)
 		ft_putstr_fd(s, 1);
 	va_end(va);
-	return (1);
+	return (size);
 }
