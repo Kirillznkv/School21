@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/30 18:52:27 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/11/30 20:48:42 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int         pointer_length(unsigned int n)
     int     i;
 
     i = 0;
+	if (!n)
+		return (1);
     while (n)
     {
         i++;
