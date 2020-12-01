@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 17:41:11 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 19:32:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,21 +102,27 @@ int		output_p(t_arg *tmp, va_list *va)
 	int         width;
     int		    precision;
 
-	pointer = va_arg(*va, long long);
-	width = tmp->width - 14;
-	if (width < 0)
-		width = 0;
-	if (!pointer)
-		width = tmp->width - 3;
+	pointer = va_arg(*va, unsigned int);
+	width = width_pointer(tmp, pointer) - 2;
+	precision = precision_poiner(tmp, pointer);
+    if (width < 0)
+        width = 0;
+	if (!pointer && tmp->precision == 0)
+	{
+        if (tmp->width - 2 > 0)
+            width++;
+		ft_put_n_char(' ', width);
+    	ft_putstr_fd("0x", 1);
+		return (width + 2);
+	}
 	if (tmp->flags == 0)
 	    ft_put_n_char(' ', width);
     ft_putstr_fd("0x", 1);
+    ft_put_n_char('0', precision);
 	out_to_16(pointer, 'a');
 	if (tmp->flags == 2)
         ft_put_n_char(' ', width);
-	if (!pointer)
-		width -= 11;
-	return (14 + width);
+	return (width + precision + pointer_length(precision) + 2);
 }
 
 int		output_s(t_arg *tmp, va_list *va)
@@ -152,7 +158,7 @@ int        output_x(t_arg *tmp, va_list *va)
     c = (tmp->type == 'x') ? 'a' : 'A';
     num = va_arg(*va, unsigned int);
     precision = precision_poiner(tmp, num);
-    width = width_pointer(tmp, num, precision);
+    width = width_pointer(tmp, num);
 	if (num == 0 && tmp->precision == 0)
 	{
 		if (width)

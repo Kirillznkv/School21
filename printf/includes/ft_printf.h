@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:08:11 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/30 17:38:01 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 18:16:02 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int             precision_poiner(t_arg *tmp, unsigned int n);
 void			out_to_16(long long n, char c);
 int       		pointer_length(unsigned int n);
 void			ft_put_n_char(char ch, int n);
-int             width_pointer(t_arg *tmp, unsigned int n, int precision);
+int             width_pointer(t_arg *tmp, unsigned int n);
 int				processor(t_arg *tmp, va_list *va);
 
 #endif
