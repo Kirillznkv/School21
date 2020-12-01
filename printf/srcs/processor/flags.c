@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 20:10:51 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 20:15:56 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int		output_p(t_arg *tmp, va_list *va)
 	int         width;
     int		    precision;
 
-	pointer = va_arg(*va, unsigned int);
+	pointer = va_arg(*va,long unsigned int);
 	width = width_pointer(tmp, pointer) - 2;
 	precision = precision_poiner(tmp, pointer);
     if (width < 0)
