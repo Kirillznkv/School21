@@ -35,7 +35,7 @@ int             precision_poiner(t_arg *tmp, unsigned int n);
 void			out_to_16(long long n, char c);
 int       		pointer_length(unsigned int n);
 void			ft_put_n_char(char ch, int n);
-int             width_pointer(t_arg *tmp, unsigned int n);
+int             width_pointer(t_arg *tmp, unsigned int n, int precision);
 int				processor(t_arg *tmp, va_list *va);
 
 #endif

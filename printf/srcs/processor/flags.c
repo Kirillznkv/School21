@@ -152,7 +152,7 @@ int        output_x(t_arg *tmp, va_list *va)
     c = (tmp->type == 'x') ? 'a' : 'A';
     num = va_arg(*va, unsigned int);
     precision = precision_poiner(tmp, num);
-    width = width_pointer(tmp, num) - precision;
+    width = width_pointer(tmp, num, precision);
 	if (num == 0 && tmp->precision == 0)
 	{
 		if (width)

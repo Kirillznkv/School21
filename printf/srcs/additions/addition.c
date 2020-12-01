@@ -143,11 +143,11 @@ int         precision_poiner(t_arg *tmp, unsigned  int n)
     return (i);
 }
 
-int         width_pointer(t_arg *tmp, unsigned  int n)
+int         width_pointer(t_arg *tmp, unsigned  int n, int precision)
 {
     int     i;
 
-    i = tmp->width - pointer_length(n);
+    i = tmp->width - pointer_length(n) - precision;
     if (i < 0)
         return (0);
     return (i);
