@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 15:21:28 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 17:41:11 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,10 +177,10 @@ int		processor(t_arg *tmp, va_list *va)
 		tmp->flags = 0;
 	if (tmp->precision < -1)
 		tmp->precision = -1;
-	if (tmp->flags == 3 && (tmp->type == '%' || tmp->type == 's'))
+	if (tmp->flags == 3)// && (tmp->type == '%' || tmp->type == 's'))
 		tmp->flags = 2;
-	else if (tmp->flags == 3)
-		return (0);
+	//else if (tmp->flags == 3)
+	//	return (0);
 	if (tmp->type == 'd' || tmp->type == 'i')
 		return (output_d(tmp, va));
 	else if (tmp->type == 'u')

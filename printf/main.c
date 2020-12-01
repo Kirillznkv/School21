@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 14:37:19 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 15:26:44 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 17:43:21 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int			main()
 	int		c = 12345678;
 	char *d = "asdfg";
 
-   a = ft_printf("|hello, world!|\n");
-    b = printf("|hello, world!|\n");
+    a = ft_printf("|%0-2.7X|", 3267);
+    b = printf("|%0-2.7X|", 3267);
 
 	printf("ft_p = %d\np    = %d\n", a, b);
 
