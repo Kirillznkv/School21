@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:26:01 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/28 16:33:53 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 15:19:26 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ char		*skip_flag(char *str, t_arg *tmp)
 
 char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 {
-	if (*str == '0' || *str == '-' || *str == '+')
-		tmp->flags = -1;
-	else if (ft_isdigit(*str))
+	while (*str == '0' || *str == '-')
+	{
+		tmp->flags = 3;
+		tmp->length++;
+		str++;
+	}
+	if (ft_isdigit(*str))
 	{
 		tmp->width = ft_atoi(str);
 		while (ft_isdigit(*str) && str++)
@@ -63,8 +67,6 @@ char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 	else if (*str == '*')
 	{
 		tmp->precision = va_arg(*va, int);
-		if (tmp->precision < 0)
-			tmp->flags = -1;
 		tmp->length++;
 		str++;
 	}
