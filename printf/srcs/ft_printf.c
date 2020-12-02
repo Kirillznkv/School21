@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/02 15:56:29 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/02 16:07:59 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@ int			ft_printf(const char *str, ...)
 	size_t		size;
 	t_arg		*elem;
 
+	size = ft_strlen(str);
 	va_start(va, str);
 	elem = NULL;
 	while ((p_newArg = ft_strchr(str, '%')))
 	{
-		print_str(str, p_newArg - 1);
+		print_str((char*)str, p_newArg);
 		if (!(elem = parser(p_newArg + 1, &va)))
 			return (0);
 		size += (processor(elem, &va) - elem->length);
 		str = p_newArg + elem->length;
 	}
-	ft_putstr_fd(str, 1);
+	ft_putstr_fd((char*)str, 1);
 	va_end(va);
 	free(elem);
 	return (size);
