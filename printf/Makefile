@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/28 14:42:19 by kshanti           #+#    #+#              #
-#    Updated: 2020/11/28 15:44:16 by kshanti          ###   ########.fr        #
+#    Updated: 2020/12/02 15:26:49 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ O_FILE = $(C_FILE:.c=.o)
 
 HEAD =	./includes/ft_printf.h
 
+FLAGS = -Wall -Wextra -Werror
+
 all: $(NAME)
 
 $(NAME): $(O_FILE)
@@ -27,7 +29,7 @@ $(NAME): $(O_FILE)
 	ar -rcs $(NAME) $(O_FILE)
 
 %.o: %.c $(HEAD)
-	gcc -c $< -o $@
+	gcc -c $(FLAGS) $< -o $@
 
 clean:
 	@rm -f $(O_FILE)

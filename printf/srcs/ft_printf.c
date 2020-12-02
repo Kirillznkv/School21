@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 20:20:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/02 15:27:36 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int			ft_printf(const char *str, ...)
 	t_arg		*elem;
 
 	size = ft_strlen(str);
-	s = ft_strdup(str);
-	if (!s)
+	if (!(s = ft_strdup(str)))
 		return (0);
 	va_start(va, str);
 	str = s;
@@ -31,19 +30,14 @@ int			ft_printf(const char *str, ...)
 	{
 		*p_newArg = '\0';
 		ft_putstr_fd(s, 1);
-		s = p_newArg;
-		elem = parser(++p_newArg, &va);
-		if (!elem)
-			break ;
-		size += processor(elem, &va);
-		size -= elem->length;
-		s += elem->length;
+		if (!(elem = parser(p_newArg + 1, &va)))
+			return (0);
+		size += (processor(elem, &va) - elem->length);
+		s = p_newArg + elem->length;
 	}
-	if (*s)
-		ft_putstr_fd(s, 1);
-	if (elem)
-		free(elem);
+	ft_putstr_fd(s, 1);
 	va_end(va);
-	free(str);
+	free((void*)str);
+	free(elem);
 	return (size);
 }

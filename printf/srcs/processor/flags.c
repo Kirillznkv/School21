@@ -6,13 +6,13 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:59:12 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 20:23:11 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/02 15:27:13 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
 
-int			out_diu(t_arg *tmp, long long num, int width, int precision)//вывод для d, i, u
+int			out_diu(t_arg *tmp, long long num, int width, int precision)
 {
 	int		res;
 
@@ -98,7 +98,6 @@ int		output_c(t_arg *tmp, va_list *va)
 int		output_p(t_arg *tmp, va_list *va)
 {
 	long long	pointer;
-	char		*str;
 	int			width;
 	int			precision;
 
@@ -183,10 +182,6 @@ int		processor(t_arg *tmp, va_list *va)
 		tmp->flags = 0;
 	if (tmp->precision < -1)
 		tmp->precision = -1;
-	if (tmp->flags == 3)// && (tmp->type == '%' || tmp->type == 's'))
-		tmp->flags = 2;
-	//else if (tmp->flags == 3)
-	//	return (0);
 	if (tmp->type == 'd' || tmp->type == 'i')
 		return (output_d(tmp, va));
 	else if (tmp->type == 'u')

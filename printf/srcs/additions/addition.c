@@ -6,13 +6,13 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 20:24:41 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/02 14:54:17 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
 
-int			num_length(long long n)// header
+int			num_length(long long n)
 {
 	int		i;
 
@@ -27,7 +27,7 @@ int			num_length(long long n)// header
 	return (i);
 }
 
-int			column_width(t_arg *tmp, long long num)//d,i,u,%	для % кидаьб 1 // header
+int			column_width(t_arg *tmp, long long num)
 {
 	int		res;
 
@@ -46,7 +46,7 @@ int			column_width(t_arg *tmp, long long num)//d,i,u,%	для % кидаьб 1 /
 	return (res);
 }
 
-int			column_width_str(t_arg *tmp, char *str)//ok
+int			column_width_str(t_arg *tmp, char *str)
 {
 	int		res;
 
@@ -67,7 +67,7 @@ int			column_width_str(t_arg *tmp, char *str)//ok
 	return (res);
 }
 
-void		out_to_16(long long n, char c) // c = 'a'/'A'
+void		out_to_16(long long n, char c)
 {
 	long long	i;
 	char		ch;
@@ -87,7 +87,7 @@ void		out_to_16(long long n, char c) // c = 'a'/'A'
 	}
 }
 
-int			output_precision_str(t_arg *tmp, char *str)//ok
+int			output_precision_str(t_arg *tmp, char *str)
 {
 	int		length;
 
@@ -99,7 +99,7 @@ int			output_precision_str(t_arg *tmp, char *str)//ok
 	return (length);
 }
 
-int			column_precision(t_arg *tmp, long long num)//d, i, u // header
+int			column_precision(t_arg *tmp, long long num)
 {
 	int		res;
 
@@ -112,7 +112,7 @@ int			column_precision(t_arg *tmp, long long num)//d, i, u // header
 	return (res);
 }
 
-void		ft_put_n_char(char ch, int n)// base
+void		ft_put_n_char(char ch, int n)
 {
 	while (n--)
 		ft_putchar_fd(ch, 1);
