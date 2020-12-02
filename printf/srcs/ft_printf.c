@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/02 16:07:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/02 16:30:41 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ int			ft_printf(const char *str, ...)
 	elem = NULL;
 	while ((p_newArg = ft_strchr(str, '%')))
 	{
-		print_str((char*)str, p_newArg);
+		while (str != p_newArg)
+			ft_putchar_fd(*(str++), 1);
 		if (!(elem = parser(p_newArg + 1, &va)))
-			return (0);
+			break ;
 		size += (processor(elem, &va) - elem->length);
 		str = p_newArg + elem->length;
 	}
 	ft_putstr_fd((char*)str, 1);
 	va_end(va);
-	free(elem);
+	if (elem)
+		free(elem);
 	return (size);
 }
