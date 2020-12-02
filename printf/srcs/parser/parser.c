@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:26:01 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/02 14:56:04 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/02 18:11:23 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char		*skip_flag(char *str, t_arg *tmp)
 	return (str);
 }
 
-char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
+char		*skip_width(char *str, t_arg *tmp, va_list *va)
 {
 	while (*str == '0' || *str == '-')
 	{
@@ -54,6 +54,11 @@ char		*skip_width_precis(char *str, t_arg *tmp, va_list *va)
 		tmp->length++;
 		str++;
 	}
+	return (str);
+}
+
+char		*skip_precis(char *str, t_arg *tmp, va_list *va)
+{
 	if (*str != '.')
 		return (str);
 	tmp->length++;
@@ -102,7 +107,8 @@ t_arg		*parser(char *str, va_list *va)
 	tmp->precision = -1;
 	tmp->type = '\0';
 	str = skip_flag(str, tmp);
-	str = skip_width_precis(str, tmp, va);
+	str = skip_width(str, tmp, va);
+	str = skip_precis(str, tmp, va);
 	str = skip_type(str, tmp);
 	if (tmp->flags == -1)
 	{

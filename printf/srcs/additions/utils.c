@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   addition.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/02 14:54:17 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/02 18:19:24 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			num_length(long long n)
 		return (1);
 	while (n)
 	{
-		n /=10;
+		n /= 10;
 		i++;
 	}
 	return (i);
@@ -37,7 +37,8 @@ int			column_width(t_arg *tmp, long long num)
 		res--;
 		num = -num;
 	}
-	if (tmp->precision > 0 && tmp->precision > num_length(num) && tmp->type != '%')
+	if (tmp->precision > 0 && tmp->precision > num_length(num)
+		&& tmp->type != '%')
 		res -= tmp->precision;
 	else
 		res -= num_length(num);
@@ -97,61 +98,4 @@ int			output_precision_str(t_arg *tmp, char *str)
 	while (tmp->precision-- && str[length])
 		ft_putchar_fd(str[length++], 1);
 	return (length);
-}
-
-int			column_precision(t_arg *tmp, long long num)
-{
-	int		res;
-
-	res = tmp->precision;
-	if (num < 0)
-		num = -num;
-	res -= num_length(num);
-	if (res < 0)
-		return (0);
-	return (res);
-}
-
-void		ft_put_n_char(char ch, int n)
-{
-	while (n--)
-		ft_putchar_fd(ch, 1);
-}
-
-int			pointer_length(long unsigned int n)
-{
-	int		i;
-
-	i = 0;
-	if (!n)
-		return (1);
-	while (n)
-	{
-		i++;
-		n /= 16;
-	}
-	return (i);
-}
-
-int			precision_poiner(t_arg *tmp,long unsigned int n)
-{
-	int		i;
-
-	i = tmp->precision - pointer_length(n);
-	if (i < 0)
-		return (0);
-	return (i);
-}
-
-int			width_pointer(t_arg *tmp,long unsigned int n)
-{
-	int		i;
-
-	i = pointer_length(n);
-	if (tmp->precision > i)
-		i = tmp->precision;
-	i = tmp->width - i;
-	if (i < 0)
-		return (0);
-	return (i);
 }

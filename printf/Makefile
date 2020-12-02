@@ -6,14 +6,15 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/28 14:42:19 by kshanti           #+#    #+#              #
-#    Updated: 2020/12/02 15:26:49 by kshanti          ###   ########.fr        #
+#    Updated: 2020/12/02 18:05:26 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a #Добавить флаги
 
-C_FILE = ./srcs/additions/addition.c ./srcs/parser/parser.c\
-		 ./srcs/processor/flags.c ./srcs/ft_printf.c
+C_FILE = ./srcs/additions/utils.c ./srcs/parser/parser.c\
+		 ./srcs/processor/conversions.c ./srcs/ft_printf.c\
+		 ./srcs/processor/conversions_two.c ./srcs/additions/utils_two.c
 
 O_FILE = $(C_FILE:.c=.o)
 
