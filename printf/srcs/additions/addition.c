@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 19:11:42 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 20:16:13 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 20:24:41 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int			column_width_str(t_arg *tmp, char *str)//ok
 
 void		out_to_16(long long n, char c) // c = 'a'/'A'
 {
-    long long	i;
-	char        ch;
+	long long	i;
+	char		ch;
 
 	i = 1;
 	while (n / i >= 16)
@@ -118,60 +118,40 @@ void		ft_put_n_char(char ch, int n)// base
 		ft_putchar_fd(ch, 1);
 }
 
-int         pointer_length(long unsigned int n)
+int			pointer_length(long unsigned int n)
 {
-    int     i;
+	int		i;
 
-    i = 0;
+	i = 0;
 	if (!n)
 		return (1);
-    while (n)
-    {
-        i++;
-        n /= 16;
-    }
-    return (i);
+	while (n)
+	{
+		i++;
+		n /= 16;
+	}
+	return (i);
 }
 
-/*int         precision_poiner(t_arg *tmp, unsigned  int n)
+int			precision_poiner(t_arg *tmp,long unsigned int n)
 {
-    int     i;
-
-    i = tmp->precision - pointer_length(n);
-    if (i < 0)
-        return (0);
-    return (i);
-}
-
-int         width_pointer(t_arg *tmp, unsigned  int n, int precision)
-{
-    int     i;
-
-    i = tmp->width - pointer_length(n) - precision;
-    if (i < 0)
-        return (0);
-    return (i);
-}*/
-
-int         precision_poiner(t_arg *tmp,long unsigned int n)
-{
-    int     i;
+	int		i;
 
 	i = tmp->precision - pointer_length(n);
-    if (i < 0)
-        return (0);
-    return (i);
+	if (i < 0)
+		return (0);
+	return (i);
 }
 
-int         width_pointer(t_arg *tmp,long unsigned int n)
+int			width_pointer(t_arg *tmp,long unsigned int n)
 {
-    int     i;
+	int		i;
 
-    i = pointer_length(n);
-    if (tmp->precision > i)
-        i = tmp->precision;
-    i = tmp->width - i;
-    if (i < 0)
-        return (0);
-    return (i);
+	i = pointer_length(n);
+	if (tmp->precision > i)
+		i = tmp->precision;
+	i = tmp->width - i;
+	if (i < 0)
+		return (0);
+	return (i);
 }

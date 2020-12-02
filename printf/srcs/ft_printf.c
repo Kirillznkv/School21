@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 15:06:55 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/01 17:07:24 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/01 20:20:23 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			ft_printf(const char *str, ...)
 {
 	va_list		va;
-	char        *s;
+	char		*s;
 	char		*p_newArg;
 	size_t		size;
 	t_arg		*elem;
