@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 17:52:08 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/02 18:19:52 by kshanti          ###   ########.fr       */
+/*   Updated: 2020/12/03 15:32:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int			output_s(t_arg *tmp, va_list *va)
 	width = column_width_str(tmp, str);
 	if (tmp->flags == 0)
 		ft_put_n_char(' ', width);
+	if (tmp->flags == 1)
+		ft_put_n_char('0', width);
 	res = output_precision_str(tmp, str);
 	if (tmp->flags == 2)
 		ft_put_n_char(' ', width);
