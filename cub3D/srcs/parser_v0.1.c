@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_v0.1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 16:39:35 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/13 19:48:30 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/10 18:08:59 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int			parsing_map(int fd, int *spases, int *w, int *h)
 	}
 }
 
-int			predparser(char *filename,int *spases, int *w, int *h)
+int			predparser1(char *filename, int *spases, int *w, int *h)
 {
 	int		fd;
 	int		column_settings;
