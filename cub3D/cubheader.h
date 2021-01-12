@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2020/12/13 16:43:08 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/12 20:22:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 # include "fcntl.h"
+# include "stdio.h"//убрать
 
 typedef struct	s_images
 {
@@ -40,5 +41,7 @@ typedef struct	s_map_settings
 	t_color		color_c;
 	char		**map;
 }				t_map_settings;
+
+t_map_settings		*parser(char *filename);//, int *spases, int *w, int *h);
 
 #endif
