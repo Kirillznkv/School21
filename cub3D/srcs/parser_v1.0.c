@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/12 20:30:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/14 13:06:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int			set_color(char *str, t_color *color)
 			str++;
 		if (i == 0)
 			color->r = a;
-		else
+		else if (i == 1)
 			color->g = a;
+		else
+			color->b = a;
 		while (*str == ' ' && i < 2)
 			str++;
 		if (*str == ',' && i < 2)
