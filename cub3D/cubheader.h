@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/12 20:22:22 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/14 19:06:45 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ typedef struct	s_map_settings
 	char		**map;
 }				t_map_settings;
 
-t_map_settings		*parser(char *filename);//, int *spases, int *w, int *h);
+t_map_settings		*parser(char *filename, int *w, int *h);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/14 13:06:22 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/14 19:49:40 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int			is_settings(char *str, t_map_settings *tmp)
 {
 	int		res;
 	char	*pointer;
-	char	*del_pointer;
 	char	ch;
 
 	res = 1;
@@ -124,28 +123,23 @@ int			is_settings(char *str, t_map_settings *tmp)
 	return (res);
 }
 
-int			checkline(char *line, t_map_settings *tmp)
+int			checkline(char *line, t_map_settings *tmp, int *column)
 {
-	int		column;
-	int		res;
 	char	*str;
 
-	column = 0;
 	if ((str = ft_strtrim(line, " ")) == NULL)
 		return (-1);//error_malloc
 	if (ft_isalpha(*str))
 	{
 		if (is_settings(str, tmp))//написать
-			column++;
+			(*column)++;
 		else
 		{
 			free(str);
 			return (-1);//error_input
 		}
 	}
-	else if (*line == '\0')
-		;
-	else if (column != 8)
+	else if (*line != '\0')
 		return (-1);//error_input
 	free(str);
 	return (1);
@@ -154,9 +148,11 @@ int			checkline(char *line, t_map_settings *tmp)
 int					skip_settings(int fd, t_map_settings *tmp)
 {
 	int		res;
+	int		column;
 	char	*line;
 
 	res = 1;
+	column = 0;
 	tmp->color_c.r = -1;
 	tmp->color_f.r = -1;
 	tmp->width = -1;
@@ -165,20 +161,63 @@ int					skip_settings(int fd, t_map_settings *tmp)
 	tmp->images.south = NULL;
 	tmp->images.sprite = NULL;
 	tmp->images.west = NULL;
+	while (res == 1 && (res = get_next_line(fd, &line)) == 1 && column < 8)
+	{
+		res = checkline(line, tmp, &column);
+		free(line);
+	}
+	if (column != 8)
+		return (-1);//error input
+	return (res);
+}
+
+int					checkline_map(char *line, int *w, int *h)
+{
+	int		this_w;
+	char	*str;
+
+	ft_putchar_fd('|', 1);
+	ft_putstr_fd(line, 1);
+	ft_putchar_fd('|', 1);
+	ft_putchar_fd('\n', 1);
+	if ((str = ft_strtrim(line, " ")) == NULL)
+		return (-1);//error_malloc
+	if (*str)
+	{
+		this_w = ft_strlen(line);
+		if (!(*h) || (*w < this_w))
+			*w = this_w;
+		(*h)++;
+	}
+	else if (h)
+	{
+		free(str);
+		return (0);
+	}
+	free(str);
+	return (1);
+}
+
+int					skip_map(int fd, int *w, int *h)
+{
+	int		res;
+	char	*line;
+
+	res = 1;
 	while (res == 1 && (res = get_next_line(fd, &line)) == 1)
 	{
-		res = checkline(line, tmp);
+		res = checkline_map(line, w, h);
 		free(line);
 	}
 	if (!res)
 	{
-		res = checkline(line, tmp);
+		res = checkline_map(line, w, h);
 		free(line);
 	}
 	return (res);
 }
 
-t_map_settings		*parser(char *filename)//, int *spases, int *w, int *h)
+t_map_settings		*parser(char *filename, int *w, int *h)
 {
 	int				res;
 	int				fd;
@@ -188,7 +227,7 @@ t_map_settings		*parser(char *filename)//, int *spases, int *w, int *h)
 		return (tmp);//return_error_code
 	fd = open(filename, O_RDONLY);
 	res = skip_settings(fd, tmp);
-	//res = skip_map(fd, spases, w, h);
+	res = skip_map(fd, w, h);
 	close(fd);
 	return (tmp);
 }
