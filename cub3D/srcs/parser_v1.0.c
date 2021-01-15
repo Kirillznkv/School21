@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/14 19:49:40 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/15 17:20:23 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,10 @@ t_map_settings		*parser(char *filename, int *w, int *h)
 	t_map_settings	*tmp;
 
 	if ((tmp = (t_map_settings*)malloc(sizeof(t_map_settings))) == NULL)
-		return (tmp);//return_error_code
+	{
+		perror("error");
+		exit(errno);
+	}
 	fd = open(filename, O_RDONLY);
 	res = skip_settings(fd, tmp);
 	res = skip_map(fd, w, h);
