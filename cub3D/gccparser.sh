@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -Wall -Wextra -Werror main.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c ./libft/ft_calloc.c ./libft/ft_bzero.c ./libft/ft_isdigit.c ./libft/ft_isalpha.c ./libft/ft_strncmp.c ./srcs/parser_v1.0.c ./libft/ft_atoi.c ./libft/ft_strtrim.c ./libft/ft_strlcpy.c ./libft/ft_strrchr.c ./libft/ft_putstr_fd.c ./libft/ft_putchar_fd.c
+gcc -Wall -Wextra -Werror main.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c ./libft/ft_calloc.c ./libft/ft_bzero.c ./libft/ft_isdigit.c ./libft/ft_isalpha.c ./libft/ft_strncmp.c ./srcs/parser_v1.0.c ./libft/ft_atoi.c ./libft/ft_strtrim.c ./libft/ft_strlcpy.c ./libft/ft_strrchr.c ./libft/ft_putstr_fd.c ./libft/ft_putchar_fd.c ./srcs/error.c

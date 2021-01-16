@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:14:07 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/15 17:16:45 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/16 01:09:02 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,10 @@ void			error_control(char *str)
 	ft_putstr_fd(str, 1);
 	ft_putchar_fd('\n', 1);
 	exit(-1);
+}
+
+void			error_system(int error)
+{
+		perror("error");
+		exit(error);
 }

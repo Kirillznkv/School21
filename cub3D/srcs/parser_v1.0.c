@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/15 17:20:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/16 03:03:49 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			set_r(char *str, t_map_settings *tmp)
 			tmp->height = a;
 	}
 	if (*str)
-		return (0);/////////////////////////////////проверить
+		return (0);
 	return (1);
 }
 
@@ -72,7 +72,7 @@ int			set_color(char *str, t_color *color)
 			str++;
 	}
 	if (*str)
-		return (0);/////////////////////////////////проверить
+		return (0);
 	return (1);
 }
 
@@ -85,7 +85,7 @@ int			set_path(char *str, char **image)
 	if (ft_strchr(str, ' '))
 		return (0);
 	if ((*image = ft_strdup(str)) == NULL)
-		return (0);///error_malloc but in input error
+		error_system(errno);
 	return (1);
 }
 
@@ -123,35 +123,32 @@ int			is_settings(char *str, t_map_settings *tmp)
 	return (res);
 }
 
-int			checkline(char *line, t_map_settings *tmp, int *column)
+void			checkline(char *line, t_map_settings *tmp, int *column)
 {
 	char	*str;
 
 	if ((str = ft_strtrim(line, " ")) == NULL)
-		return (-1);//error_malloc
+		error_system(errno);
 	if (ft_isalpha(*str))
 	{
-		if (is_settings(str, tmp))//написать
+		if (is_settings(str, tmp))
 			(*column)++;
 		else
 		{
 			free(str);
-			return (-1);//error_input
+			error_control("error input");
 		}
 	}
 	else if (*line != '\0')
-		return (-1);//error_input
+			error_control("error input");
 	free(str);
-	return (1);
 }
 
-int					skip_settings(int fd, t_map_settings *tmp)
+void					skip_settings(int fd, t_map_settings *tmp)
 {
-	int		res;
 	int		column;
 	char	*line;
 
-	res = 1;
 	column = 0;
 	tmp->color_c.r = -1;
 	tmp->color_f.r = -1;
@@ -161,27 +158,24 @@ int					skip_settings(int fd, t_map_settings *tmp)
 	tmp->images.south = NULL;
 	tmp->images.sprite = NULL;
 	tmp->images.west = NULL;
-	while (res == 1 && (res = get_next_line(fd, &line)) == 1 && column < 8)
+	while (column < 8 && get_next_line(fd, &line) == 1)
 	{
-		res = checkline(line, tmp, &column);
+		checkline(line, tmp, &column);
 		free(line);
 	}
 	if (column != 8)
-		return (-1);//error input
-	return (res);
+		error_control("error input");
+	if (errno)
+		error_system(errno);
 }
 
-int					checkline_map(char *line, int *w, int *h)
+void					checkline_map(char *line, int *w, int *h)
 {
 	int		this_w;
 	char	*str;
 
-	ft_putchar_fd('|', 1);
-	ft_putstr_fd(line, 1);
-	ft_putchar_fd('|', 1);
-	ft_putchar_fd('\n', 1);
 	if ((str = ft_strtrim(line, " ")) == NULL)
-		return (-1);//error_malloc
+		error_system(errno);
 	if (*str)
 	{
 		this_w = ft_strlen(line);
@@ -189,48 +183,118 @@ int					checkline_map(char *line, int *w, int *h)
 			*w = this_w;
 		(*h)++;
 	}
-	else if (h)
+	else if (*h)
 	{
 		free(str);
-		return (0);
+		error_control("error input");
 	}
 	free(str);
-	return (1);
 }
 
-int					skip_map(int fd, int *w, int *h)
+void					skip_map(int fd, int *w, int *h)
 {
-	int		res;
 	char	*line;
 
-	res = 1;
-	while (res == 1 && (res = get_next_line(fd, &line)) == 1)
+	while (get_next_line(fd, &line) == 1)
 	{
-		res = checkline_map(line, w, h);
+		checkline_map(line, w, h);
 		free(line);
 	}
-	if (!res)
+	if (errno)
+		error_system(errno);
+	checkline_map(line, w, h);
+	free(line);
+}
+
+void				spase_in_map(t_map_settings *tmp, int w, int h)
+{
+	int				i;
+	int				j;
+
+	i = -1;
+	while (++i < h)
 	{
-		res = checkline_map(line, w, h);
+		j = -1;
+		while (++j < w)
+			tmp->map[i][j] = ' ';
+		tmp->map[i][j] = '\0';
+	}
+}
+
+void				skip_settings_for_map(int fd)
+{
+	int				column;
+	char			*line;
+
+	column = 0;
+	while (column < 8 && get_next_line(fd, &line) == 1)
+	{
+		while (*line == ' ')
+			line++;
+		if (*line)
+			column++;
 		free(line);
 	}
-	return (res);
+	if (errno)
+		error_system(errno);
+}
+
+void				fill_map(char *filename, t_map_settings *tmp)
+{
+	int				fd;
+	int				i;
+	int				j;
+	char			*line;
+
+	if ((fd = open(filename, O_RDONLY)) == -1)
+		error_system(errno);
+	skip_settings_for_map(fd);
+	i = 0;
+	while (get_next_line(fd, &line) == 1)
+	{
+		j = 0;
+		while (line[j] == ' ')
+			j++;
+		if (line[j] == '\0')
+		{
+			free(line);
+			continue ;
+		}
+		j = -1;
+		while (line[++j])
+			tmp->map[i][j] = line[j];
+		i++;
+		free(line);
+	}
+	if (errno)
+		error_system(errno);
+	j = -1;
+	while (line[++j])
+		tmp->map[i][j] = line[j];
+	free(line);
+	close(fd);
 }
 
 t_map_settings		*parser(char *filename, int *w, int *h)
 {
-	int				res;
 	int				fd;
+	int				i;
 	t_map_settings	*tmp;
 
+	i = -1;
 	if ((tmp = (t_map_settings*)malloc(sizeof(t_map_settings))) == NULL)
-	{
-		perror("error");
-		exit(errno);
-	}
-	fd = open(filename, O_RDONLY);
-	res = skip_settings(fd, tmp);
-	res = skip_map(fd, w, h);
+		error_system(errno);
+	if ((fd = open(filename, O_RDONLY)) == -1)
+		error_system(errno);
+	skip_settings(fd, tmp);
+	skip_map(fd, w, h);
 	close(fd);
+	if ((tmp->map = (char**)malloc(sizeof(char*) * (*h))) == NULL)
+		error_system(errno);
+	while (++i < *h)
+		if ((tmp->map[i] = (char*)malloc(sizeof(char) * (*w + 1))) == NULL)
+			error_system(errno);
+	spase_in_map(tmp, *w, *h);
+	fill_map(filename, tmp);
 	return (tmp);
 }

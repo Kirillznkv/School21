@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/14 19:21:26 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/16 03:06:24 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,13 @@ int			main(int argc, char **argv)
 	printf("S %s\n", tmp->images.sprite);
 	printf("\nw = %d\n", w);
 	printf("h = %d\n", h);
+
+	printf("\n->>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+	for(int i = 0; i < h; i++)
+	{
+		for(int j = 0; j < w; j++)
+			printf("%c", tmp->map[i][j]);
+		printf("\n");
+	}
 	return (0);
 }
