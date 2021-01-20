@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/16 01:16:32 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/20 15:08:24 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "./libft/libft.h"
 # include "fcntl.h"
 # include "errno.h"
-# include "stdio.h"//убрать
+# include "stdio.h" //убрать
 
 typedef struct	s_images
 {
@@ -46,5 +46,12 @@ typedef struct	s_map_settings
 t_map_settings		*parser(char *filename, int *w, int *h);
 void				error_control(char *str);
 void				error_system(int error);
+int					set_path(char *str, char **image);
+int					set_color(char *str, t_color *color);
+int					set_r(char *str, t_map_settings *tmp);
+void				skip_settings(int fd, t_map_settings *tmp);
+void				skip_map(int fd, int *w, int *h);
+void				check_map(char **tmp, int h);
+int					skip_empty_line(char *line);
 
 #endif
