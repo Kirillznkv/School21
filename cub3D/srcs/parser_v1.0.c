@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/16 03:03:49 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/20 07:30:44 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,38 +171,56 @@ void					skip_settings(int fd, t_map_settings *tmp)
 
 void					checkline_map(char *line, int *w, int *h)
 {
-	int		this_w;
-	char	*str;
+	int			this_w;
 
-	if ((str = ft_strtrim(line, " ")) == NULL)
-		error_system(errno);
-	if (*str)
-	{
-		this_w = ft_strlen(line);
-		if (!(*h) || (*w < this_w))
-			*w = this_w;
-		(*h)++;
-	}
-	else if (*h)
-	{
-		free(str);
-		error_control("error input");
-	}
-	free(str);
+	this_w = ft_strlen(line);
+	if (!(*h) || (*w < this_w))
+		*w = this_w;
+	(*h)++;
 }
+int						skip_empty_line(char *line)
+{
+	char	*str;
+	int		res;
 
+	if (*line == '\0')
+		return (2);
+	if ((str = ft_strtrim(line, " ")) == NULL)
+			error_system(errno);
+	if (*str)
+		res = 0;
+	else
+		res = 1;
+	free(str);
+	return (res);
+}
 void					skip_map(int fd, int *w, int *h)
 {
 	char	*line;
+	int		flag;
+	int		empty_line;
 
+	flag = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
-		checkline_map(line, w, h);
+		if (((empty_line = skip_empty_line(line)) && flag))
+			flag = 2;
+		if (flag == 2 && !empty_line)
+		{
+			free(line);
+			error_control("error input");
+		}
+		if (empty_line == 0)
+		{
+			flag = 1;
+			checkline_map(line, w, h);
+		}
 		free(line);
 	}
 	if (errno)
 		error_system(errno);
-	checkline_map(line, w, h);
+	if ((empty_line = skip_empty_line(line)) == 0)
+		checkline_map(line, w, h);
 	free(line);
 }
 
@@ -252,10 +270,7 @@ void				fill_map(char *filename, t_map_settings *tmp)
 	i = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
-		j = 0;
-		while (line[j] == ' ')
-			j++;
-		if (line[j] == '\0')
+		if (skip_empty_line(line))
 		{
 			free(line);
 			continue ;
@@ -269,10 +284,97 @@ void				fill_map(char *filename, t_map_settings *tmp)
 	if (errno)
 		error_system(errno);
 	j = -1;
-	while (line[++j])
-		tmp->map[i][j] = line[j];
+	if (!skip_empty_line(line))
+		while (line[0] && line[++j])
+			tmp->map[i][j] = line[j];
 	free(line);
 	close(fd);
+}
+
+void				check_zero(char **tmp, int h, int i, int j)
+{
+	int		ii;
+	int		jj;
+
+	ii = i;
+	jj = j;
+	while (tmp[ii][jj] && tmp[ii][jj] != '1')
+	{
+		if (tmp[ii][jj] == '0' || tmp[ii][jj] == '2')
+			;
+		else if (tmp[ii][jj] == 'W' || tmp[ii][jj] == 'S' || tmp[ii][jj] == 'N' || tmp[ii][jj] == 'E')
+			;
+		else
+			error_control("map error1");
+		jj++;
+	}
+	if (tmp[ii][jj] != '1')
+		error_control("map error2");
+	ii = i;
+	jj = j;
+	while (jj >= 0 && tmp[ii][jj] != '1')
+	{
+		if (tmp[ii][jj] == '0' || tmp[ii][jj] == '2')
+			;
+		else if (tmp[ii][jj] == 'W' || tmp[ii][jj] == 'S' || tmp[ii][jj] == 'N' || tmp[ii][jj] == 'E')
+			;//
+		else
+			error_control("map error3");
+		jj--;
+	}
+	if (tmp[ii][jj] != '1')
+		error_control("map error4");
+	ii = i;
+	jj = j;
+	while (ii >= 0 && tmp[ii][jj] != '1')
+	{
+		if (tmp[ii][jj] == '0' || tmp[ii][jj] == '2')
+			;
+		else if (tmp[ii][jj] == 'W' || tmp[ii][jj] == 'S' || tmp[ii][jj] == 'N' || tmp[ii][jj] == 'E')
+			;//
+		else
+			error_control("map error5");
+		ii--;
+	}
+	if (tmp[ii][jj] != '1')
+		error_control("map error6");
+	ii = i;
+	jj = j;
+	while (ii < h && tmp[ii][jj] != '1')
+	{
+		if (tmp[ii][jj] == '0' || tmp[ii][jj] == '2')
+			;
+		else if (tmp[ii][jj] == 'W' || tmp[ii][jj] == 'S' || tmp[ii][jj] == 'N' || tmp[ii][jj] == 'E')
+			;
+		else
+			error_control("map error7");
+		ii++;
+	}
+	if (tmp[ii][jj] != '1')
+		error_control("map error8");
+}
+
+void				check_map(t_map_settings *tmp, int h)
+{
+	int				i;
+	int				j;
+
+	i = -1;
+	while (++i < h)
+	{
+		j = -1;
+		while (tmp->map[i][++j])
+		{
+			if (tmp->map[i][j] == '0')
+				check_zero(tmp->map, h, i, j);
+			else if (tmp->map[i][j] == 'W' || tmp->map[i][j] == 'S' || tmp->map[i][j] == 'N' || tmp->map[i][j] == 'E')
+				;//
+			else if (tmp->map[i][j] == '1' || tmp->map[i][j] == ' ' || tmp->map[i][j] == '2')
+				;//
+			else
+				error_control("map error");
+		}
+	}
 }
 
 t_map_settings		*parser(char *filename, int *w, int *h)
@@ -296,5 +398,6 @@ t_map_settings		*parser(char *filename, int *w, int *h)
 			error_system(errno);
 	spase_in_map(tmp, *w, *h);
 	fill_map(filename, tmp);
+	check_map(tmp, *h);
 	return (tmp);
 }
