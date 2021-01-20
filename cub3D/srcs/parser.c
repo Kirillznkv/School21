@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 15:08:22 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/20 16:14:40 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,19 @@ void				skip_settings_for_map(int fd)
 	error_system(errno);
 }
 
+void				f_fill_map(char **map, char *line, int i)
+{
+	int				j;
+
+	j = -1;
+	while (line[++j])
+		map[i][j] = line[j];
+}
+
 void				fill_map(char *filename, t_map_settings *tmp)
 {
 	int				fd;
 	int				i;
-	int				j;
 	char			*line;
 
 	if ((fd = open(filename, O_RDONLY)) == -1)
@@ -62,17 +70,12 @@ void				fill_map(char *filename, t_map_settings *tmp)
 			free(line);
 			continue ;
 		}
-		j = -1;
-		while (line[++j])
-			tmp->map[i][j] = line[j];
-		i++;
+		f_fill_map(tmp->map, line, i++);
 		free(line);
 	}
 	error_system(errno);
-	j = -1;
 	if (!skip_empty_line(line))
-		while (line[0] && line[++j])
-			tmp->map[i][j] = line[j];
+		f_fill_map(tmp->map, line, i);
 	free(line);
 	close(fd);
 }
