@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 16:06:16 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:37:00 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@
 # include "errno.h"
 # include "stdio.h" //убрать
 
+typedef struct	s_player
+{
+	char			direction;
+	int				i;
+	int				j;
+}					t_player;
+typedef struct	s_sprite
+{
+	int				i;
+	int				j;
+	struct s_sprite	*next;
+}					t_sprite;
 typedef struct	s_images
 {
 	char			*north;
@@ -41,19 +53,9 @@ typedef struct	s_map_settings
 	t_color			color_f;
 	t_color			color_c;
 	char			**map;
+	t_player		plr;
+	t_sprite		*sp;
 }					t_map_settings;
-typedef struct	s_player
-{
-	char			direction;
-	int				x;
-	int				y;
-}					t_player;
-typedef struct	s_sprite
-{
-	int				x;
-	int				y;
-	struct s_sprite	*next;
-}					t_sprite;
 
 t_map_settings		*parser(char *filename, int *w, int *h);
 void				error_control(char *str);
@@ -63,7 +65,9 @@ int					set_color(char *str, t_color *color);
 int					set_r(char *str, t_map_settings *tmp);
 void				skip_settings(int fd, t_map_settings *tmp);
 void				skip_map(int fd, int *w, int *h);
-void				check_map(char **tmp, int h);
+void				check_map(t_map_settings *tmp, int h);
 int					skip_empty_line(char *line);
+t_sprite			*lstnew(int i, int j);
+void				addlst(t_map_settings *tmp, int i, int j);
 
 #endif

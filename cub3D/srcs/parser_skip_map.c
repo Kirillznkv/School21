@@ -6,11 +6,38 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:51:10 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 13:01:09 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:32:15 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cubheader.h"
+
+t_sprite				*lstnew(int i, int j)
+{
+	t_sprite	*tmp;
+
+	tmp = (t_sprite*)malloc(sizeof(t_sprite));
+	error_system(errno);
+	tmp->next = NULL;
+	tmp->i = i;
+	tmp->j = j;
+	return (tmp);
+}
+
+void					addlst(t_map_settings *tmp, int i, int j)
+{
+	t_sprite	*first;
+
+	if (!(tmp->sp))
+	{
+		tmp->sp = lstnew(i, j);
+		return ;
+	}
+	first = tmp->sp;
+	while (first->next)
+		first = first->next;
+	first->next = lstnew(i, j);
+}
 
 void					checkline_map(char *line, int *w, int *h)
 {

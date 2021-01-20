@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 15:43:48 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:37:32 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,35 @@ int					check_zero(char **tmp, int i, int j)
 	return (0);
 }
 
-void				check_map(char **tmp, int h)
+void				add_plr(t_map_settings *tmp, int i, int j)
+{
+	if (tmp->plr.direction != 0)
+		error_control("error player in map");
+	tmp->plr.direction = tmp->map[i][j];
+	tmp->plr.i = i;
+	tmp->plr.j = j;
+}
+
+void				check_map(t_map_settings *tmp, int h)
 {
 	int				i;
 	int				j;
 
 	i = 0;
-	ckeck_contour(tmp, h);
+	ckeck_contour(tmp->map, h);
+	tmp->plr.direction = 0;
+	tmp->sp = NULL;
 	while (++i < h - 1)
 	{
 		j = 0;
-		while (tmp[i][++j + 1])
+		while (tmp->map[i][++j + 1])
 		{
-			if (tmp[i][j] == '0' && check_zero(tmp, i, j))
+			if (tmp->map[i][j] == '0' && check_zero(tmp->map, i, j))
 				error_control("map_error5");
-			else if (tmp[i][j] == '2')
-				;//sprit
-			else if (ft_strchr("WSNE", tmp[i][j]))
-				;//player
+			else if (tmp->map[i][j] == '2')
+				addlst(tmp, i, j);
+			else if (ft_strchr("WSNE", tmp->map[i][j]))
+				add_plr(tmp, i, j);
 		}
 	}
 }

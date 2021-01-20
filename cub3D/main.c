@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/16 03:06:24 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:36:12 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ int			main(int argc, char **argv)
 		for(int j = 0; j < w; j++)
 			printf("%c", tmp->map[i][j]);
 		printf("\n");
+	}
+	printf("\n->>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+	printf("player: %c (%d, %d)\n", tmp->plr.direction, tmp->plr.i, tmp->plr.j);
+	printf("Sprite--------\n");
+	while (tmp->sp)
+	{
+		printf("      (%d, %d)\n", tmp->sp->i, tmp->sp->j);
+		tmp->sp = tmp->sp->next;
 	}
 	return (0);
 }
