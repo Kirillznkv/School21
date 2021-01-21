@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 17:37:32 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 01:37:20 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void				ckeck_contour(char **tmp, int h)
 	{
 		j = -1;
 		if (tmp[i][0] != '1' && tmp[i][0] != ' ')
-			error_control("map error1");
+			error_control("map error");
 		while (tmp[i][++j])
 		{
 			if ((i == 0 || (i == h - 1))
 				&& (tmp[i][0] != '1' && tmp[i][0] != ' '))
-				error_control("map error2");
+				error_control("map error");
 			if (!ft_strchr("WSNE 012", tmp[i][j]))
-				error_control("map error3");
+				error_control("map error");
 		}
 		if (tmp[i][j - 1] != '1' && tmp[i][j - 1] != ' ')
-			error_control("map error4");
+			error_control("map error");
 	}
 }
 
@@ -72,12 +72,16 @@ void				check_map(t_map_settings *tmp, int h)
 		j = 0;
 		while (tmp->map[i][++j + 1])
 		{
-			if (tmp->map[i][j] == '0' && check_zero(tmp->map, i, j))
-				error_control("map_error5");
+			if ((tmp->map[i][j] == '0' || tmp->map[i][j] == '2') && check_zero(tmp->map, i, j))
+				error_control("map_error");
 			else if (tmp->map[i][j] == '2')
 				addlst(tmp, i, j);
 			else if (ft_strchr("WSNE", tmp->map[i][j]))
+			{
+				if (check_zero(tmp->map, i, j))
+					error_control("map_error");
 				add_plr(tmp, i, j);
+			}
 		}
 	}
 }
