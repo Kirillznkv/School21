@@ -6,11 +6,12 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:29:03 by kshanti           #+#    #+#             */
-/*   Updated: 2020/11/01 17:46:39 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 01:19:13 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "errno.h"
 
 int					ft_atoi(const char *str)
 {
@@ -30,6 +31,12 @@ int					ft_atoi(const char *str)
 	{
 		m++;
 		i++;
+	}
+	if (!(ft_isdigit(str[i])))
+	{
+		ft_putstr_fd("error: error input", 1);
+		ft_putchar_fd('\n', 1);
+		exit(1);
 	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 		res = res * 10 + str[i++] - '0';
