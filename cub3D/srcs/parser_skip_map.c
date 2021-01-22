@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:51:10 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 17:32:15 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 02:59:07 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,33 @@ void					skip_map(int fd, int *w, int *h)
 {
 	char	*line;
 	int		flag;
+	int		end;
 	int		empty_line;
 
 	flag = 0;
+	end = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
-		if (((empty_line = skip_empty_line(line)) && flag))
+		if (((empty_line = skip_empty_line(line)) == 2 && flag))
 			flag = 2;
 		if (flag == 2 && !empty_line)
 			error_control("error input");
 		if (empty_line == 0)
 		{
+			end = 0;
 			flag = 1;
 			checkline_map(line, w, h);
+		}
+		else if (empty_line == 1 && flag)
+		{
+			end++;
+			(*h)++;
 		}
 		free(line);
 	}
 	error_system(errno);
 	if ((empty_line = skip_empty_line(line)) == 0)
 		checkline_map(line, w, h);
+	(*h) -= end;
 	free(line);
 }

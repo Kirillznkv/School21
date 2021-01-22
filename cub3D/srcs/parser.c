@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 17:14:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 03:15:17 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,32 @@ void				f_fill_map(char **map, char *line, int i)
 		map[i][j] = line[j];
 }
 
-void				fill_map(char *filename, t_map_settings *tmp)
+void				fill_map(char *filename, t_map_settings *tmp, int h)
 {
 	int				fd;
 	int				i;
+	int				flag;
 	char			*line;
 
+	flag = 1;
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		error_system(errno);
 	skip_settings_for_map(fd);
 	i = 0;
-	while (get_next_line(fd, &line) == 1)
+	while (get_next_line(fd, &line) == 1 && (i < h))
 	{
-		if (skip_empty_line(line))
+		if (skip_empty_line(line) && flag)
 		{
 			free(line);
 			continue ;
 		}
-		f_fill_map(tmp->map, line, i++);
+		flag = 0;
+		if (skip_empty_line(line) != 2)
+			f_fill_map(tmp->map, line, i++);
 		free(line);
 	}
 	error_system(errno);
-	if (!skip_empty_line(line))
+	if (skip_empty_line(line) == 0)
 		f_fill_map(tmp->map, line, i);
 	free(line);
 	close(fd);
@@ -100,7 +104,7 @@ t_map_settings		*parser(char *filename, int *w, int *h)
 		if ((tmp->map[i] = (char*)malloc(sizeof(char) * (*w + 1))) == NULL)
 			error_system(errno);
 	spase_in_map(tmp, *w, *h);
-	fill_map(filename, tmp);
+	fill_map(filename, tmp, *h);
 	check_map(tmp, *h);
 	return (tmp);
 }
