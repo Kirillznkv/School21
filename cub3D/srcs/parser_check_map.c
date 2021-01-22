@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 01:37:20 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:31:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void				ckeck_contour(char **tmp, int h)
 				&& (tmp[i][0] != '1' && tmp[i][0] != ' '))
 				error_control("map error");
 			if (!ft_strchr("WSNE 012", tmp[i][j]))
-				error_control("map error");
+				error_control("invalid character");
 		}
 		if (tmp[i][j - 1] != '1' && tmp[i][j - 1] != ' ')
 			error_control("map error");
@@ -52,7 +52,7 @@ int					check_zero(char **tmp, int i, int j)
 void				add_plr(t_map_settings *tmp, int i, int j)
 {
 	if (tmp->plr.direction != 0)
-		error_control("error player in map");
+		error_control("repeating player in map");
 	tmp->plr.direction = tmp->map[i][j];
 	tmp->plr.i = i;
 	tmp->plr.j = j;
@@ -73,13 +73,13 @@ void				check_map(t_map_settings *tmp, int h)
 		while (tmp->map[i][++j + 1])
 		{
 			if ((tmp->map[i][j] == '0' || tmp->map[i][j] == '2') && check_zero(tmp->map, i, j))
-				error_control("map_error");
+				error_control("0 or 2 is not surrounded by a wall");
 			else if (tmp->map[i][j] == '2')
 				addlst(tmp, i, j);
 			else if (ft_strchr("WSNE", tmp->map[i][j]))
 			{
 				if (check_zero(tmp->map, i, j))
-					error_control("map_error");
+					error_control("player is not surrounded by a wall");
 				add_plr(tmp, i, j);
 			}
 		}

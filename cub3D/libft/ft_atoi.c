@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:29:03 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 01:30:50 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:38:04 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int					ft_atoi(const char *str)
 	}
 	if (!(ft_isdigit(str[i])))
 	{
-		ft_putstr_fd("error: error input", 1);
+		ft_putstr_fd("error: digit was not found", 1);
 		ft_putchar_fd('\n', 1);
 		exit(1);
 	}

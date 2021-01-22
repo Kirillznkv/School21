@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 17:37:00 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:24:34 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ typedef struct	s_map_settings
 t_map_settings		*parser(char *filename, int *w, int *h);
 void				error_control(char *str);
 void				error_system(int error);
-int					set_path(char *str, char **image);
-int					set_color(char *str, t_color *color);
-int					set_r(char *str, t_map_settings *tmp);
+void				set_path(char *str, char **image);
+void				set_color(char *str, t_color *color);
+void				set_r(char *str, t_map_settings *tmp);
 void				skip_settings(int fd, t_map_settings *tmp);
 void				skip_map(int fd, int *w, int *h);
 void				check_map(t_map_settings *tmp, int h);

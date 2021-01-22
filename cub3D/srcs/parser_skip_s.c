@@ -6,50 +6,44 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:46:01 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/20 13:55:31 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:32:58 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cubheader.h"
 
-int				f_is_settings(char **pointer, char *str, char *ch)
+void				f_is_settings(char **pointer, char *str, char *ch)
 {
 	if (!(*pointer = ft_strchr(str, ' ')))
-		return (0);
+		error_control("error input in settings line");
 	if (*(*pointer + 1) == '\0')
-		return (0);
+		error_control("error input in settings line");
 	*ch = *(*pointer + 1);
 	*(*pointer + 1) = '\0';
-	return (1);
 }
 
-int				is_settings(char *str, t_map_settings *tmp)
+void				is_settings(char *str, t_map_settings *tmp)
 {
-	int		res;
 	char	*pointer;
 	char	ch;
 
-	if (!(res = f_is_settings(&pointer, str, &ch)))
-		return (0);
+	f_is_settings(&pointer, str, &ch);
 	if (!(ft_strncmp(str, "R ", 4)) && (*(pointer + 1) = ch))
-		res = set_r(++pointer, tmp);
+		set_r(++pointer, tmp);
 	else if (!(ft_strncmp(str, "F ", 4)) && (*(pointer + 1) = ch))
-		res = set_color(++pointer, &(tmp->color_f));
+		set_color(++pointer, &(tmp->color_f));
 	else if (!(ft_strncmp(str, "C ", 4)) && (*(pointer + 1) = ch))
-		res = set_color(++pointer, &(tmp->color_c));
+		set_color(++pointer, &(tmp->color_c));
 	else if (!(ft_strncmp(str, "S ", 4)) && (*(pointer + 1) = ch))
-		res = set_path(++pointer, &(tmp->images.sprite));
+		set_path(++pointer, &(tmp->images.sprite));
 	else if (!(ft_strncmp(str, "NO ", 4)) && (*(pointer + 1) = ch))
-		res = set_path(++pointer, &(tmp->images.north));
+		set_path(++pointer, &(tmp->images.north));
 	else if (!(ft_strncmp(str, "SO ", 4)) && (*(pointer + 1) = ch))
-		res = set_path(++pointer, &(tmp->images.south));
+		set_path(++pointer, &(tmp->images.south));
 	else if (!(ft_strncmp(str, "WE ", 4)) && (*(pointer + 1) = ch))
-		res = set_path(++pointer, &(tmp->images.west));
+		set_path(++pointer, &(tmp->images.west));
 	else if (!(ft_strncmp(str, "EA ", 4)) && (*(pointer + 1) = ch))
-		res = set_path(++pointer, &(tmp->images.east));
-	else
-		return (0);
-	return (res);
+		set_path(++pointer, &(tmp->images.east));
 }
 
 void			checkline(char *line, t_map_settings *tmp, int *column)
@@ -60,13 +54,11 @@ void			checkline(char *line, t_map_settings *tmp, int *column)
 	error_system(errno);
 	if (ft_isalpha(*str))
 	{
-		if (is_settings(str, tmp))
-			(*column)++;
-		else
-			error_control("error input");
+		is_settings(str, tmp);
+		(*column)++;
 	}
 	else if (*line != '\0')
-		error_control("error input");
+		error_control("not all settings");
 	free(str);
 }
 
@@ -90,6 +82,6 @@ void			skip_settings(int fd, t_map_settings *tmp)
 		free(line);
 	}
 	if (column != 8)
-		error_control("error input");
+		error_control("not all settings and map");
 	error_system(errno);
 }

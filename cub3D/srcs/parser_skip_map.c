@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:51:10 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 02:59:07 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/22 18:25:48 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void					skip_map(int fd, int *w, int *h)
 		if (((empty_line = skip_empty_line(line)) == 2 && flag))
 			flag = 2;
 		if (flag == 2 && !empty_line)
-			error_control("error input");
+			error_control("end line inside map");
 		if (empty_line == 0)
 		{
 			end = 0;
@@ -98,5 +98,7 @@ void					skip_map(int fd, int *w, int *h)
 	if ((empty_line = skip_empty_line(line)) == 0)
 		checkline_map(line, w, h);
 	(*h) -= end;
+	if (*h == 0)
+		error_control("map was not found");
 	free(line);
 }
