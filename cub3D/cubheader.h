@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 18:24:34 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/25 04:05:01 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "./libft/libft.h"
 # include "fcntl.h"
 # include "errno.h"
+# include "./mlx/mlx.h"
 # include "stdio.h" //убрать
 
 typedef struct	s_player
@@ -69,5 +70,6 @@ void				check_map(t_map_settings *tmp, int h);
 int					skip_empty_line(char *line);
 t_sprite			*lstnew(int i, int j);
 void				addlst(t_map_settings *tmp, int i, int j);
+void				print_map2d(t_map_settings *tmp);
 
 #endif

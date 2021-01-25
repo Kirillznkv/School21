@@ -6,35 +6,42 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/07 17:20:27 by kshanti           #+#    #+#              #
-#    Updated: 2020/12/07 17:23:27 by kshanti          ###   ########.fr        #
+#    Updated: 2021/01/25 04:09:52 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libcub.a
+NAME = cub3D
 
+HEAD = ./cubheader.h
 SRCS = ./srcs/
+GNL = ./get_next_line/
 
-C_FILE = main.c $(SRCS)parser.c
+CFLAGS = -Wall -Wextra -Werror
+MLX = -Lmlx -lmlx -framework OpenGL -framework Appkit
+
+C_FILE =	$(SRCS)parser_skip_s.c $(SRCS)parser_skip_s_utils.c\
+			$(SRCS)parser_skip_map.c $(SRCS)parser_check_map.c\
+			$(SRCS)parser.c\
+			$(GNL)get_next_line.c $(GNL)get_next_line_utils.c\
+			$(SRCS)error.c\
+			$(SRCS)print_map2d.c ./main.c
 
 O_FILE = $(C_FILE:.c=.o)
-
-HEAD =	./cubheader.h
-
-FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(O_FILE)
 	$(MAKE) -C ./libft all
-	cp ./Libft/libft.a $(NAME)
-	ar -rcs $(NAME) $(O_FILE)
+	$(MAKE) -C ./mlx all
+	gcc $(O_FILE) ./libft/libft.a $(MLX) -o $(NAME)
 
 %.o: %.c $(HEAD)
-	gcc -c $(FLAGS) $< -o $@
+	gcc -c $(СFLAGS) $< -o $@
 
 clean:
 	@rm -f $(O_FILE)
 	$(MAKE) -C ./libft clean
+	$(MAKE) -C ./mlx clean
 
 fclean: clean
 	@rm -f $(NAME)
