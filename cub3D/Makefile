@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/07 17:20:27 by kshanti           #+#    #+#              #
-#    Updated: 2021/01/25 04:09:52 by kshanti          ###   ########.fr        #
+#    Updated: 2021/01/26 15:32:58 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = ./srcs/
 GNL = ./get_next_line/
 
 CFLAGS = -Wall -Wextra -Werror
-MLX = -Lmlx -lmlx -framework OpenGL -framework Appkit
+MLX = ./mlx/libmlx.a -framework OpenGL -framework Appkit
 
 C_FILE =	$(SRCS)parser_skip_s.c $(SRCS)parser_skip_s_utils.c\
 			$(SRCS)parser_skip_map.c $(SRCS)parser_check_map.c\

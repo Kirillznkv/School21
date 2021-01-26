@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map2d.c                                      :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/24 14:25:25 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/25 21:09:15 by kshanti          ###   ########.fr       */
+/*   Created: 2021/01/26 15:24:17 by kshanti           #+#    #+#             */
+/*   Updated: 2021/01/26 15:26:43 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cubheader.h"
+#include "./mlx/mlx.h"
+#include "stdio.h"
 
-void		print_map2d(t_map_settings *tmp)
+int		main()
 {
+	
 	void *mlx = NULL;
 	void *win = NULL;
 	int x = 100;
@@ -28,4 +30,6 @@ void		print_map2d(t_map_settings *tmp)
 			mlx_pixel_put(mlx, win, x, y, 0xFFFFFF);
 	}
 	mlx_loop(mlx);
+	printf("its work!\n");
+	return (0);
 }
