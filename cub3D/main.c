@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 03:19:32 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/26 16:13:43 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int			main(int argc, char **argv)
 		;
 	h = 0;
 	w = 0;
+	errno = 0;
 	tmp = parser("firstmap.cub", &w, &h);
 	printf("R %d %d\n", tmp->width, tmp->height);
 	printf("F %d, %d, %d\n", tmp->color_f.r, tmp->color_f.g, tmp->color_f.b);
