@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/07 17:20:27 by kshanti           #+#    #+#              #
-#    Updated: 2021/01/26 16:07:49 by kshanti          ###   ########.fr        #
+#    Updated: 2021/01/26 22:29:31 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ C_FILE =	$(SRCS)parser_skip_s.c $(SRCS)parser_skip_s_utils.c\
 
 O_FILE = $(C_FILE:.c=.o)
 
-all: $(NAME)
+all:
+	$(MAKE) $(NAME) -j 4
 
 $(NAME): $(O_FILE)
 	$(MAKE) -C ./libft all

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/25 01:37:43 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/26 21:48:11 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ t_map_settings		*parser(char *filename, int *w, int *h)
 	skip_settings(fd, tmp);
 	skip_map(fd, w, h);
 	close(fd);
-	tmp->map = (char**)malloc(sizeof(char*) * (*h));
+	tmp->map = (char**)malloc(sizeof(char*) * (*h + 1));
 	error_system(errno);
 	while (++i < *h)
 		if ((tmp->map[i] = (char*)malloc(sizeof(char) * (*w + 1))) == NULL)
 			error_system(errno);
+	tmp->map[*h] = NULL;
 	spase_in_map(tmp, *w, *h);
 	fill_map(filename, tmp, *h);
 	check_map(tmp, *h);

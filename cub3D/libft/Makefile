@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/30 14:54:25 by kshanti           #+#    #+#              #
-#    Updated: 2020/11/05 13:29:29 by kshanti          ###   ########.fr        #
+#    Updated: 2021/01/26 22:29:20 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ HEADER = libft.h
 
 .PHONY: all clean fclean bonus re
 
-all: $(NAME)
+all:
+	$(MAKE) $(NAME) -j 4
 
 $(NAME): $(O_FILE)
 	ar -rcs $(NAME) $(O_FILE)
