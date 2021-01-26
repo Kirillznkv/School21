@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/25 20:47:20 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/26 20:26:09 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # include "./mlx/mlx.h"
 # include "stdio.h" //убрать
 
+typedef struct	s_data
+{
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}					t_data;
 typedef struct	s_player
 {
 	char			direction;
