@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:25:25 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/26 22:54:33 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/27 09:59:40 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void		put_square(t_data *img, int x, int y, int color)
 	int		j;
 	int		n;
 
-	i = y - 1;
+	i = x - 1;
 	n = 10;
-	while (++i < y + n)
+	while (++i < x + n)
 	{
-		j = x - 1;
-		while (++j < x + n)
+		j = y - 1;
+		while (++j < y + n)
 			my_mlx_pixel_put(img, i, j, color);
 	}
 }
@@ -64,7 +64,7 @@ void		put_map(t_map_settings *map, t_data *img)
 		while (map->map[i][++j])
 		{
 			color = get_color(map->map[i][j]);
-			put_square(img, y, x, color);
+			put_square(img, x, y, color);
 			x += 10;
 		}
 		y += 10;
@@ -82,7 +82,7 @@ void		print_map2d(t_map_settings *tmp)
 	img.img = mlx_new_image(mlx, 640, 480);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	put_map(tmp, &img);//
+	put_map(tmp, &img);
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
