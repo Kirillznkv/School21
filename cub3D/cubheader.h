@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/26 20:26:09 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:05:52 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ typedef struct	s_map_settings
 	char			**map;
 	t_player		plr;
 	t_sprite		*sp;
+	void			*mlx;
+	void			*win;
+	t_data			img;
 }					t_map_settings;
 
-t_map_settings		*parser(char *filename, int *w, int *h);
+t_map_settings		*parser(char *filename);
 void				error_control(char *str);
 void				error_system(int error);
 void				set_path(char *str, char **image);

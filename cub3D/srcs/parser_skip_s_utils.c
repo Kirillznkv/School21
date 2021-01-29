@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:47:55 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 18:24:13 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:37:31 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ void			set_path(char *str, char **image)
 		str++;
 	if (ft_strchr(str, ' '))
 		error_control("spases in path");
-	*image = ft_strdup(str);
-	error_system(errno);
+	if ((*image = ft_strdup(str)) == NULL)
+		error_system(errno);
 }

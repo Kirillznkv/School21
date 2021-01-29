@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:51:10 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 18:25:48 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:38:57 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_sprite				*lstnew(int i, int j)
 {
 	t_sprite	*tmp;
 
-	tmp = (t_sprite*)malloc(sizeof(t_sprite));
-	error_system(errno);
+	if ((tmp = (t_sprite*)malloc(sizeof(t_sprite))) == NULL)
+		error_system(errno);
 	tmp->next = NULL;
 	tmp->i = i;
 	tmp->j = j;
@@ -56,8 +56,8 @@ int						skip_empty_line(char *line)
 
 	if (*line == '\0')
 		return (2);
-	str = ft_strtrim(line, " ");
-	error_system(errno);
+	if ((str = ft_strtrim(line, " ")) == NULL)
+		error_system(errno);
 	if (*str)
 		res = 0;
 	else
@@ -72,10 +72,11 @@ void					skip_map(int fd, int *w, int *h)
 	int		flag;
 	int		end;
 	int		empty_line;
+	int		check_gnl;
 
 	flag = 0;
 	end = 0;
-	while (get_next_line(fd, &line) == 1)
+	while ((check_gnl = get_next_line(fd, &line)) == 1)
 	{
 		if (((empty_line = skip_empty_line(line)) == 2 && flag))
 			flag = 2;
@@ -94,7 +95,8 @@ void					skip_map(int fd, int *w, int *h)
 		}
 		free(line);
 	}
-	error_system(errno);
+	if (check_gnl == -1)
+		error_system(errno);
 	if ((empty_line = skip_empty_line(line)) == 0)
 		checkline_map(line, w, h);
 	(*h) -= end;

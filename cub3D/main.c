@@ -6,51 +6,43 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/26 16:13:43 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:53:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubheader.h"
 
-int			main(int argc, char **argv)
+t_map_settings		*cub_init(char *filename)
 {
 	t_map_settings	*tmp;
-	int				w;
-	int				h;
 
-	if (argc == 1 || argv[0][0] == '9')
-		;
-	h = 0;
-	w = 0;
-	errno = 0;
-	tmp = parser("firstmap.cub", &w, &h);
-	printf("R %d %d\n", tmp->width, tmp->height);
-	printf("F %d, %d, %d\n", tmp->color_f.r, tmp->color_f.g, tmp->color_f.b);
-	printf("C %d, %d, %d\n", tmp->color_c.r, tmp->color_c.g, tmp->color_c.b);
-	printf("SO %s\n", tmp->images.south);
-	printf("NO %s\n", tmp->images.north);
-	printf("WE %s\n", tmp->images.west);
-	printf("EA %s\n", tmp->images.east);
-	printf("S %s\n", tmp->images.sprite);
-	printf("\nw = %d\n", w);
-	printf("h = %d\n", h);
+	tmp = parser(filename);
+	printf("%s\n", tmp->images.sprite);
+	tmp->mlx = mlx_init();
+	tmp->win = mlx_new_window(tmp->mlx, 640, 480, "MyCub3D");
+	tmp->img.img = mlx_new_image(tmp->mlx, 640, 480);
+	tmp->img.addr = mlx_get_data_addr(tmp->img.img,
+		&tmp->img.bits_per_pixel, &tmp->img.line_length,
+		&tmp->img.endian);
+	print_map2d(tmp);
+	return (tmp);
+}
 
-	printf("\n->>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-	for(int i = 0; i < h; i++)
-	{
-		for(int j = 0; j < w; j++)
-			printf("%c", tmp->map[i][j]);
-		printf("\n");
-	}
-	printf("\n->>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-	printf("player: %c (%d, %d)\n", tmp->plr.direction, tmp->plr.i, tmp->plr.j);
-	printf("Sprite--------\n");
-	while (tmp->sp)
-	{
-		printf("      (%d, %d)\n", tmp->sp->i, tmp->sp->j);
-		tmp->sp = tmp->sp->next;
-	}
-	return (0);
+void				my_exit(int key_press)
+{
+	exit(1);
+}
+
+int					main(int argc, char **argv)
+{
+	t_map_settings	*tmp;
+
+	tmp = cub_init("map.cub");
+	//mlx_hook(tmp->win, 2, 0, keybord_manager, tmp);
+	mlx_hook(tmp->win, 17, 0, my_exit, NULL);
+	mlx_loop(tmp->mlx);
+	free(tmp);
+	return (1);
 }
     //написать проверку открытия файлов
 

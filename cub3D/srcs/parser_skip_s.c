@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:46:01 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/22 18:32:58 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:37:06 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void			checkline(char *line, t_map_settings *tmp, int *column)
 {
 	char	*str;
 
-	str = ft_strtrim(line, " ");
-	error_system(errno);
+	if ((str = ft_strtrim(line, " ")) == NULL)
+		error_system(errno);
 	if (ft_isalpha(*str))
 	{
 		is_settings(str, tmp);
@@ -65,6 +65,7 @@ void			checkline(char *line, t_map_settings *tmp, int *column)
 void			skip_settings(int fd, t_map_settings *tmp)
 {
 	int		column;
+	int		check_gnl;
 	char	*line;
 
 	column = 0;
@@ -76,12 +77,13 @@ void			skip_settings(int fd, t_map_settings *tmp)
 	tmp->images.south = NULL;
 	tmp->images.sprite = NULL;
 	tmp->images.west = NULL;
-	while (column < 8 && get_next_line(fd, &line) == 1)
+	while (column < 8 && (check_gnl = get_next_line(fd, &line)) == 1)
 	{
 		checkline(line, tmp, &column);
 		free(line);
 	}
 	if (column != 8)
 		error_control("not all settings and map");
-	error_system(errno);
+	if (check_gnl == -1)
+		error_system(errno);
 }

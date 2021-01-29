@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:14:07 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/26 16:09:39 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:44:54 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void			error_control(char *str)
 
 void			error_system(int error)
 {
-	if (error)
-	{
-		perror("error");
-		exit(error);
-	}
+	perror("error");
+	exit(error);
 }

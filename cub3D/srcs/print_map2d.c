@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:25:25 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/27 09:59:40 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:39:36 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,6 @@ void		put_map(t_map_settings *map, t_data *img)
 
 void		print_map2d(t_map_settings *tmp)
 {
-	void		*mlx;
-	void		*win;
-	t_data		img;
-
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 640, 480, "test");
-	img.img = mlx_new_image(mlx, 640, 480);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-	put_map(tmp, &img);
-	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
-	mlx_loop(mlx);
+	put_map(tmp, &tmp->img);
+	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img, 0, 0);
 }
