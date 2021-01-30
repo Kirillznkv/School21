@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 02:53:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 02:58:25 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ t_map_settings		*parser(char *filename)
 	skip_settings(fd, tmp);
 	skip_map(fd, &w, &h);
 	close(fd);
-	printf("h = %d w = %d\n", h, w);
 	if ((tmp->map = (char**)malloc(sizeof(char*) * (h + 1))) == NULL)
 		error_system(errno);
 	while (++i < h)

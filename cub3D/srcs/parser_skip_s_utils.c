@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:47:55 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 02:37:31 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 03:00:59 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			set_r(char *str, t_map_settings *tmp)
 		if (!(ft_isdigit(*str)))
 			error_control("error input R line");
 		a = ft_atoi(str);
-		if (a <= 0)
+		if (a < 1)
 			error_control("a negative number in R");
 		while (ft_isdigit(*str))
 			str++;

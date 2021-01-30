@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/07 17:20:27 by kshanti           #+#    #+#              #
-#    Updated: 2021/01/26 22:29:31 by kshanti          ###   ########.fr        #
+#    Updated: 2021/01/30 02:58:59 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ all:
 $(NAME): $(O_FILE)
 	$(MAKE) -C ./libft all
 	$(MAKE) -C ./mlx all
-	#ECHO $(O_FILE)
 	gcc $(O_FILE) ./libft/libft.a $(MLX) -o $(NAME)
 
 %.o: %.c $(HEAD)

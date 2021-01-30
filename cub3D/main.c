@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 02:53:28 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 04:13:18 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ t_map_settings		*cub_init(char *filename)
 	t_map_settings	*tmp;
 
 	tmp = parser(filename);
-	printf("%s\n", tmp->images.sprite);
+	if (tmp->width > 2560)
+		tmp->width = 2560;
+	if (tmp->height > 1390)
+		tmp->height = 1390;
 	tmp->mlx = mlx_init();
-	tmp->win = mlx_new_window(tmp->mlx, 640, 480, "MyCub3D");
-	tmp->img.img = mlx_new_image(tmp->mlx, 640, 480);
+	tmp->win = mlx_new_window(tmp->mlx, tmp->width, tmp->height, "MyCub3D");
+	tmp->img.img = mlx_new_image(tmp->mlx, tmp->width, tmp->height);
 	tmp->img.addr = mlx_get_data_addr(tmp->img.img,
 		&tmp->img.bits_per_pixel, &tmp->img.line_length,
 		&tmp->img.endian);
