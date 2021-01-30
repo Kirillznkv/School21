@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:25:25 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 05:38:00 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 10:33:12 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int			get_color(char ch)
 {
 	if (ch == '1')
 		return (0xFFFFFF);
+	else if (ch == '2')
+		return (0xDC5B57);
 	return (0x000000);
 }
 
