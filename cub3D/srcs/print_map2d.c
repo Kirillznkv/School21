@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:25:25 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 02:39:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 05:38:00 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,12 @@ void		put_square(t_data *img, int x, int y, int color)
 
 int			get_color(char ch)
 {
-	if (ch == ' ' || ch == '2' || ch == '0')
-		return (0x000000);
 	if (ch == '1')
 		return (0xFFFFFF);
-	if (ft_strchr("WSNE", ch))
-		return (0x00FF00);
-	return (0);
+	return (0x000000);
 }
 
-void		put_map(t_map_settings *map, t_data *img)
+void		put_map(t_map_settings *tmp, t_data *img)
 {
 	int		x;
 	int		y;
@@ -57,18 +53,19 @@ void		put_map(t_map_settings *map, t_data *img)
 
 	y = 0;
 	i = -1;
-	while (map->map[++i])
+	while (tmp->map[++i])
 	{
 		x = 0;
 		j = -1;
-		while (map->map[i][++j])
+		while (tmp->map[i][++j])
 		{
-			color = get_color(map->map[i][j]);
+			color = get_color(tmp->map[i][j]);
 			put_square(img, x, y, color);
 			x += 10;
 		}
 		y += 10;
 	}
+	put_square(img, tmp->plr.j, tmp->plr.i, 0x00FF00);
 }
 
 void		print_map2d(t_map_settings *tmp)

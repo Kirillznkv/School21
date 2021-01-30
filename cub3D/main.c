@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 04:13:18 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/01/30 06:05:00 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,29 @@ t_map_settings		*cub_init(char *filename)
 	return (tmp);
 }
 
-void				my_exit(int key_press)
+int				my_exit(int key)
 {
 	exit(1);
+	return (1);
+}
+
+int				keybord_manager(int key, t_map_settings *tmp)
+{
+	if (key == 53)//esc
+		exit(1);
+	if (key == 13)//W 13
+		;
+	else if (key == 0)//A
+		;
+	else if (key == 1)//S
+		;
+	else if (key == 2)//D
+		;
+	else if (key == 123)//  <-
+		;
+	else if (key == 124)//  ->
+		;
+	return (0);
 }
 
 int					main(int argc, char **argv)
@@ -41,7 +61,7 @@ int					main(int argc, char **argv)
 	t_map_settings	*tmp;
 
 	tmp = cub_init("map.cub");
-	//mlx_hook(tmp->win, 2, 0, keybord_manager, tmp);
+	mlx_hook(tmp->win, 2, 0, keybord_manager, tmp);
 	mlx_hook(tmp->win, 17, 0, my_exit, NULL);
 	mlx_loop(tmp->mlx);
 	free(tmp);
