@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 02:05:52 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 19:48:52 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,15 @@
 # include "fcntl.h"
 # include "errno.h"
 # include "./mlx/mlx.h"
+# include "math.h"
 # include "stdio.h" //убрать
 
+
+typedef struct	s_vector
+{
+	int				x;
+	int				y;
+}					t_vector;
 typedef struct	s_data
 {
 	void			*img;
@@ -30,14 +37,14 @@ typedef struct	s_data
 }					t_data;
 typedef struct	s_player
 {
-	char			direction;
-	int				i;
-	int				j;
+	t_vector		dir;
+	int				y;
+	int				x;
 }					t_player;
 typedef struct	s_sprite
 {
-	int				i;
-	int				j;
+	int				y;
+	int				x;
 	struct s_sprite	*next;
 }					t_sprite;
 typedef struct	s_images

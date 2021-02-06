@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:51:10 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 02:38:57 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 19:49:46 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_sprite				*lstnew(int i, int j)
 	if ((tmp = (t_sprite*)malloc(sizeof(t_sprite))) == NULL)
 		error_system(errno);
 	tmp->next = NULL;
-	tmp->i = i;
-	tmp->j = j;
+	tmp->y = i;
+	tmp->x = j;
 	return (tmp);
 }
 

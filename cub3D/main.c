@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 10:35:33 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 19:51:36 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,38 +40,38 @@ int				my_exit(int key)
 
 int				keybord_manager(int key, t_map_settings *tmp)
 {
-	tmp->map[tmp->plr.i / 10][tmp->plr.j / 10] = '0';
+	tmp->map[tmp->plr.y / 10][tmp->plr.x / 10] = '0';
 	if (key == 53)//esc
 		exit(1);
 	if (key == 13)//W 13
 	{
-		if (tmp->map[(tmp->plr.i - 1) / 10][tmp->plr.j / 10] == '0')
+		if (tmp->map[(tmp->plr.y - 1) / 10][tmp->plr.x / 10] == '0')
 		{
-			tmp->plr.i--;
+			tmp->plr.y--;
 			print_map2d(tmp);
 		}
 	}
 	else if (key == 0)//A
 	{
-		if (tmp->map[tmp->plr.i / 10][(tmp->plr.j - 1) / 10] == '0')
+		if (tmp->map[tmp->plr.y / 10][(tmp->plr.x - 1) / 10] == '0')
 		{
-			tmp->plr.j--;
+			tmp->plr.x--;
 			print_map2d(tmp);
 		}
 	}
 	else if (key == 1)//S
 	{
-		if (tmp->map[tmp->plr.i / 10 + 1][tmp->plr.j / 10] == '0')
+		if (tmp->map[tmp->plr.y / 10 + 1][tmp->plr.x / 10] == '0')
 		{
-			tmp->plr.i++;
+			tmp->plr.y++;
 			print_map2d(tmp);
 		}
 	}
 	else if (key == 2)//D
 	{
-		if (tmp->map[tmp->plr.i / 10][tmp->plr.j / 10 + 1] == '0')
+		if (tmp->map[tmp->plr.y / 10][tmp->plr.x / 10 + 1] == '0')
 		{
-			tmp->plr.j++;
+			tmp->plr.x++;
 			print_map2d(tmp);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 05:37:51 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 19:50:17 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,31 @@ int					check_zero(char **tmp, int i, int j)
 
 void				add_plr(t_map_settings *tmp, int i, int j)
 {
-	if (tmp->plr.direction != 0)
+	if (tmp->plr.dir.x != -100)
 		error_control("repeating player in map");
-	tmp->plr.direction = tmp->map[i][j];
-	tmp->plr.i = i * 10;///////////////////////////////////////////////////////////////////////////////////////
-	tmp->plr.j = j * 10;///////////////////////////////////////////////////////////////////////////////////////
+	// tmp->plr.direction = tmp->map[i][j];
+	if (tmp->map[i][j] == 'w')
+	{
+		tmp->plr.dir.x = -1;
+		tmp->plr.dir.y = 0;
+	}
+	else if (tmp->map[i][j] == 'a')
+	{
+		tmp->plr.dir.x = 0;
+		tmp->plr.dir.y = -1;
+	}
+	else if (tmp->map[i][j] == 's')
+	{
+		tmp->plr.dir.x = 1;
+		tmp->plr.dir.y = 0;
+	}
+	else if (tmp->map[i][j] == 'd')
+	{
+		tmp->plr.dir.x = 0;
+		tmp->plr.dir.y = 1;
+	}
+	tmp->plr.y = i * 10;///////////////////////////////////////////////////////////////////////////////////////
+	tmp->plr.x = j * 10;///////////////////////////////////////////////////////////////////////////////////////
 }
 
 void				check_map(t_map_settings *tmp, int h)
@@ -65,7 +85,7 @@ void				check_map(t_map_settings *tmp, int h)
 
 	i = 0;
 	ckeck_contour(tmp->map, h);
-	tmp->plr.direction = 0;
+	tmp->plr.dir.x = -100;
 	tmp->sp = NULL;
 	while (++i < h - 1)
 	{

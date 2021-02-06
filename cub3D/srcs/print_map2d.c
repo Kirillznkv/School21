@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:25:25 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 10:33:12 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 20:16:58 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,27 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+void		ray(t_map_settings *tmp, t_data *img, double x, double y)
+{
+	int			step;
+	double		dy;
+	double		dx;
+
+	dy = tmp->plr.y - y - 1;
+	dx = tmp->plr.x - x - 1;
+	step = (abs(dy) > abs(dx)) ? abs(dy) : abs(dx);
+	my_mlx_pixel_put(img, x, y, (int)0xFF0000);
+	my_mlx_pixel_put(img, tmp->plr.x, tmp->plr.y, (int)0xFF0000);
+	dx = abs(dx) / (double)step;
+	dy = abs(dy) / (double)step;
+	while (step--)
+	{
+		x += dx;
+		y += dy;
+		my_mlx_pixel_put(img, round(x), round(y), (int)0xFF0000);
+	}
 }
 
 void		put_square(t_data *img, int x, int y, int color)
@@ -67,11 +88,12 @@ void		put_map(t_map_settings *tmp, t_data *img)
 		}
 		y += 10;
 	}
-	put_square(img, tmp->plr.j, tmp->plr.i, 0x00FF00);
+	put_square(img, tmp->plr.x, tmp->plr.y, 0x00FF00);
 }
 
 void		print_map2d(t_map_settings *tmp)
 {
 	put_map(tmp, &tmp->img);
+	ray(tmp, &tmp->img, 0, 0);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img, 0, 0);
 }
