@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:25:25 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/06 20:16:58 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 22:19:31 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,24 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void		ray(t_map_settings *tmp, t_data *img, double x, double y)
 {
-	int			step;
-	double		dy;
-	double		dx;
+	t_rey	rey;
 
-	dy = tmp->plr.y - y - 1;
-	dx = tmp->plr.x - x - 1;
-	step = (abs(dy) > abs(dx)) ? abs(dy) : abs(dx);
+	rey.x1 = tmp->plr.x;
+	rey.y1 = tmp->plr.y;
+	rey.x2 = x;
+	rey.y2 = y;
+	rey.dy = rey.y2 - rey.y1;
+	rey.dx = rey.x2 - rey.x1;
+	rey.step = (abs(rey.dy) > abs(rey.dx)) ? abs(rey.dy) : abs(rey.dx);
 	my_mlx_pixel_put(img, x, y, (int)0xFF0000);
 	my_mlx_pixel_put(img, tmp->plr.x, tmp->plr.y, (int)0xFF0000);
-	dx = abs(dx) / (double)step;
-	dy = abs(dy) / (double)step;
-	while (step--)
+	rey.dx = (rey.dx) / (double)rey.step;
+	rey.dy = (rey.dy) / (double)rey.step;
+	while (rey.step--)
 	{
-		x += dx;
-		y += dy;
-		my_mlx_pixel_put(img, round(x), round(y), (int)0xFF0000);
+		rey.x1 += rey.dx;
+		rey.y1 += rey.dy;
+		my_mlx_pixel_put(img, round(rey.x1), round(rey.y1), (int)0xFF0000);
 	}
 }
 
