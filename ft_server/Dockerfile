@@ -1,7 +1,5 @@
-#Install system
 FROM debian:buster
 
-#Install some packegs
 RUN apt-get update
 RUN apt-get -y install php7.3-fpm
 RUN apt-get -y install php7.3-common
@@ -21,5 +19,4 @@ COPY ./srcs/nginx.conf /etc/nginx/
 COPY ./srcs/wordpress/ /var/www/wordpress
 COPY ./srcs/phpMyAdmin/ /var/www/phpMyAdmin
 
-#Starting services
 CMD bash start.sh

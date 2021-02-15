@@ -5,14 +5,14 @@ echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost' WITH GRANT OPTIO
 echo "update mysql.user set plugin='mysql_native_password' where user='root';" | mysql -u root --skip-password
 echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
 
-mkdir /etc/rtoast
+mkdir /etc/kshantiSsl
 openssl req -newkey rsa:4096 \
             -x509 \
             -sha256 \
             -days 3650 \
             -nodes \
-            -out /etc/rtoast/localhost.crt \
-            -keyout /etc/rtoast/localhost.key \
+            -out /etc/kshantiSsl/localhost.crt \
+            -keyout /etc/kshantiSsl/localhost.key \
             -subj "/C=RU/ST=Tatarstan/L=Kazan/O=21School/OU=IT Department/CN=localhost"
 
 
