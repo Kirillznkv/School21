@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/06 22:14:50 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/12 18:13:19 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,27 @@
 # include "math.h"
 # include "stdio.h" //убрать
 
-typedef struct	s_rey
+typedef struct	s_ray
 {
-	int				step;
-	double			x1;
-	double			y1;
-	double			x2;
-	double			y2;
-	double			dy;
-	double			dx;
-}					t_rey;
+	double			planeX;
+	double			planeY;
+	double			time;
+	double			oldtime;
+	double			cameraX;
+	double			rayDirX;
+	double			rayDirY;
+	double			sideDistX;
+	double			sideDistY;
+	double			deltaDistX;
+	double			deltaDistY;
+	int				mapX;
+	int				mapY;
+	int				stepX;
+	int				stepY;
+	int				hit;
+	int				side;
+	double			perpWallDist;
+}					t_ray;
 typedef struct	s_vector
 {
 	int				x;
@@ -47,8 +58,7 @@ typedef struct	s_data
 typedef struct	s_player
 {
 	t_vector		dir;
-	int				y;
-	int				x;
+	t_vector		pos;
 }					t_player;
 typedef struct	s_sprite
 {
@@ -72,6 +82,8 @@ typedef struct	s_color
 }					t_color;
 typedef struct	s_map_settings
 {
+	int				w;
+	int				h;
 	int				width;
 	int				height;
 	t_images		images;

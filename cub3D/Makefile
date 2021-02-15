@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/07 17:20:27 by kshanti           #+#    #+#              #
-#    Updated: 2021/01/30 02:58:59 by kshanti          ###   ########.fr        #
+#    Updated: 2021/02/11 17:42:51 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ C_FILE =	$(SRCS)parser_skip_s.c $(SRCS)parser_skip_s_utils.c\
 			$(SRCS)parser.c\
 			$(GNL)get_next_line.c $(GNL)get_next_line_utils.c\
 			$(SRCS)error.c\
-			$(SRCS)print_map2d.c ./main.c
+			./main.c
 
 O_FILE = $(C_FILE:.c=.o)
 

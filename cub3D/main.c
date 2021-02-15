@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/06 19:51:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/12 17:53:01 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_map_settings		*cub_init(char *filename)
 	tmp->img.addr = mlx_get_data_addr(tmp->img.img,
 		&tmp->img.bits_per_pixel, &tmp->img.line_length,
 		&tmp->img.endian);
-	print_map2d(tmp);
 	return (tmp);
 }
 
@@ -40,40 +39,19 @@ int				my_exit(int key)
 
 int				keybord_manager(int key, t_map_settings *tmp)
 {
-	tmp->map[tmp->plr.y / 10][tmp->plr.x / 10] = '0';
 	if (key == 53)//esc
 		exit(1);
 	if (key == 13)//W 13
 	{
-		if (tmp->map[(tmp->plr.y - 1) / 10][tmp->plr.x / 10] == '0')
-		{
-			tmp->plr.y--;
-			print_map2d(tmp);
-		}
 	}
 	else if (key == 0)//A
 	{
-		if (tmp->map[tmp->plr.y / 10][(tmp->plr.x - 1) / 10] == '0')
-		{
-			tmp->plr.x--;
-			print_map2d(tmp);
-		}
 	}
 	else if (key == 1)//S
 	{
-		if (tmp->map[tmp->plr.y / 10 + 1][tmp->plr.x / 10] == '0')
-		{
-			tmp->plr.y++;
-			print_map2d(tmp);
-		}
 	}
 	else if (key == 2)//D
 	{
-		if (tmp->map[tmp->plr.y / 10][tmp->plr.x / 10 + 1] == '0')
-		{
-			tmp->plr.x++;
-			print_map2d(tmp);
-		}
 	}
 	else if (key == 123)//  <-
 		;
@@ -93,6 +71,3 @@ int					main(int argc, char **argv)
 	free(tmp);
 	return (1);
 }
-    //написать проверку открытия файлов
-
-	// // если указывается огромный размер экрана то все подводится под дисплэй а save делается по этому формату

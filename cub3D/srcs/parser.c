@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 02:58:25 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/12 17:26:51 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ t_map_settings		*parser(char *filename)
 	spase_in_map(tmp, w, h);
 	fill_map(filename, tmp, h);
 	check_map(tmp, h);
+	tmp->w = w;
+	tmp->h = h;
 	return (tmp);
 }
