@@ -18,5 +18,7 @@ COPY ./srcs/start.sh /
 COPY ./srcs/nginx.conf /etc/nginx/
 COPY ./srcs/wordpress/ /var/www/wordpress
 COPY ./srcs/phpMyAdmin/ /var/www/phpMyAdmin
+COPY ./srcs/autoindex_off.sh ./
+COPY ./srcs/autoindex_on.sh ./
 
 CMD bash start.sh
