@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/12 18:18:22 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/16 21:00:10 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		raycasting(t_map_settings *tmp)
 
 	ray.planeX = 0;/////////////
 	ray.planeY = 0.66;//////////
-	ray.mapX = tmp->plr.pos.x;
-	ray.mapY = tmp->plr.pos.y;
+	ray.mapX = (int)tmp->plr.pos.x;
+	ray.mapY = (int)tmp->plr.pos.y;
 	ray.hit = 0;
 	x = -1;
 	while (++x < tmp->w)
@@ -30,7 +30,7 @@ void		raycasting(t_map_settings *tmp)
 		ray.rayDirY = tmp->plr.dir.y + ray.planeY * ray.cameraX;
 		ray.deltaDistX = abs(1 / ray.rayDirX);
 		ray.deltaDistY = abs(1 / ray.rayDirY);
-		if (ray.rayDirX <0)
+		if (ray.rayDirX < 0)
 		{
 			ray.stepX = -1;
 			ray.sideDistX = (tmp->plr.pos.x - ray.mapX) * ray.deltaDistX;
@@ -40,7 +40,7 @@ void		raycasting(t_map_settings *tmp)
 			ray.stepX = 1;
 			ray.sideDistX = (tmp->plr.pos.x + 1.0 - ray.mapX) * ray.deltaDistX;
 		}
-		if (ray.rayDirY <0)
+		if (ray.rayDirY < 0)
 		{
 			ray.stepY = -1;
 			ray.sideDistY = (tmp->plr.pos.y - ray.mapY) * ray.deltaDistY;
@@ -64,6 +64,10 @@ void		raycasting(t_map_settings *tmp)
 				ray.mapY += ray.stepY;
 				ray.side = 1;
 			}
+			if (ray.side == 0)
+				ray.perpWallDist = (ray.mapX - tmp->plr.pos.x + (1 - ray.stepX) / 2) / ray.rayDirX;
+			else
+				ray.perpWallDist = (ray.mapY - tmp->plr.pos.y + (1 - ray.stepY) / 2) / ray.rayDirY;
 			if (tmp->map[ray.mapX] [ray.mapY] > 0)
 				ray.hit = 1;
 		}

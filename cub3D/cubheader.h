@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/12 18:13:19 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/16 20:48:38 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct	s_ray
 }					t_ray;
 typedef struct	s_vector
 {
-	int				x;
-	int				y;
+	double			x;
+	double			y;
 }					t_vector;
 typedef struct	s_data
 {
