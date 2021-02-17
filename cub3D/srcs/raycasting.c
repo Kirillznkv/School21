@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/16 21:00:10 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/16 21:31:03 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void		raycasting(t_map_settings *tmp)
 				ray.mapY += ray.stepY;
 				ray.side = 1;
 			}
-			if (ray.side == 0)
-				ray.perpWallDist = (ray.mapX - tmp->plr.pos.x + (1 - ray.stepX) / 2) / ray.rayDirX;
-			else
-				ray.perpWallDist = (ray.mapY - tmp->plr.pos.y + (1 - ray.stepY) / 2) / ray.rayDirY;
 			if (tmp->map[ray.mapX] [ray.mapY] > 0)
 				ray.hit = 1;
 		}
+		if (ray.side == 0)
+			ray.perpWallDist = (ray.mapX - tmp->plr.pos.x + (1 - ray.stepX) / 2) / ray.rayDirX;
+		else
+			ray.perpWallDist = (ray.mapY - tmp->plr.pos.y + (1 - ray.stepY) / 2) / ray.rayDirY;
 	}
 }
