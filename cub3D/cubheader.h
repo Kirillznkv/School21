@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/16 20:48:38 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/17 20:18:31 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef struct	s_ray
 	int				side;
 	double			perpWallDist;
 }					t_ray;
+typedef struct	s_line
+{
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+}					t_line;
 typedef struct	s_vector
 {
 	double			x;

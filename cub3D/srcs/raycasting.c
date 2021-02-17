@@ -6,15 +6,21 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/16 21:31:03 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/17 20:45:51 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cubheader.h"
 
+void		ver_line(t_map_settings tmp, int x, t_line line, int color)
+{
+	
+}
+
 void		raycasting(t_map_settings *tmp)
 {
 	t_ray		ray;
+	t_line		line;
 	int			x;
 
 	ray.planeX = 0;/////////////
@@ -71,5 +77,12 @@ void		raycasting(t_map_settings *tmp)
 			ray.perpWallDist = (ray.mapX - tmp->plr.pos.x + (1 - ray.stepX) / 2) / ray.rayDirX;
 		else
 			ray.perpWallDist = (ray.mapY - tmp->plr.pos.y + (1 - ray.stepY) / 2) / ray.rayDirY;
+		line.lineHeight = (int)(tmp->h / ray.perpWallDist);
+		line.drawStart = (int)((tmp->h / 2) - (line.lineHeight / 2));
+		line.drawEnd = (int)((tmp->h / 2) + (line.lineHeight / 2));
+		if (line.drawStart < 0)
+			line.drawStart = 0;
+		if (line.drawEnd >= tmp->h)
+			line.drawEnd = tmp->h - 1;
 	}
 }
