@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/17 20:18:31 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/17 20:58:31 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ void				check_map(t_map_settings *tmp, int h);
 int					skip_empty_line(char *line);
 t_sprite			*lstnew(int i, int j);
 void				addlst(t_map_settings *tmp, int i, int j);
-void				print_map2d(t_map_settings *tmp);
+void				raycasting(t_map_settings *tmp);
 
 #endif
