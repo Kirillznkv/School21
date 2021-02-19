@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/11 17:41:45 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/19 23:12:40 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,22 @@ void				add_plr(t_map_settings *tmp, int i, int j)
 	if (tmp->plr.dir.x != -100)
 		error_control("repeating player in map");
 	// tmp->plr.direction = tmp->map[i][j];
-	if (tmp->map[i][j] == 'w')
+	if (tmp->map[i][j] == 'W')
 	{
 		tmp->plr.dir.x = -1;
 		tmp->plr.dir.y = 0;
 	}
-	else if (tmp->map[i][j] == 'a')
+	else if (tmp->map[i][j] == 'N')
 	{
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = -1;
 	}
-	else if (tmp->map[i][j] == 's')
+	else if (tmp->map[i][j] == 'E')
 	{
 		tmp->plr.dir.x = 1;
 		tmp->plr.dir.y = 0;
 	}
-	else if (tmp->map[i][j] == 'd')
+	else if (tmp->map[i][j] == 'S')
 	{
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = 1;
@@ -104,4 +104,6 @@ void				check_map(t_map_settings *tmp, int h)
 			}
 		}
 	}
+	if (tmp->plr.dir.x == -100)
+		error_control("player dont found");
 }
