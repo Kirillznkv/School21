@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/19 23:12:40 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/24 15:52:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,22 @@ void				add_plr(t_map_settings *tmp, int i, int j)
 {
 	if (tmp->plr.dir.x != -100)
 		error_control("repeating player in map");
-	// tmp->plr.direction = tmp->map[i][j];
-	if (tmp->map[i][j] == 'W')
+	if (tmp->map[i][j] == 'W')//W
 	{
 		tmp->plr.dir.x = -1;
 		tmp->plr.dir.y = 0;
 	}
-	else if (tmp->map[i][j] == 'N')
+	else if (tmp->map[i][j] == 'N')//N
 	{
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = -1;
 	}
-	else if (tmp->map[i][j] == 'E')
+	else if (tmp->map[i][j] == 'E')//E
 	{
 		tmp->plr.dir.x = 1;
 		tmp->plr.dir.y = 0;
 	}
-	else if (tmp->map[i][j] == 'S')
+	else if (tmp->map[i][j] == 'S')//S
 	{
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = 1;

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/19 23:19:37 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/25 00:48:26 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_map_settings		*cub_init(char *filename)
 	tmp->img.addr = mlx_get_data_addr(tmp->img.img,
 		&tmp->img.bits_per_pixel, &tmp->img.line_length,
 		&tmp->img.endian);
+	tmp->planeX = 0;////////////
+	tmp->planeY = 0.66;/////////
 	raycasting(tmp);
 	return (tmp);
 }
@@ -49,7 +51,7 @@ int				keybord_manager(int key, t_map_settings *tmp)
 	}
 	else if (key == 0)//A
 	{
-		tmp->plr.pos.y += 0.1;
+		tmp->plr.pos.y -= 0.1;
 		raycasting(tmp);
 	}
 	else if (key == 1)//S
@@ -59,13 +61,31 @@ int				keybord_manager(int key, t_map_settings *tmp)
 	}
 	else if (key == 2)//D
 	{
-		tmp->plr.pos.y -= 0.1;
+		tmp->plr.pos.y += 0.1;
 		raycasting(tmp);
 	}
 	else if (key == 123)//  <-
-		;
+	{
+		double old;
+		old = tmp->plr.dir.x;
+		tmp->plr.dir.x = tmp->plr.dir.x * cos(-0.05) - tmp->plr.dir.y * sin(-0.05);
+		tmp->plr.dir.y = old * sin(-0.05) + old * cos(-0.05);
+		old = tmp->planeX;
+		tmp->planeX = tmp->planeX * cos(-0.05) - tmp->planeY * sin(-0.05);
+		tmp->planeY = old * sin(-0.05) + old * cos(-0.05);
+		raycasting(tmp);
+	}
 	else if (key == 124)//  ->
-		;
+	{
+		double old;
+		old = tmp->plr.dir.x;
+		tmp->plr.dir.x = tmp->plr.dir.x * cos(0.05) - tmp->plr.dir.y * sin(0.05);
+		tmp->plr.dir.y = old * sin(0.05) + old * cos(0.05);
+		old = tmp->planeX;
+		tmp->planeX = tmp->planeX * cos(0.05) - tmp->planeY * sin(0.05);
+		tmp->planeY = old * sin(0.05) + old * cos(0.05);
+		raycasting(tmp);
+	}
 	return (0);
 }
 

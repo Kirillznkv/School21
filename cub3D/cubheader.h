@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/17 20:58:31 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/25 00:42:44 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct	s_map_settings
 	void			*mlx;
 	void			*win;
 	t_data			img;
+	double			planeX;
+	double			planeY;
 }					t_map_settings;
 
 t_map_settings		*parser(char *filename);
