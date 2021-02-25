@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 02:50:10 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/25 18:22:16 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ int				my_exit(int key)
 int				keybord_manager(int key, t_map_settings *tmp)
 {
 	if (key == 53)//esc
-	{
-		tmp->images.west[0] = ' ';
-		raycasting(tmp);
-	}
-		//exit(1);
+		exit(1);
 	if (key == 13)//W 13
 	{
 		tmp->plr.pos.x -= 0.1;
@@ -73,10 +69,10 @@ int				keybord_manager(int key, t_map_settings *tmp)
 		double old;
 		old = tmp->plr.dir.x;
 		tmp->plr.dir.x = tmp->plr.dir.x * cos(-0.05) - tmp->plr.dir.y * sin(-0.05);
-		tmp->plr.dir.y = old * sin(-0.05) + old * cos(-0.05);
+		tmp->plr.dir.y = old * sin(-0.05) + tmp->plr.dir.y * cos(-0.05);
 		old = tmp->planeX;
 		tmp->planeX = tmp->planeX * cos(-0.05) - tmp->planeY * sin(-0.05);
-		tmp->planeY = old * sin(-0.05) + old * cos(-0.05);
+		tmp->planeY = old * sin(-0.05) + tmp->planeY * cos(-0.05);
 		raycasting(tmp);
 	}
 	else if (key == 124)//  ->
@@ -84,10 +80,10 @@ int				keybord_manager(int key, t_map_settings *tmp)
 		double old;
 		old = tmp->plr.dir.x;
 		tmp->plr.dir.x = tmp->plr.dir.x * cos(0.05) - tmp->plr.dir.y * sin(0.05);
-		tmp->plr.dir.y = old * sin(0.05) + old * cos(0.05);
+		tmp->plr.dir.y = old * sin(0.05) + tmp->plr.dir.y * cos(0.05);
 		old = tmp->planeX;
 		tmp->planeX = tmp->planeX * cos(0.05) - tmp->planeY * sin(0.05);
-		tmp->planeY = old * sin(0.05) + old * cos(0.05);
+		tmp->planeY = old * sin(0.05) + tmp->planeY * cos(0.05);
 		raycasting(tmp);
 	}
 	return (0);
