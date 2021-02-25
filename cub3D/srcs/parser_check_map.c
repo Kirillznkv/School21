@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 19:01:33 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/25 19:14:35 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,34 @@ int					check_zero(char **tmp, int i, int j)
 }
 
 void				add_plr(t_map_settings *tmp, int i, int j)
-{
+{//////1.570796
 	if (tmp->plr.dir.x != -100)
 		error_control("repeating player in map");
 	if (tmp->map[i][j] == 'W')//W
 	{
+		tmp->planeX = 0;////////////
+		tmp->planeY = 0.66;/////////
 		tmp->plr.dir.x = -1;
 		tmp->plr.dir.y = 0;
 	}
 	else if (tmp->map[i][j] == 'N')//N
 	{
+		tmp->planeX = -0.66;////////////
+		tmp->planeY = 0;/////////
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = -1;
 	}
 	else if (tmp->map[i][j] == 'E')//E
 	{
+		tmp->planeX = 0;////////////
+		tmp->planeY = -0.66;/////////
 		tmp->plr.dir.x = 1;
 		tmp->plr.dir.y = 0;
 	}
 	else if (tmp->map[i][j] == 'S')//S
 	{
+		tmp->planeX = 0.66;////////////
+		tmp->planeY = 0;/////////
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = 1;
 	}

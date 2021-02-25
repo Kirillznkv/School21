@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 19:00:55 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/25 19:14:44 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_map_settings		*cub_init(char *filename)
 	tmp->img.addr = mlx_get_data_addr(tmp->img.img,
 		&tmp->img.bits_per_pixel, &tmp->img.line_length,
 		&tmp->img.endian);
-	tmp->planeX = 0;////////////
-	tmp->planeY = 0.66;/////////
 	raycasting(tmp);
 	return (tmp);
 }
