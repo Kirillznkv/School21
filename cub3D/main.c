@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 00:48:26 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/25 02:50:10 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ int				my_exit(int key)
 int				keybord_manager(int key, t_map_settings *tmp)
 {
 	if (key == 53)//esc
-		exit(1);
+	{
+		tmp->images.west[0] = ' ';
+		raycasting(tmp);
+	}
+		//exit(1);
 	if (key == 13)//W 13
 	{
 		tmp->plr.pos.x -= 0.1;
@@ -51,7 +55,7 @@ int				keybord_manager(int key, t_map_settings *tmp)
 	}
 	else if (key == 0)//A
 	{
-		tmp->plr.pos.y -= 0.1;
+		tmp->plr.pos.y += 0.1;
 		raycasting(tmp);
 	}
 	else if (key == 1)//S
@@ -61,7 +65,7 @@ int				keybord_manager(int key, t_map_settings *tmp)
 	}
 	else if (key == 2)//D
 	{
-		tmp->plr.pos.y += 0.1;
+		tmp->plr.pos.y -= 0.1;
 		raycasting(tmp);
 	}
 	else if (key == 123)//  <-

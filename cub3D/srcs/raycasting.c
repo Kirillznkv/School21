@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 00:43:24 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/25 03:05:02 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,36 +50,51 @@ void		raycasting(t_map_settings *tmp)
 
 	x = -1;
 	black_display(tmp);
+	if (tmp->images.west[0] == ' ')
+	{
+		printf("#############################\n");
+		printf("#############################\n");
+	}
 	while (++x < tmp->width)
 	{
 		ray.mapX = (int)tmp->plr.pos.x;////
 		ray.mapY = (int)tmp->plr.pos.y;////
-		ray.cameraX = 2 * x / (double)tmp->width - 1;
+		if (tmp->images.west[0] == ' ')
+		{
+			printf("x = %d\n", x);
+			printf("mapX = %d  |  mapY = %d\n", ray.mapX, ray.mapY);
+			printf("plrX = %lf  |  plrY = %lf\n", tmp->plr.pos.x, tmp->plr.pos.y);
+		}
+		ray.cameraX = (2 - 2 * x / (double)tmp->width) - 1;
 		ray.rayDirX = tmp->plr.dir.x + tmp->planeX * ray.cameraX;
 		ray.rayDirY = tmp->plr.dir.y + tmp->planeY * ray.cameraX;
 		ray.hit = 0;
 		ray.deltaDistX = (ray.rayDirY == 0) ? 0 : ((ray.rayDirX == 0) ? 1 : fabs(1 / ray.rayDirX));
 		ray.deltaDistY = (ray.rayDirX == 0) ? 0 : ((ray.rayDirY == 0) ? 1 : fabs(1 / ray.rayDirY));
+		if (tmp->images.west[0] == ' ')
+			printf("camera = %lf\nDirX = %lf  |  DirY = %lf\t-----> %lf  |  %lf\n", ray.cameraX, ray.rayDirX, ray.rayDirY, ray.deltaDistX, ray.deltaDistY);
 		if (ray.rayDirX < 0)
 		{
 			ray.stepX = -1;
-			ray.sideDistX = (tmp->plr.pos.x - (double)ray.mapX) * ray.deltaDistX;
+			ray.sideDistX = (tmp->plr.pos.x - ray.mapX) * ray.deltaDistX;
 		}
 		else
 		{
 			ray.stepX = 1;
-			ray.sideDistX = (tmp->plr.pos.x + 1.0 - (double)ray.mapX) * ray.deltaDistX;
+			ray.sideDistX = (tmp->plr.pos.x + 1.0 - ray.mapX) * ray.deltaDistX;
 		}
 		if (ray.rayDirY < 0)
 		{
 			ray.stepY = -1;
-			ray.sideDistY = (tmp->plr.pos.y - (double)ray.mapY) * ray.deltaDistY;
+			ray.sideDistY = (tmp->plr.pos.y - ray.mapY) * ray.deltaDistY;
 		}
 		else
 		{
 			ray.stepY = 1;
-			ray.sideDistY = (tmp->plr.pos.y + 1.0 - (double)ray.mapY) * ray.deltaDistY;
+			ray.sideDistY = (tmp->plr.pos.y + 1.0 - ray.mapY) * ray.deltaDistY;
 		}
+		if (tmp->images.west[0] == ' ')
+			printf("sideDistX = %lf  |  sideDistY = %lf\n", ray.sideDistX, ray.sideDistY);
 		while (ray.hit == 0)
 		{
 			if (ray.sideDistX <= ray.sideDistY)
@@ -112,6 +127,15 @@ void		raycasting(t_map_settings *tmp)
 			ver_line(tmp, x, line, 0xDE5D83);
 		else
 			ver_line(tmp, x, line, 0x199EBD);
+		if (tmp->images.west[0] == ' ')
+		{
+			printf("-----------------------\n");
+			printf("mapX = %d  |  mapY = %d\n", ray.mapX, ray.mapY);
+			printf("plrX = %lf  |  plrY = %lf\n", tmp->plr.pos.x, tmp->plr.pos.y);
+			printf("sideDistX = %lf  |  sideDistY = %lf\n", ray.sideDistX, ray.sideDistY);
+			printf("perpWallDist = %lf\t----->%d\n", ray.perpWallDist, line.lineHeight);
+			printf("-----------------------\n");
+		}
 	}
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img, 0, 0);
 }
