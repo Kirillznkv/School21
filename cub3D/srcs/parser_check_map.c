@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 19:14:35 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/27 17:17:02 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,6 @@ void				check_map(t_map_settings *tmp, int h)
 	}
 	if (tmp->plr.dir.x == -100)
 		error_control("player dont found");
+	tmp->color_c.color = (tmp->color_c.r << 16) + (tmp->color_c.g << 8) + tmp->color_c.b;
+	tmp->color_f.color = (tmp->color_f.r << 16) + (tmp->color_f.g << 8) + tmp->color_f.b;
 }

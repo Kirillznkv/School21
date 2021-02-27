@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 00:42:44 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/27 17:15:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct	s_images
 }					t_images;
 typedef struct	s_color
 {
+	int				color;
 	int				r;
 	int				g;
 	int				b;

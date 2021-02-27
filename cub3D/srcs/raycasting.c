@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/27 16:26:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/27 17:18:11 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 {
 	int		color;
+	int		i;
 
 	if (side == 1)
 		color = 0xDE5D83;
@@ -33,23 +34,14 @@ void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 		color = 0x33FF33;
 	else if (side == 4)
 		color = 0xCCFF33;
+	i = -1;
+	while (++i < line.drawStart)
+		my_mlx_pixel_put(&(tmp->img.img), x, i, tmp->color_c.color);
 	while (line.drawStart <= line.drawEnd)
 		my_mlx_pixel_put(&(tmp->img.img), x, line.drawStart++, color);
-}
-
-void		black_display(t_map_settings *tmp)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < tmp->width)
-	{
-		j = -1;
-		while (++j < tmp->height)
-			my_mlx_pixel_put(&(tmp->img.img), i, j, 0x000000);
-	}
-	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img, 0, 0);
+	i = line.drawEnd;
+	while (++i < tmp->height)
+		my_mlx_pixel_put(&(tmp->img.img), x, i, tmp->color_f.color);
 }
 
 void		raycasting(t_map_settings *tmp)
@@ -59,7 +51,7 @@ void		raycasting(t_map_settings *tmp)
 	int			x;
 
 	x = -1;
-	black_display(tmp);
+	// black_display(tmp);
 	while (++x < tmp->width)
 	{
 		ray.mapX = (int)tmp->plr.pos.x;////
