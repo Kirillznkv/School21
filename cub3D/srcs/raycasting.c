@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/27 17:18:11 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/27 18:41:17 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 	int		i;
 
 	if (side == 1)
-		color = 0xDE5D83;
+		color = 0x003000;
 	else if (side == 2)
-		color = 0x199EBD;
+		color = 0x333300;
 	else if (side == 3)
-		color = 0x33FF33;
+		color = 0x330066;
 	else if (side == 4)
-		color = 0xCCFF33;
+		color = 0x660033;
 	i = -1;
 	while (++i < line.drawStart)
-		my_mlx_pixel_put(&(tmp->img.img), x, i, tmp->color_c.color);
+		my_mlx_pixel_put(&tmp->img, x, i, tmp->color_c.color);
 	while (line.drawStart <= line.drawEnd)
-		my_mlx_pixel_put(&(tmp->img.img), x, line.drawStart++, color);
+		my_mlx_pixel_put(&tmp->img, x, line.drawStart++, color);
 	i = line.drawEnd;
 	while (++i < tmp->height)
-		my_mlx_pixel_put(&(tmp->img.img), x, i, tmp->color_f.color);
+		my_mlx_pixel_put(&tmp->img, x, i, tmp->color_f.color);
 }
 
 void		raycasting(t_map_settings *tmp)
