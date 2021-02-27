@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/25 18:09:03 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/27 16:26:36 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,18 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void		ver_line(t_map_settings *tmp, int x, t_line line, int color)
+void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 {
+	int		color;
+
+	if (side == 1)
+		color = 0xDE5D83;
+	else if (side == 2)
+		color = 0x199EBD;
+	else if (side == 3)
+		color = 0x33FF33;
+	else if (side == 4)
+		color = 0xCCFF33;
 	while (line.drawStart <= line.drawEnd)
 		my_mlx_pixel_put(&(tmp->img.img), x, line.drawStart++, color);
 }
@@ -86,18 +96,24 @@ void		raycasting(t_map_settings *tmp)
 			{
 				ray.sideDistX += ray.deltaDistX;
 				ray.mapX += ray.stepX;
-				ray.side = 0;
+				if (tmp->plr.pos.x > ray.mapX)
+					ray.side = 1;
+				else
+					ray.side = 2;
 			}
 			else
 			{
 				ray.sideDistY += ray.deltaDistY;
 				ray.mapY += ray.stepY;
-				ray.side = 1;
+				if (tmp->plr.pos.y > ray.mapY)
+					ray.side = 3;
+				else
+					ray.side = 4;
 			}
 			if (!ft_strchr("02NEWS", tmp->map[ray.mapY][ray.mapX]))
 				ray.hit = 1;
 		}
-		if (!ray.side)
+		if (ray.side < 3)
 			ray.perpWallDist = (ray.mapX - tmp->plr.pos.x + (1 - ray.stepX) / 2) / ray.rayDirX;
 		else
 			ray.perpWallDist = (ray.mapY - tmp->plr.pos.y + (1 - ray.stepY) / 2) / ray.rayDirY;
@@ -108,10 +124,7 @@ void		raycasting(t_map_settings *tmp)
 				line.drawStart = 0;
 		if (line.drawEnd >= tmp->height)
 			line.drawEnd = tmp->height - 1;
-		if (ray.side)
-			ver_line(tmp, x, line, 0xDE5D83);
-		else
-			ver_line(tmp, x, line, 0x199EBD);
+		ver_line(tmp, x, line, ray.side);
 	}
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img, 0, 0);
 }
