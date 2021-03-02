@@ -1,9 +1,9 @@
 R 900 900
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-S ./path_to_the_sprite_textur
+NO ./path_to_the_north_texture   
+SO ./path_to_the_south_texture   
+WE ./path_to_the_wes\ t_tex\ ture   
+EA ./path_to_the_east_texture  
+S ./path_to_the_sprite_textur   
 F 120,120,120
 C 0,0,80
 

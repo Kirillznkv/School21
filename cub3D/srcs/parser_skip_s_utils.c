@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:47:55 by kshanti           #+#    #+#             */
-/*   Updated: 2021/01/30 03:00:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/02 20:19:42 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,18 @@ void			set_color(char *str, t_color *color)
 
 void			set_path(char *str, char **image)
 {
+	char	*pstr;
+
 	if (*image != NULL)
 		error_control("repeating settings path");
 	while (*str == ' ')
 		str++;
-	if (ft_strchr(str, ' '))
-		error_control("spases in path");
+	while ((pstr = ft_strchr(str, ' ')))
+	{
+		if (*(pstr - 1) != '\\')
+			error_control("spases in path");
+		str = pstr + 1;
+	}
 	if ((*image = ft_strdup(str)) == NULL)
 		error_system(errno);
 }
