@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/02 20:37:53 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/02 21:38:15 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,10 @@ int					skip_empty_line(char *line);
 t_sprite			*lstnew(int i, int j);
 void				addlst(t_map_settings *tmp, int i, int j);
 void				raycasting(t_map_settings *tmp);
+int					color_we(t_map_settings *tmp, int x, int y);
+int					color_s(t_map_settings *tmp, int x, int y);
+int					color_so(t_map_settings *tmp, int x, int y);
+int					color_ea(t_map_settings *tmp, int x, int y);
+int					color_no(t_map_settings *tmp, int x, int y);
 
 #endif

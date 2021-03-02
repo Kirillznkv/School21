@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/02 20:49:00 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/02 21:49:15 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,26 @@ void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 	while (++i < line.drawStart)
 		my_mlx_pixel_put(&tmp->img, x, i, tmp->color_c.color);
 	while (line.drawStart <= line.drawEnd)
+	{
+		if (side == 1)//ea
+			tmp->text.tex_y = (int)tmp->text.tex_pos & (tmp->text.img_ea.h - 1);
+		else if (side == 2)//so
+			tmp->text.tex_y = (int)tmp->text.tex_pos & (tmp->text.img_so.h - 1);
+		else if (side == 3)//no
+			tmp->text.tex_y = (int)tmp->text.tex_pos & (tmp->text.img_no.h - 1);
+		else if (side == 4)//we
+			tmp->text.tex_y = (int)tmp->text.tex_pos & (tmp->text.img_we.h - 1);
+		tmp->text.tex_pos += tmp->text.step;
+		if (side == 1)//ea
+			color = color_ea(tmp, tmp->text.tex_x, tmp->text.tex_y);
+		else if (side == 2)//so
+			color = color_so(tmp, tmp->text.tex_x, tmp->text.tex_y);
+		else if (side == 3)//no
+			color = color_no(tmp, tmp->text.tex_x, tmp->text.tex_y);
+		else if (side == 4)//we
+			color = color_we(tmp, tmp->text.tex_x, tmp->text.tex_y);
 		my_mlx_pixel_put(&tmp->img, x, line.drawStart++, color);
+	}
 	i = line.drawEnd;
 	while (++i < tmp->height)
 		my_mlx_pixel_put(&tmp->img, x, i, tmp->color_f.color);
