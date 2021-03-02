@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/27 17:15:28 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/02 20:37:53 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,31 @@ typedef struct	s_color
 	int				g;
 	int				b;
 }					t_color;
+typedef struct	s_win
+{
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				w;
+	int				h;
+}					t_win;
+typedef struct	s_textur
+{
+	int				tex_x;
+	int				tex_y;
+	double			wall_x;
+	double			step;
+	double			tex_pos;
+	t_win			img_so;
+	t_win			img_no;
+	t_win			img_we;
+	t_win			img_ea;
+	t_win			img_s;
+}					t_textur;
 typedef struct	s_map_settings
 {
 	int				w;
@@ -104,6 +129,8 @@ typedef struct	s_map_settings
 	t_data			img;
 	double			planeX;
 	double			planeY;
+	t_textur		text;
+	
 }					t_map_settings;
 
 t_map_settings		*parser(char *filename);

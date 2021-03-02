@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/27 18:41:17 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/02 20:49:00 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,35 @@ void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 	i = line.drawEnd;
 	while (++i < tmp->height)
 		my_mlx_pixel_put(&tmp->img, x, i, tmp->color_f.color);
+}
+
+void		textur(t_map_settings *tmp, t_line line, int side)
+{//////////////////////////////////////////////////////////////////////////////     Поменять стороны
+	if (side == 1)
+	{
+		tmp->text.tex_x = (int)(tmp->text.wall_x * (double)tmp->text.img_ea.w);
+		tmp->text.tex_x = tmp->text.img_ea.w - tmp->text.tex_x - 1;
+		tmp->text.step = (double)tmp->text.img_ea.h / line.lineHeight;
+	}
+	if (side == 2)
+	{
+		tmp->text.tex_x = (int)(tmp->text.wall_x * (double)tmp->text.img_so.w);
+		tmp->text.tex_x = tmp->text.img_so.w - tmp->text.tex_x - 1;
+		tmp->text.step = (double)tmp->text.img_so.h / line.lineHeight;
+	}
+	if (side == 3)
+	{
+		tmp->text.tex_x = (int)(tmp->text.wall_x * (double)tmp->text.img_no.w);
+		tmp->text.tex_x = tmp->text.img_no.w - tmp->text.tex_x - 1;
+		tmp->text.step = (double)tmp->text.img_no.h / line.lineHeight;
+	}
+	if (side == 4)
+	{
+		tmp->text.tex_x = (int)(tmp->text.wall_x * (double)tmp->text.img_we.w);
+		tmp->text.tex_x = tmp->text.img_we.w - tmp->text.tex_x - 1;
+		tmp->text.step = (double)tmp->text.img_we.h / line.lineHeight;
+	}
+	tmp->text.tex_pos = tmp->text.step * (line.drawStart - tmp->height / 2 + line.lineHeight / 2);
 }
 
 void		raycasting(t_map_settings *tmp)
@@ -106,9 +135,16 @@ void		raycasting(t_map_settings *tmp)
 				ray.hit = 1;
 		}
 		if (ray.side < 3)
+		{
 			ray.perpWallDist = (ray.mapX - tmp->plr.pos.x + (1 - ray.stepX) / 2) / ray.rayDirX;
+			tmp->text.wall_x = tmp->plr.pos.y + ray.perpWallDist * ray.rayDirY;
+		}
 		else
+		{
 			ray.perpWallDist = (ray.mapY - tmp->plr.pos.y + (1 - ray.stepY) / 2) / ray.rayDirY;
+			tmp->text.wall_x = tmp->plr.pos.x + ray.perpWallDist * ray.rayDirX;
+		}
+		tmp->text.wall_x -= floor(tmp->text.wall_x);
 		line.lineHeight = tmp->height / ray.perpWallDist;
 		line.drawStart = (tmp->height / 2) - (line.lineHeight / 2);
 		line.drawEnd = (tmp->height / 2) + (line.lineHeight / 2);
@@ -116,6 +152,7 @@ void		raycasting(t_map_settings *tmp)
 				line.drawStart = 0;
 		if (line.drawEnd >= tmp->height)
 			line.drawEnd = tmp->height - 1;
+		textur(tmp, line, ray.side);
 		ver_line(tmp, x, line, ray.side);
 	}
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img, 0, 0);

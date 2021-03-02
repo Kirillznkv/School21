@@ -6,12 +6,30 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/27 17:07:24 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/02 21:14:31 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubheader.h"
 #include "stdio.h"///
+
+void				init_images(t_map_settings	*tmp)
+{
+	tmp->text.img_ea.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.east, &(tmp->text.img_ea.w), &(tmp->text.img_ea.h));
+	tmp->text.img_ea.addr = mlx_get_data_addr(tmp->text.img_ea.img, &(tmp->text.img_ea.bits_per_pixel), &(tmp->text.img_ea.line_length), &(tmp->text.img_ea.endian));
+
+	tmp->text.img_no.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.north, &(tmp->text.img_no.w), &(tmp->text.img_no.h));
+	tmp->text.img_no.addr = mlx_get_data_addr(tmp->text.img_no.img, &(tmp->text.img_no.bits_per_pixel), &(tmp->text.img_no.line_length), &(tmp->text.img_no.endian));
+
+	tmp->text.img_s.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.sprite, &(tmp->text.img_s.w), &(tmp->text.img_s.h));
+	tmp->text.img_s.addr = mlx_get_data_addr(tmp->text.img_s.img, &(tmp->text.img_s.bits_per_pixel), &(tmp->text.img_s.line_length), &(tmp->text.img_s.endian));
+
+	tmp->text.img_so.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.south, &(tmp->text.img_so.w), &(tmp->text.img_so.h));
+	tmp->text.img_so.addr = mlx_get_data_addr(tmp->text.img_so.img, &(tmp->text.img_so.bits_per_pixel), &(tmp->text.img_so.line_length), &(tmp->text.img_so.endian));
+
+	tmp->text.img_we.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.west, &(tmp->text.img_we.w), &(tmp->text.img_we.h));
+	tmp->text.img_we.addr = mlx_get_data_addr(tmp->text.img_we.img, &(tmp->text.img_we.bits_per_pixel), &(tmp->text.img_we.line_length), &(tmp->text.img_we.endian));
+}
 
 t_map_settings		*cub_init(char *filename)
 {
@@ -28,6 +46,7 @@ t_map_settings		*cub_init(char *filename)
 	tmp->img.addr = mlx_get_data_addr(tmp->img.img,
 		&tmp->img.bits_per_pixel, &tmp->img.line_length,
 		&tmp->img.endian);
+	init_images(tmp);
 	raycasting(tmp);
 	return (tmp);
 }
