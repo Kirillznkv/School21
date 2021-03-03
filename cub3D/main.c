@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/03 13:05:21 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:52:08 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,24 @@
 
 void				init_images(t_map_settings	*tmp)
 {
-	tmp->text.img_ea.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.east, &(tmp->text.img_ea.w), &(tmp->text.img_ea.h));
+	if (!(tmp->text.img_ea.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.east, &(tmp->text.img_ea.w), &(tmp->text.img_ea.h))))
+		error_system(errno);
 	tmp->text.img_ea.addr = mlx_get_data_addr(tmp->text.img_ea.img, &(tmp->text.img_ea.bits_per_pixel), &(tmp->text.img_ea.line_length), &(tmp->text.img_ea.endian));
 
-	tmp->text.img_no.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.north, &(tmp->text.img_no.w), &(tmp->text.img_no.h));
+	if (!(tmp->text.img_no.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.north, &(tmp->text.img_no.w), &(tmp->text.img_no.h))))
+		error_system(errno);
 	tmp->text.img_no.addr = mlx_get_data_addr(tmp->text.img_no.img, &(tmp->text.img_no.bits_per_pixel), &(tmp->text.img_no.line_length), &(tmp->text.img_no.endian));
 
-	tmp->text.img_s.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.sprite, &(tmp->text.img_s.w), &(tmp->text.img_s.h));
+	if (!(tmp->text.img_s.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.sprite, &(tmp->text.img_s.w), &(tmp->text.img_s.h))))
+		error_system(errno);
 	tmp->text.img_s.addr = mlx_get_data_addr(tmp->text.img_s.img, &(tmp->text.img_s.bits_per_pixel), &(tmp->text.img_s.line_length), &(tmp->text.img_s.endian));
 
-	tmp->text.img_so.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.south, &(tmp->text.img_so.w), &(tmp->text.img_so.h));
+	if (!(tmp->text.img_so.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.south, &(tmp->text.img_so.w), &(tmp->text.img_so.h))))
+		error_system(errno);
 	tmp->text.img_so.addr = mlx_get_data_addr(tmp->text.img_so.img, &(tmp->text.img_so.bits_per_pixel), &(tmp->text.img_so.line_length), &(tmp->text.img_so.endian));
 
-	tmp->text.img_we.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.west, &(tmp->text.img_we.w), &(tmp->text.img_we.h));
+	if (!(tmp->text.img_we.img = mlx_xpm_file_to_image(tmp->mlx, tmp->images.west, &(tmp->text.img_we.w), &(tmp->text.img_we.h))))
+		error_system(errno);
 	tmp->text.img_we.addr = mlx_get_data_addr(tmp->text.img_we.img, &(tmp->text.img_we.bits_per_pixel), &(tmp->text.img_we.line_length), &(tmp->text.img_we.endian));
 }
 

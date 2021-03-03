@@ -2,7 +2,7 @@ R 900 900
 SO ./xpm/1.xpm
 NO ./xpm/3.xpm
 WE ./xpm/2.xpm
-EA ./xpm/4.xpm
+EA ./xpm/4.xpmj
 S ./xpm/barrel.xpm 
 F 120,120,120
 C 0,0,80
