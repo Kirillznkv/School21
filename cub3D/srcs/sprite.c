@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 03:48:48 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 07:27:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 08:05:56 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,8 @@ void		draw_sprt(t_map_settings *tmp, double dist[])
 				tmp->sp.d = 128 * (tmp->sp.y * 2 - tmp->height + tmp->sp.sp_hight);
 				tmp->sp.tex_y = tmp->sp.d * tmp->text.img_s.h / tmp->sp.sp_hight / 256;
 				clr = color_s(tmp, tmp->sp.tex_x, tmp->sp.tex_y);
-				printf("%d %d ---> %d\n", tmp->sp.stripe, (int)tmp->sp.y, clr);
-				if (!clr)
-					my_mlx_pixel_put(tmp, tmp->sp.stripe, (int)tmp->sp.y, 0);
+				if (clr)
+					my_mlx_pixel_put(&tmp->img, tmp->sp.stripe, (int)tmp->sp.y, clr);
 				tmp->sp.y += 1;
 			}
 		}
