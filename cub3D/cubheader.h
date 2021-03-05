@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 10:00:24 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 11:33:23 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,9 @@ void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void				screen(t_map_settings *tmp);
 void				init_images(t_map_settings *tmp);
 t_map_settings		*cub_init(char *filename, int scr);
+void				fsm1(int *end, int *h);
+void				fsm2(int *end, int *h, int *w, char **line);
+void				fsm3(int *end, int *flag);
+void				fsm4(int *check_gnl);
 
 #endif

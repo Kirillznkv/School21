@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:47:55 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/02 20:19:42 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 11:34:16 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			set_r(char *str, t_map_settings *tmp)
 		error_control("symbols after line in R");
 }
 
-void		f_set_color(t_color *color, int i, int a)
+void			f_set_color(t_color *color, int i, int a)
 {
 	if (i == 0)
 		color->r = a;

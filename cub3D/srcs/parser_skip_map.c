@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:51:10 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 04:06:07 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 11:32:32 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,23 @@ void					skip_map(int fd, int *w, int *h)
 	int		empty_line;
 	int		check_gnl;
 
-	flag = 0;
-	end = 0;
+	fsm3(&end, &flag);
 	while ((check_gnl = get_next_line(fd, &line)) == 1)
 	{
 		if (((empty_line = skip_empty_line(line)) == 2 && flag))
 			flag = 2;
 		if (flag == 2 && !empty_line)
 			error_control("end line inside map");
-		if (empty_line == 0)
-		{
-			end = 0;
-			flag = 1;
-			checkline_map(line, w, h);
-		}
+		if (empty_line == 0 && (flag = 1))
+			fsm2(&end, h, w, &line);
 		else if (empty_line == 1 && flag)
-		{
-			end++;
-			(*h)++;
-		}
+			fsm1(&end, h);
 		free(line);
 	}
-	if (check_gnl == -1)
-		error_system(errno);
+	fsm4(&check_gnl);
 	if ((empty_line = skip_empty_line(line)) == 0)
 		checkline_map(line, w, h);
-	(*h) -= end;
-	if (*h == 0)
+	if (!((*h) -= end))
 		error_control("map was not found");
 	free(line);
 }
