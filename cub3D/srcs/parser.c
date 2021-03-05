@@ -6,27 +6,11 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 10:48:58 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 11:50:35 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cubheader.h"
-
-void				spase_in_map(t_map_settings *tmp, int w, int h)
-{
-	int				i;
-	int				j;
-
-	i = -1;
-	while (++i < h)
-	{
-		j = -1;
-		while (++j < w)
-			tmp->map[i][j] = ' ';
-		tmp->map[i][j] = '\0';
-	}
-	tmp->plr.dir.x = -100;
-}
 
 void				skip_settings_for_map(int fd)
 {
@@ -71,18 +55,14 @@ void				fill_map(char *filename, t_map_settings *tmp, int h)
 	i = 0;
 	while ((check_gnl = get_next_line(fd, &line)) == 1 && (i < h))
 	{
-		if (skip_empty_line(line) && flag)
-		{
-			free(line);
+		if (ffm(&line, &flag))
 			continue ;
-		}
 		flag = 0;
 		if (skip_empty_line(line) != 2)
 			f_fill_map(tmp->map, line, i++);
 		free(line);
 	}
-	if (check_gnl == -1)
-		error_system(errno);
+	fsm4(&check_gnl);
 	if (skip_empty_line(line) == 0)
 		f_fill_map(tmp->map, line, i);
 	free(line);
@@ -93,30 +73,25 @@ t_map_settings		*parser(char *filename)
 {
 	int				fd;
 	int				i;
-	int				w;
-	int				h;
 	t_map_settings	*tmp;
 
 	i = -1;
-	w = 0;
-	h = 0;
 	if ((tmp = (t_map_settings*)malloc(sizeof(t_map_settings))) == NULL)
 		error_system(errno);
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		error_system(errno);
+	tmp->w = 0;
+	tmp->h = 0;
 	skip_settings(fd, tmp);
-	skip_map(fd, &w, &h);
+	skip_map(fd, &tmp->w, &tmp->h);
 	close(fd);
-	if ((tmp->map = (char**)malloc(sizeof(char*) * (h + 1))) == NULL)
+	if ((tmp->map = (char**)malloc(sizeof(char*) * (tmp->h + 1))) == NULL)
 		error_system(errno);
-	while (++i < h)
-		if ((tmp->map[i] = (char*)malloc(sizeof(char) * (w + 1))) == NULL)
+	while (++i < tmp->h)
+		if ((tmp->map[i] = (char*)malloc(sizeof(char) * (tmp->w + 1))) == NULL)
 			error_system(errno);
-	tmp->map[h] = NULL;
-	spase_in_map(tmp, w, h);
-	fill_map(filename, tmp, h);
-	check_map(tmp, h);
-	tmp->w = w;
-	tmp->h = h;
+	spase_in_map(tmp, tmp->w, tmp->h);
+	fill_map(filename, tmp, tmp->h);
+	check_map(tmp, tmp->h);
 	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 11:33:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 11:50:58 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,7 @@ void				fsm1(int *end, int *h);
 void				fsm2(int *end, int *h, int *w, char **line);
 void				fsm3(int *end, int *flag);
 void				fsm4(int *check_gnl);
+int					ffm(char **line, int *flag);
+void				spase_in_map(t_map_settings *tmp, int w, int h);
 
 #endif
