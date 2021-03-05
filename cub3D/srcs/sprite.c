@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 03:48:48 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 08:05:56 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 08:12:40 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		sprt_screen(t_map_settings *tmp, t_sprite_arr sp[], int i)
 	tmp->sp.inv = 1.0 / (tmp->planeX * tmp->plr.dir.y - tmp->plr.dir.x * tmp->planeY);
 	tmp->sp.transX = tmp->sp.inv * (tmp->plr.dir.y * tmp->sp.x - tmp->plr.dir.x * tmp->sp.y);
 	tmp->sp.transY = tmp->sp.inv * (tmp->planeX * tmp->sp.y - tmp->planeY * tmp->sp.x);
-	tmp->sp.sp_screenX = (int)(tmp->width / 2 * (1 + tmp->sp.transX / tmp->sp.transY));
+	tmp->sp.sp_screenX = (int)(tmp->width - tmp->width / 2 * (1 + tmp->sp.transX / tmp->sp.transY));
 }
 
 void		sprt_h_w(t_map_settings *tmp)
@@ -116,8 +116,6 @@ void		draw_sprt(t_map_settings *tmp, double dist[])
 			tmp->sp.y = tmp->sp.start_y;
 			while (tmp->sp.y < tmp->sp.end_y)
 			{
-				// printf("%d  ", (int)tmp->sp.y);
-				// printf("%d\n", tmp->sp.end_y);
 				tmp->sp.d = 128 * (tmp->sp.y * 2 - tmp->height + tmp->sp.sp_hight);
 				tmp->sp.tex_y = tmp->sp.d * tmp->text.img_s.h / tmp->sp.sp_hight / 256;
 				clr = color_s(tmp, tmp->sp.tex_x, tmp->sp.tex_y);
