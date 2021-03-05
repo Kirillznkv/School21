@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 08:14:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 08:20:44 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 }
 
 void		textur(t_map_settings *tmp, t_line line, int side)
-{//////////////////////////////////////////////////////////////////////////////     Поменять стороны
+{
 	if (side == 1)
 	{
 		tmp->text.tex_x = (int)(tmp->text.wall_x * (double)tmp->text.img_ea.w);

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 05:56:08 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 08:54:55 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,6 @@ int					color_so(t_map_settings *tmp, int x, int y);
 int					color_ea(t_map_settings *tmp, int x, int y);
 int					color_no(t_map_settings *tmp, int x, int y);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void				screen(t_map_settings *tmp);
 
 #endif

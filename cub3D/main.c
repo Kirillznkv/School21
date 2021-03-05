@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 05:58:54 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 09:27:25 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,35 @@ void				init_images(t_map_settings	*tmp)
 	tmp->text.img_we.addr = mlx_get_data_addr(tmp->text.img_we.img, &(tmp->text.img_we.bits_per_pixel), &(tmp->text.img_we.line_length), &(tmp->text.img_we.endian));
 }
 
-t_map_settings		*cub_init(char *filename)
+void				file(char *filename)
+{
+	int		i;
+
+	while (*filename != '\0' && *filename != '.')
+		filename++;
+	if (*filename == '\0')
+		error_control("Неверное название файла");
+	i = 0;
+	filename++;
+	while (*filename != '\0')
+	{
+		if (i == 0 && *filename == 'c')
+			i++;
+		else if (i == 1 && *filename == 'u')
+			i++;
+		else if (i == 2 && *filename == 'b')
+			i++;
+		else
+			error_control("Неверное название файла");
+		filename++;
+	}
+}
+
+t_map_settings		*cub_init(char *filename, int scr)
 {
 	t_map_settings	*tmp;
 
+	file(filename);
 	tmp = parser(filename);
 	if (tmp->width > 2560)
 		tmp->width = 2560;
@@ -53,6 +78,8 @@ t_map_settings		*cub_init(char *filename)
 		&tmp->img.endian);
 	init_images(tmp);
 	raycasting(tmp);
+	if (scr)
+		screen(tmp);
 	return (tmp);
 }
 
@@ -126,11 +153,23 @@ int				keybord_manager(int key, t_map_settings *tmp)
 int					main(int argc, char **argv)
 {
 	t_map_settings	*tmp;
+	int				scr;
 
-	tmp = cub_init("map.cub");
-	mlx_hook(tmp->win, 2, 0, keybord_manager, tmp);
-	mlx_hook(tmp->win, 17, 0, my_exit, NULL);
-	mlx_loop(tmp->mlx);
-	free(tmp);
-	return (1);
+	scr = 0;
+	if (argc == 2 || argc == 3)
+	{
+		if (argc == 3)
+		{
+			if (ft_strncmp("--save", argv[2], 6) || ft_strlen(argv[2]) != 6)
+				error_control("Неверный второй аргумент");
+			scr++;
+		}
+		tmp = cub_init(argv[1], scr);
+		mlx_hook(tmp->win, 2, 0, keybord_manager, tmp);
+		mlx_hook(tmp->win, 17, 0, my_exit, NULL);
+		mlx_loop(tmp->mlx);
+		free(tmp);
+	}
+	error_control("Неверное количество параметров программы");
+	return (0);
 }
