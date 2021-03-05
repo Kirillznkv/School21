@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 10:28:31 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 12:48:13 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void				add_plr2(t_map_settings *tmp, int i, int j)
 {
 	if (tmp->map[i][j] == 'E')
 	{
-		tmp->planeX = 0;
-		tmp->planeY = -0.66;
+		tmp->planex = 0;
+		tmp->planey = -0.66;
 		tmp->plr.dir.x = 1;
 		tmp->plr.dir.y = 0;
 	}
 	else if (tmp->map[i][j] == 'S')
 	{
-		tmp->planeX = 0.66;
-		tmp->planeY = 0;
+		tmp->planex = 0.66;
+		tmp->planey = 0;
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = 1;
 	}
@@ -79,15 +79,15 @@ void				add_plr(t_map_settings *tmp, int i, int j)
 		error_control("repeating player in map");
 	if (tmp->map[i][j] == 'W')
 	{
-		tmp->planeX = 0;
-		tmp->planeY = 0.66;
+		tmp->planex = 0;
+		tmp->planey = 0.66;
 		tmp->plr.dir.x = -1;
 		tmp->plr.dir.y = 0;
 	}
 	else if (tmp->map[i][j] == 'N')
 	{
-		tmp->planeX = -0.66;
-		tmp->planeY = 0;
+		tmp->planex = -0.66;
+		tmp->planey = 0;
 		tmp->plr.dir.x = 0;
 		tmp->plr.dir.y = -1;
 	}

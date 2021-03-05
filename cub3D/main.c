@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 09:59:54 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 12:52:30 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void				keybord2(int key, t_map_settings *tmp)
 	else if (key == 2)
 	{
 		if (ft_strchr("0WESN", tmp->map[(int)tmp->plr.pos.y]
-			[(int)(tmp->plr.pos.x - tmp->planeX * 0.1)]))
-			tmp->plr.pos.x -= tmp->planeX * 0.1;
+			[(int)(tmp->plr.pos.x - tmp->planex * 0.1)]))
+			tmp->plr.pos.x -= tmp->planex * 0.1;
 		if (ft_strchr("0WESN", tmp->map[(int)(tmp->plr.pos.y -
-			tmp->planeY * 0.1)][(int)tmp->plr.pos.x]))
-			tmp->plr.pos.y -= tmp->planeY * 0.1;
+			tmp->planey * 0.1)][(int)tmp->plr.pos.x]))
+			tmp->plr.pos.y -= tmp->planey * 0.1;
 		raycasting(tmp);
 	}
 }
@@ -53,9 +53,9 @@ void				keybord3(int key, t_map_settings *tmp)
 							tmp->plr.dir.y * sin(-0.05);
 		tmp->plr.dir.y = old * sin(-0.05) +
 							tmp->plr.dir.y * cos(-0.05);
-		old = tmp->planeX;
-		tmp->planeX = tmp->planeX * cos(-0.05) - tmp->planeY * sin(-0.05);
-		tmp->planeY = old * sin(-0.05) + tmp->planeY * cos(-0.05);
+		old = tmp->planex;
+		tmp->planex = tmp->planex * cos(-0.05) - tmp->planey * sin(-0.05);
+		tmp->planey = old * sin(-0.05) + tmp->planey * cos(-0.05);
 		raycasting(tmp);
 	}
 	else if (key == 124)
@@ -64,9 +64,9 @@ void				keybord3(int key, t_map_settings *tmp)
 		tmp->plr.dir.x = tmp->plr.dir.x * cos(0.05) -
 							tmp->plr.dir.y * sin(0.05);
 		tmp->plr.dir.y = old * sin(0.05) + tmp->plr.dir.y * cos(0.05);
-		old = tmp->planeX;
-		tmp->planeX = tmp->planeX * cos(0.05) - tmp->planeY * sin(0.05);
-		tmp->planeY = old * sin(0.05) + tmp->planeY * cos(0.05);
+		old = tmp->planex;
+		tmp->planex = tmp->planex * cos(0.05) - tmp->planey * sin(0.05);
+		tmp->planey = old * sin(0.05) + tmp->planey * cos(0.05);
 		raycasting(tmp);
 	}
 }
@@ -88,11 +88,11 @@ int					keybord_manager(int key, t_map_settings *tmp)
 	else if (key == 0)
 	{
 		if (ft_strchr("0WESN", tmp->map[(int)tmp->plr.pos.y]
-			[(int)(tmp->plr.pos.x + tmp->planeX * 0.1)]))
-			tmp->plr.pos.x += tmp->planeX * 0.1;
+			[(int)(tmp->plr.pos.x + tmp->planex * 0.1)]))
+			tmp->plr.pos.x += tmp->planex * 0.1;
 		if (ft_strchr("0WESN", tmp->map[(int)(tmp->plr.pos.y +
-			tmp->planeY * 0.1)][(int)tmp->plr.pos.x]))
-			tmp->plr.pos.y += tmp->planeY * 0.1;
+			tmp->planey * 0.1)][(int)tmp->plr.pos.x]))
+			tmp->plr.pos.y += tmp->planey * 0.1;
 		raycasting(tmp);
 	}
 	keybord2(key, tmp);

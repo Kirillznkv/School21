@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 11:50:58 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 12:47:00 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,40 @@
 # include "errno.h"
 # include "./mlx/mlx.h"
 # include "math.h"
-# include "stdio.h" //убрать
 
-typedef struct	s_ray
+typedef struct		s_ray
 {
-	double			planeX;
-	double			planeY;
+	double			planex;
+	double			planey;
 	double			time;
 	double			oldtime;
-	double			cameraX;
-	double			rayDirX;
-	double			rayDirY;
-	double			sideDistX;
-	double			sideDistY;
-	double			deltaDistX;
-	double			deltaDistY;
-	int				mapX;
-	int				mapY;
-	int				stepX;
-	int				stepY;
+	double			camerax;
+	double			raydirx;
+	double			raydiry;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	int				mapx;
+	int				mapy;
+	int				stepx;
+	int				stepy;
 	int				hit;
 	int				side;
-	double			perpWallDist;
+	double			perpwalldist;
 }					t_ray;
-typedef struct	s_line
+typedef struct		s_line
 {
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
 }					t_line;
-typedef struct	s_vector
+typedef struct		s_vector
 {
 	double			x;
 	double			y;
 }					t_vector;
-typedef struct	s_data
+typedef struct		s_data
 {
 	void			*img;
 	char			*addr;
@@ -61,12 +60,12 @@ typedef struct	s_data
 	int				line_length;
 	int				endian;
 }					t_data;
-typedef struct	s_player
+typedef struct		s_player
 {
 	t_vector		dir;
 	t_vector		pos;
 }					t_player;
-typedef struct	s_images
+typedef struct		s_images
 {
 	char			*north;
 	char			*south;
@@ -74,14 +73,14 @@ typedef struct	s_images
 	char			*east;
 	char			*sprite;
 }					t_images;
-typedef struct	s_color
+typedef struct		s_color
 {
 	int				color;
 	int				r;
 	int				g;
 	int				b;
 }					t_color;
-typedef struct	s_win
+typedef struct		s_win
 {
 	void			*mlx;
 	void			*win;
@@ -93,33 +92,33 @@ typedef struct	s_win
 	int				w;
 	int				h;
 }					t_win;
-typedef struct	s_textur
+typedef struct		s_textur
 {
 	int				tex_x;
 	int				tex_y;
 	double			wall_x;
-	double			step;
-	double			tex_pos;
+	double			s;
+	double			tex_p;
 	t_win			img_so;
 	t_win			img_no;
 	t_win			img_we;
 	t_win			img_ea;
 	t_win			img_s;
 }					t_textur;
-typedef struct	s_sprite_arr
+typedef struct		s_sprite_arr
 {
 	double			x;
 	double			y;
 	double			dist;
 }					t_sprite_arr;
-typedef struct	s_sprite
+typedef struct		s_sprite
 {
 	double			x;
 	double			y;
 	double			inv;
-	double			transX;
-	double			transY;
-	int				sp_screenX;
+	double			transx;
+	double			transy;
+	int				sp_screenx;
 	int				sp_hight;
 	int				sp_width;
 	int				start_x;
@@ -132,7 +131,7 @@ typedef struct	s_sprite
 	int				i;
 	int				d;
 }					t_sprite;
-typedef struct	s_map_settings
+typedef struct		s_map_settings
 {
 	int				w;
 	int				h;
@@ -147,10 +146,9 @@ typedef struct	s_map_settings
 	void			*mlx;
 	void			*win;
 	t_data			img;
-	double			planeX;
-	double			planeY;
+	double			planex;
+	double			planey;
 	t_textur		text;
-	
 }					t_map_settings;
 
 t_map_settings		*parser(char *filename);
@@ -180,5 +178,13 @@ void				fsm3(int *end, int *flag);
 void				fsm4(int *check_gnl);
 int					ffm(char **line, int *flag);
 void				spase_in_map(t_map_settings *tmp, int w, int h);
+void				sort_sprite(t_sprite_arr sp[], int n);
+void				swap_sprt(t_sprite_arr *a, t_sprite_arr *b);
+void				cast_sprite_arr(t_sprite_arr sp[], t_map_settings *tmp);
+int					col_sprite(t_map_settings *tmp);
+void				ray_u4(t_map_settings *tmp, t_ray *ray, t_line *line);
+void				ray_u3(t_map_settings *tmp, t_ray *ray);
+void				ray_u2(t_map_settings *tmp, t_ray *ray);
+void				ray_u1(t_map_settings *tmp, t_ray *ray, int x);
 
 #endif
