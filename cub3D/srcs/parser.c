@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:49:26 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/12 17:26:51 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 10:48:58 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void				spase_in_map(t_map_settings *tmp, int w, int h)
 			tmp->map[i][j] = ' ';
 		tmp->map[i][j] = '\0';
 	}
+	tmp->plr.dir.x = -100;
 }
 
 void				skip_settings_for_map(int fd)
