@@ -6,13 +6,13 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:46:01 by kshanti           #+#    #+#             */
-/*   Updated: 2021/02/06 19:50:26 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 11:35:14 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cubheader.h"
 
-void				f_is_settings(char **pointer, char *str, char *ch)
+void			f_is_settings(char **pointer, char *str, char *ch)
 {
 	if (!(*pointer = ft_strchr(str, ' ')))
 		error_control("error input in settings line");
@@ -22,7 +22,7 @@ void				f_is_settings(char **pointer, char *str, char *ch)
 	*(*pointer + 1) = '\0';
 }
 
-void				is_settings(char *str, t_map_settings *tmp)
+void			is_settings(char *str, t_map_settings *tmp)
 {
 	char	*pointer;
 	char	ch;
