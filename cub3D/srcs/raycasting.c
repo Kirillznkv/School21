@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/02 21:49:15 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 06:58:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ void		ver_line(t_map_settings *tmp, int x, t_line line, int side)
 	int		color;
 	int		i;
 
-	if (side == 1)
-		color = 0x003000;
-	else if (side == 2)
-		color = 0x333300;
-	else if (side == 3)
-		color = 0x330066;
-	else if (side == 4)
-		color = 0x660033;
 	i = -1;
 	while (++i < line.drawStart)
 		my_mlx_pixel_put(&tmp->img, x, i, tmp->color_c.color);
@@ -96,6 +88,7 @@ void		raycasting(t_map_settings *tmp)
 {
 	t_ray		ray;
 	t_line		line;
+	double		dist[tmp->width];
 	int			x;
 
 	x = -1;
@@ -171,8 +164,10 @@ void		raycasting(t_map_settings *tmp)
 				line.drawStart = 0;
 		if (line.drawEnd >= tmp->height)
 			line.drawEnd = tmp->height - 1;
+		dist[x] = ray.perpWallDist;
 		textur(tmp, line, ray.side);
 		ver_line(tmp, x, line, ray.side);
 	}
+	sprite(tmp, dist);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img.img, 0, 0);
 }

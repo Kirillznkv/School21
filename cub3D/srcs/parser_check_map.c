@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:54:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/03 13:05:46 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 05:57:38 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void				check_map(t_map_settings *tmp, int h)
 	i = 0;
 	ckeck_contour(tmp->map, h);
 	tmp->plr.dir.x = -100;
-	tmp->sp = NULL;
 	while (++i < h - 1)
 	{
 		j = 0;
@@ -101,8 +100,6 @@ void				check_map(t_map_settings *tmp, int h)
 		{
 			if ((tmp->map[i][j] == '0' || tmp->map[i][j] == '2') && check_zero(tmp->map, i, j))
 				error_control("0 or 2 is not surrounded by a wall");
-			else if (tmp->map[i][j] == '2')
-				addlst(tmp, i, j);
 			else if (ft_strchr("WSNE", tmp->map[i][j]))
 			{
 				if (check_zero(tmp->map, i, j))

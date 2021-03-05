@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/02 21:38:15 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 05:56:08 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,6 @@ typedef struct	s_player
 	t_vector		dir;
 	t_vector		pos;
 }					t_player;
-typedef struct	s_sprite
-{
-	int				y;
-	int				x;
-	struct s_sprite	*next;
-}					t_sprite;
 typedef struct	s_images
 {
 	char			*north;
@@ -112,6 +106,32 @@ typedef struct	s_textur
 	t_win			img_ea;
 	t_win			img_s;
 }					t_textur;
+typedef struct	s_sprite_arr
+{
+	double			x;
+	double			y;
+	double			dist;
+}					t_sprite_arr;
+typedef struct	s_sprite
+{
+	double			x;
+	double			y;
+	double			inv;
+	double			transX;
+	double			transY;
+	int				sp_screenX;
+	int				sp_hight;
+	int				sp_width;
+	int				start_x;
+	int				start_y;
+	int				end_x;
+	int				end_y;
+	int				stripe;
+	int				tex_x;
+	int				tex_y;
+	int				i;
+	int				d;
+}					t_sprite;
 typedef struct	s_map_settings
 {
 	int				w;
@@ -123,7 +143,7 @@ typedef struct	s_map_settings
 	t_color			color_c;
 	char			**map;
 	t_player		plr;
-	t_sprite		*sp;
+	t_sprite		sp;
 	void			*mlx;
 	void			*win;
 	t_data			img;
@@ -143,13 +163,13 @@ void				skip_settings(int fd, t_map_settings *tmp);
 void				skip_map(int fd, int *w, int *h);
 void				check_map(t_map_settings *tmp, int h);
 int					skip_empty_line(char *line);
-t_sprite			*lstnew(int i, int j);
-void				addlst(t_map_settings *tmp, int i, int j);
 void				raycasting(t_map_settings *tmp);
+void				sprite(t_map_settings *tmp, double dist[]);
 int					color_we(t_map_settings *tmp, int x, int y);
 int					color_s(t_map_settings *tmp, int x, int y);
 int					color_so(t_map_settings *tmp, int x, int y);
 int					color_ea(t_map_settings *tmp, int x, int y);
 int					color_no(t_map_settings *tmp, int x, int y);
+void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

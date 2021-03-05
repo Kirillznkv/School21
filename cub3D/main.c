@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:13:40 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/03 16:52:08 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/05 05:58:54 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,33 +68,33 @@ int				keybord_manager(int key, t_map_settings *tmp)
 		exit(1);
 	if (key == 13)//W 13
 	{
-		if (ft_strchr("02WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x + tmp->plr.dir.x * 0.1)]))
+		if (ft_strchr("0WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x + tmp->plr.dir.x * 0.1)]))
 			tmp->plr.pos.x += tmp->plr.dir.x * 0.1;
-		if (ft_strchr("02WESN", tmp->map[(int)(tmp->plr.pos.y + tmp->plr.dir.y * 0.1)][(int)tmp->plr.pos.x]))
+		if (ft_strchr("0WESN", tmp->map[(int)(tmp->plr.pos.y + tmp->plr.dir.y * 0.1)][(int)tmp->plr.pos.x]))
 			tmp->plr.pos.y += tmp->plr.dir.y * 0.1;
 		raycasting(tmp);
 	}
 	else if (key == 0)//A
 	{
-		if (ft_strchr("02WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x + tmp->planeX * 0.1)]))
+		if (ft_strchr("0WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x + tmp->planeX * 0.1)]))
 			tmp->plr.pos.x += tmp->planeX * 0.1;
-		if (ft_strchr("02WESN", tmp->map[(int)(tmp->plr.pos.y + tmp->planeY * 0.1)][(int)tmp->plr.pos.x]))
+		if (ft_strchr("0WESN", tmp->map[(int)(tmp->plr.pos.y + tmp->planeY * 0.1)][(int)tmp->plr.pos.x]))
 			tmp->plr.pos.y += tmp->planeY * 0.1;
 		raycasting(tmp);
 	}
 	else if (key == 1)//S
 	{
-		if (ft_strchr("02WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x - tmp->plr.dir.x * 0.1)]))
+		if (ft_strchr("0WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x - tmp->plr.dir.x * 0.1)]))
 			tmp->plr.pos.x -= tmp->plr.dir.x * 0.1;
-		if (ft_strchr("02WESN", tmp->map[(int)(tmp->plr.pos.y - tmp->plr.dir.y * 0.1)][(int)tmp->plr.pos.x]))
+		if (ft_strchr("0WESN", tmp->map[(int)(tmp->plr.pos.y - tmp->plr.dir.y * 0.1)][(int)tmp->plr.pos.x]))
 			tmp->plr.pos.y -= tmp->plr.dir.y * 0.1;
 		raycasting(tmp);
 	}
 	else if (key == 2)//D
 	{
-		if (ft_strchr("02WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x - tmp->planeX * 0.1)]))
+		if (ft_strchr("0WESN", tmp->map[(int)tmp->plr.pos.y][(int)(tmp->plr.pos.x - tmp->planeX * 0.1)]))
 			tmp->plr.pos.x -= tmp->planeX * 0.1;
-		if (ft_strchr("02WESN", tmp->map[(int)(tmp->plr.pos.y - tmp->planeY * 0.1)][(int)tmp->plr.pos.x]))
+		if (ft_strchr("0WESN", tmp->map[(int)(tmp->plr.pos.y - tmp->planeY * 0.1)][(int)tmp->plr.pos.x]))
 			tmp->plr.pos.y -= tmp->planeY * 0.1;
 		raycasting(tmp);
 	}
