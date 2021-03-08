@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:59:06 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 12:47:34 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/08 17:26:39 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void				file(char *filename)
 			error_control("Неверное название файла");
 		filename++;
 	}
+	if (*filename == '\0' && i < 3)
+		error_control("Неверное название файла");
 }
 
 t_map_settings		*cub_init(char *filename, int scr)
