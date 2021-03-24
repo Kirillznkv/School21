@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 17:08:13 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 12:51:14 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/17 22:53:05 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void		fvl(t_map_settings *tmp, int side)
 {
-	if (side == 1)
-		tmp->text.tex_y = (int)tmp->text.tex_p & (tmp->text.img_ea.h - 1);
-	else if (side == 2)
-		tmp->text.tex_y = (int)tmp->text.tex_p & (tmp->text.img_so.h - 1);
-	else if (side == 3)
-		tmp->text.tex_y = (int)tmp->text.tex_p & (tmp->text.img_no.h - 1);
-	else if (side == 4)
-		tmp->text.tex_y = (int)tmp->text.tex_p & (tmp->text.img_we.h - 1);
+	tmp->text.tex_y = (int)tmp->text.tex_p;
+	if (side == 1 && tmp->text.tex_y >= tmp->text.img_ea.h)
+		tmp->text.tex_y = tmp->text.img_ea.h - 1;
+	else if (side == 2 && tmp->text.tex_y >= tmp->text.img_so.h)
+		tmp->text.tex_y = tmp->text.img_so.h - 1;
+	else if (side == 3 && tmp->text.tex_y >= tmp->text.img_no.h)
+		tmp->text.tex_y = tmp->text.img_no.h - 1;
+	else if (side == 4 && tmp->text.tex_y >= tmp->text.img_we.h)
+		tmp->text.tex_y = tmp->text.img_we.h - 1;
 	tmp->text.tex_p += tmp->text.s;
 }
 

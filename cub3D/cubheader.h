@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:17:59 by kshanti           #+#    #+#             */
-/*   Updated: 2021/03/05 12:47:00 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/03/18 22:59:05 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "errno.h"
 # include "./mlx/mlx.h"
 # include "math.h"
+# include "stdio.h"////
 
 typedef struct		s_ray
 {
@@ -178,6 +179,7 @@ void				fsm3(int *end, int *flag);
 void				fsm4(int *check_gnl);
 int					ffm(char **line, int *flag);
 void				spase_in_map(t_map_settings *tmp, int w, int h);
+void				checkline_map(char *line, int *w, int *h);
 void				sort_sprite(t_sprite_arr sp[], int n);
 void				swap_sprt(t_sprite_arr *a, t_sprite_arr *b);
 void				cast_sprite_arr(t_sprite_arr sp[], t_map_settings *tmp);
